@@ -1,9 +1,9 @@
-# CMake Build File for Release 1 of Sandstorms
+# CMake Build File for Sandstorms
 # author: Tag Ashby <tgashby@calpoly.edu>
 
 cmake_minimum_required(VERSION 2.8)
 
-project(SandstormsRel1)
+project(Sandstorms)
 
 # Sources
 set(
@@ -103,7 +103,7 @@ include_directories(
 
 # Get everything together for the executable
 add_executable(
-   SandstormsRel1
+   Sandstorms
    WIN32
    MACOSX_BUNDLE
    ${SOURCES}
@@ -112,7 +112,7 @@ add_executable(
 
 # Link all the libraries
 target_link_libraries(
-   SandstormsRel1
+   Sandstorms
    ${OPENGL_LIBRARIES}
    ${SDL_LIBRARY}
    ${SDLMAIN_LIBRARY}
