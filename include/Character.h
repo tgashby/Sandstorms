@@ -12,13 +12,16 @@ namespace Sandstorms
 		Character(std::string texName, int lvl, int xPos = 0, int yPos = 0);
 		virtual ~Character();
 
-		virtual void moveToward(Character& who) = 0;
+		//virtual void moveToward(Character& who) = 0; PUT THIS IN ENEMY
+
 		virtual void attack(Character& who) = 0;
 		
 		void takeDamage(int damage);
 		int getHealth();
 		SDL_Point getPosition();
 		SDL_Rect getBounds();
+
+		void updatePosition();
 
 	protected:
 		virtual void initAttributes(int level) = 0;
@@ -30,6 +33,8 @@ namespace Sandstorms
 		TGA::Animation animation;
 
 		int health, level, speed;
+		int currentAttack;
+
 		SDL_Point coords;
 		SDL_Rect bounds;
 
