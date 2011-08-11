@@ -5,8 +5,10 @@ namespace Sandstorms
 	class Character
 	{
 	public:
-		Character(void);
-		~Character(void);
+		Character(int health);
+		virtual ~Character(void);
+
+		virtual void 
 	};
 }
 

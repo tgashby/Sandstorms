@@ -6,7 +6,6 @@ namespace Sandstorms
 	{
 	}
 
-
 	Character::~Character(void)
 	{
 	}
