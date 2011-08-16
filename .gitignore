@@ -1,5 +1,4 @@
 vs/
 CMakeFiles/
 CMakeCache.txt/
-lib/
-
+lib/sdl-1.3/src/
