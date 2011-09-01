@@ -28,6 +28,7 @@ set(
    src/Character.cpp
    src/Player.cpp
    src/SSMain.cpp
+   src/Main.cpp
 )
 
 # Includes
@@ -36,6 +37,7 @@ set(
    include/Character.h
    include/Player.h
    include/SSMain.h
+   include/Main.h
 )
 
 # Get everything together for the executable

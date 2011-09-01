@@ -42,6 +42,7 @@ namespace TGA
 		key_8 = SDLK_8,
 		key_9 = SDLK_9,
 		key_0 = SDLK_0,
-		key_TAB = SDLK_TAB
+		key_TAB = SDLK_TAB,
+		key_SPACE = SDLK_SPACE
 	};
 }

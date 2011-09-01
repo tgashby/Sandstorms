@@ -1,5 +1,6 @@
 #pragma once
 #include "ProjIncludes.h"
+#include "TextureManager.h"
 
 namespace TGA
 {
@@ -28,6 +29,7 @@ namespace TGA
 		bool isLoaded;
 		SDL_bool isFullScreen;
 
+		std::string winTitle;
 		SDL_Window* window;
 		SDL_GLContext glCtx;
 	};

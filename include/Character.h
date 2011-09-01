@@ -18,30 +18,36 @@ namespace Sandstorms
 		
 		void takeDamage(int damage);
 		int getHealth();
-		SDL_Point getPosition();
+		TGA::Vector2D getPosition();
 		SDL_Rect getBounds();
 
-		void updatePosition();
+		void increaseAccels(float xAcceleration, float yAcceleration);
+		
+		virtual void updatePosition();
+
+		bool isAlive();
+
+		void draw();
 
 	protected:
 		virtual void initAttributes(int level) = 0;
-		void setX(int xVal);
-		void setY(int yVal);
-		void setPosition(SDL_Point newCoords);
+		void setX(float xVal);
+		void setY(float yVal);
+		void setPosition(float xVal, float yVal);
 
 		TGA::Texture texture;
 		TGA::Animation animation;
 
+		bool alive;
+
 		int health, level, speed;
 		int currentAttack;
-
-		SDL_Point coords;
 		SDL_Rect bounds;
 
-		float xVel, yVel; 
-		float xAccel, yAccel;
+		TGA::Vector2D position, velocity, accel;
 		
 		//std::vector<Attack> attacks;
+		//int currAttack;
 	};
 }
 

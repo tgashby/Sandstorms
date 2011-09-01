@@ -5,10 +5,10 @@
 
 namespace Sandstorms
 {
-	class Player : Character
+	class Player : public Character
 	{
 	public:
-		Player(void);
+		Player(std::string texName, int lvl, int xPos = 0, int yPos = 0);
 		~Player(void);
 
 		virtual void initAttributes(int level);
@@ -17,12 +17,11 @@ namespace Sandstorms
 
 		virtual void attack(Character& who);
 
+		virtual void updatePosition();
+
 		void changeAttack(int attackNum);
 
 		void jump();
-
-		void setSingleJumped(bool val);
-		void setDoubleJumped(bool val);
 
 	private:
 		bool hasJumped, hasDoubleJumped;

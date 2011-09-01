@@ -1,6 +1,10 @@
 #pragma once
+
 #include <App.h>
+#include <Key.h>
 #include <Engine.h>
+
+#include "Player.h"
 
 namespace Sandstorms
 {
@@ -17,10 +21,11 @@ namespace Sandstorms
 		virtual void shutDown();
 
 	private:
-		void processEvents();
+		bool processEvents();
 		void processLogic();
 		void render();
 
+		TGA::Engine theEngine;
 		Player player;
 	};
 }
