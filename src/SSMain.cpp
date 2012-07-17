@@ -3,7 +3,7 @@
 namespace Sandstorms
 {
 	SSMain::SSMain(void)
-		: player("../resources/player.png", 1337, 512 / 2, 1024 - 50)
+		: player("../resources/player/idle.png", 1337, 512 / 2, 1024 - 50)
 	{
 	}
 	
@@ -14,8 +14,6 @@ namespace Sandstorms
 
 	void SSMain::init()
 	{
-		theEngine.Initalize();
-
 		// Call the Graphics init method
 		theEngine.Graphics->init();
 		

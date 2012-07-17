@@ -55,9 +55,9 @@ namespace Sandstorms
 
 	void Player::updatePosition()
 	{
-		if(coords.y > 512 || yAccel < -10)
+		if(position.getY() > 512 || accel.getY() < -10)
 		{
-			yAccel = 0;
+			accel.setY(0);
 			hasDoubleJumped = false;
 			hasJumped = false;
 		}

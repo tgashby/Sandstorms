@@ -1,0 +1,39 @@
+﻿Build started 7/10/2012 1:45:28 PM.
+     1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "obj\Release\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /nologo /W3 /WX- /Od /Oy- /D NDEBUG /D _MBCS /Gm- /EHsc /RTC1 /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\Release\\" /Fd"obj\Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Camera.cpp ..\src\Engine.cpp ..\src\GraphicsManager.cpp ..\src\InputManager.cpp ..\src\Texture.cpp ..\src\TextureManager.cpp ..\src\Vector2D.cpp
+         Animation.cpp
+         AnimationManager.cpp
+         Camera.cpp
+         Engine.cpp
+         GraphicsManager.cpp
+         InputManager.cpp
+         Texture.cpp
+         TextureManager.cpp
+         Vector2D.cpp
+         Generating Code...
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Release\Animation.obj
+         obj\Release\AnimationManager.obj
+         obj\Release\Camera.obj
+         obj\Release\Engine.obj
+         obj\Release\GraphicsManager.obj
+         obj\Release\InputManager.obj
+         obj\Release\Texture.obj
+         obj\Release\TextureManager.obj
+         obj\Release\Vector2D.obj
+         TGAEngine.vcxproj -> C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\.\TGAEngine.lib
+       PostBuildEvent:
+         copy .\TGAEngine.lib .\..\..\Animation-Calibrator\lib\TGAEngine
+         :VCEnd
+                 1 file(s) copied.
+       FinalizeBuildStatus:
+         Deleting file "obj\Release\TGAEngine.unsuccessfulbuild".
+         Touching "obj\Release\TGAEngine.lastbuildstate".
+     1>Done Building Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.93

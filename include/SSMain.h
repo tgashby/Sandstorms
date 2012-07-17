@@ -1,6 +1,5 @@
 #pragma once
 
-#include <App.h>
 #include <Key.h>
 #include <Engine.h>
 
@@ -8,17 +7,17 @@
 
 namespace Sandstorms
 {
-	class SSMain : TGA::App
+	class SSMain
 	{
 	public:
 		SSMain(void);
 		~SSMain(void);
 
-		virtual void init();
+		void init();
 
-		virtual void run();
+		void run();
 
-		virtual void shutDown();
+		void shutDown();
 
 	private:
 		bool processEvents();

@@ -3,6 +3,7 @@
 #include <ProjIncludes.h>
 #include <Texture.h>
 #include <Animation.h>
+#include <Vector2D.h>
 
 namespace Sandstorms
 {

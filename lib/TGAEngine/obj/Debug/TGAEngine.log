@@ -1,0 +1,41 @@
+﻿Build started 7/16/2012 9:49:34 PM.
+     1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "obj\Debug\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Vector2D.cpp
+         Vector2D.cpp
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Debug\Animation.obj
+         obj\Debug\AnimationManager.obj
+         obj\Debug\Camera.obj
+         obj\Debug\Engine.obj
+         obj\Debug\GraphicsManager.obj
+         obj\Debug\InputManager.obj
+         obj\Debug\Texture.obj
+         obj\Debug\TextureManager.obj
+         obj\Debug\Vector2D.obj
+         TGAEngine.vcxproj -> C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\.\TGAEngine.lib
+       PostBuildEvent:
+         copy .\TGAEngine.lib .\..\..\Libraries\TGAEngine\lib
+         robocopy /s .\obj\ .\..\..\Libraries\TGAEngine\lib\obj\
+         robocopy .\..\include\ .\..\..\Libraries\TGAEngine\include\ *.h
+         exit 0
+         :VCEnd
+                 1 file(s) copied.
+         
+         -------------------------------------------------------------------------------
+            ROBOCOPY     ::     Robust File Copy for Windows                              
+         -------------------------------------------------------------------------------
+         
+           Started : Mon Jul 16 21:49:34 2012
+         
+            Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
+              Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\lib\obj\
+         
+             Files : *.*
+         	    
+           Options : *.* /S /COPY:DAT /R:1000000 /W:30 
+         
+         ------------------------------------------------------------------------------
+         
