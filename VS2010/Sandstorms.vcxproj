@@ -116,7 +116,9 @@ exit 0</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Character.h" />
+    <ClInclude Include="..\include\Level.h" />
     <ClInclude Include="..\include\Main.h" />
+    <ClInclude Include="..\include\Platform.h" />
     <ClInclude Include="..\include\Player.h" />
     <ClInclude Include="..\include\SSMain.h" />
     <ClInclude Include="..\include\SDL\begin_code.h" />
@@ -194,8 +196,10 @@ exit 0</Command>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\Platform.cpp" />
     <ClCompile Include="..\src\Player.cpp">
     </ClCompile>
     <ClCompile Include="..\src\SSMain.cpp">

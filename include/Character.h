@@ -1,54 +1,86 @@
+/**
+ * @file Character.h
+ *
+ * @author Tag Ashby
+ * @date 7/2012
+ * 
+ */
 #pragma once
 
-#include <ProjIncludes.h>
-#include <Texture.h>
-#include <Animation.h>
+#include <Collidable.h>
 #include <Vector2D.h>
+#include <Animation.h>
+#include <map>
+#include <string>
 
-namespace Sandstorms
+
+/**
+ * @class Character
+ *
+ * @brief Base class for all "characters", the player and enemies.
+ *
+ */
+class Character : public TGA::Collidable 
 {
-	class Character
-	{
-	public:
-		Character(std::string texName, int lvl, int xPos = 0, int yPos = 0);
-		virtual ~Character();
+public:
+  /**
+  * Character
+  *
+  * Initializes the basic attributes of a Character.
+  * @param int health - the health of the character
+  * @param TGA::Vector2D position - the position of the character
+  * @param TGA::Vector2D velocity - the velocity of the character
+  */
+  Character (int health = 100, TGA::Vector2D position = TGA::Vector2D(0,0), TGA::Vector2D velocity = TGA::Vector2D(0,0));
 
-		//virtual void moveToward(Character& who) = 0; PUT THIS IN ENEMY
+  ~Character ();
 
-		virtual void attack(Character& who) = 0;
-		
-		void takeDamage(int damage);
-		int getHealth();
-		TGA::Vector2D getPosition();
-		SDL_Rect getBounds();
+  /**
+  * update
+  *
+  * Updates the character, handling position changes and
+  * checking collisions as well as anything else desired.
+  */
+  virtual void update ();
 
-		void increaseAccels(float xAcceleration, float yAcceleration);
-		
-		virtual void updatePosition();
+  /**
+  * draw
+  *
+  * Draw the character using its current Animation.
+  */
+  virtual void draw ();
 
-		bool isAlive();
+  /**
+  * getPosition
+  *
+  * Gets the character's current position.
+  * @return TGA::Vector2D - the current position
+  */
+  TGA::Vector2D getPosition ();
 
-		void draw();
+  /**
+  * isAlive
+  *
+  * Determines whether or not this character is still alive.
+  * @return bool - true if the character is alive
+  */
+  bool isAlive ();
 
-	protected:
-		virtual void initAttributes(int level) = 0;
-		void setX(float xVal);
-		void setY(float yVal);
-		void setPosition(float xVal, float yVal);
+  /**
+   * handleCollision
+   *
+   * Update the state of the characters based on what it collided with.
+   * @param TGA::Collidable collidedWith - the entity collided with
+   * @return void -
+   */
+  virtual void handleCollision (TGA::Collidable collidedWith);
 
-		TGA::Texture texture;
-		TGA::Animation animation;
-
-		bool alive;
-
-		int health, level, speed;
-		int currentAttack;
-		SDL_Rect bounds;
-
-		TGA::Vector2D position, velocity, accel;
-		
-		//std::vector<Attack> attacks;
-		//int currAttack;
-	};
-}
+protected:
+  int health;
+  TGA::Vector2D position;
+  TGA::Vector2D velocity;
+  std::map<std::string, TGA::Animation> animations;
+  TGA::Animation currAnimation;
+  bool alive;
+};
 

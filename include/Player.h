@@ -1,31 +1,57 @@
+/**
+ * @file Player.h
+ *
+ * @author Tag Ashby
+ * @date 7/2012
+ * 
+ */
 #pragma once
 
-#include <ProjIncludes.h>
 #include "Character.h"
 
-namespace Sandstorms
+/**
+ * @class Player
+ *
+ * @brief Represents the player character.
+ *
+ * Player will contain all methods and information needed 
+ * to handle interactions with the player.
+ */
+class Player : public Character 
 {
-	class Player : public Character
-	{
-	public:
-		Player(std::string texName, int lvl, int xPos = 0, int yPos = 0);
-		~Player(void);
+public:
+  /**
+  * Player
+  *
+  * Create a player with an optional initial location.
+  * @param TGA::Vector2D position - the player's initial position.
+  */
+  Player (TGA::Vector2D position = TGA::Vector2D(0,0));
+  
+  /**
+  * @copydoc Character::update()
+  */
+  virtual void update ();
+  
+  /**
+  * @copydoc Character::draw()
+  */
+  virtual void draw ();
+  
+  /**
+  * getHealthPercent
+  *
+  * Gets the player's current health as a percentage.
+  * Used for generating the health bar.
+  * @return float -
+  */
+  float getHealthPercent ();
 
-		virtual void initAttributes(int level);
+private:
+  void jump ();
 
-		virtual void moveToward(Character& who);
-
-		virtual void attack(Character& who);
-
-		virtual void updatePosition();
-
-		void changeAttack(int attackNum);
-
-		void jump();
-
-	private:
-		bool hasJumped, hasDoubleJumped;
-		Uint64 lastJump;
-	};
-}
+  bool hasJumped;
+  bool hasDoubleJumped;
+  Uint64 lastJumpTime;
+};
 
