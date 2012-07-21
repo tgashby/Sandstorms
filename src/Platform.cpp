@@ -8,23 +8,37 @@
 
 #include "Platform.h"
 
-
-Platform::Platform( std::string textureStr, TGA::BoundingBox bounds )
+Platform::Platform(std::string textureStr, TGA::BoundingBox bounds)
+   : Collidable(bounds)
 {
-
+   if (!texture.loadTexture(textureStr))
+   {
+      std::cerr << "Failed to load level texture: " << textureStr << "\n";
+   }
 }
 
-Platform::Platform( std::string textureStr, int x, int y, int width, int height )
+Platform::Platform(std::string textureStr, int x, int y, int width, int height)
+   : Collidable(TGA::BoundingBox(x, y, width, height))
 {
-
+   if (!texture.loadTexture(textureStr))
+   {
+      std::cerr << "Failed to load level texture: " << textureStr << "\n";
+   }
 }
 
 void Platform::draw()
 {
-
+   texture.draw((float)this->bounds.getX(), (float)this->bounds.getY());
 }
 
-void Platform::handleCollision( TGA::Collidable collidedWith )
+void Platform::handleCollision(TGA::Collidable& collidedWith)
 {
+   if (typeid(collidedWith) == typeid(Player))
+   {
+   }
 
+   if (typeid(collidedWith) == typeid(Platform))
+   {
+      std::cerr << "Overlapping platforms." << "\n";
+   }
 }

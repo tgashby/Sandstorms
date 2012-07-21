@@ -67,13 +67,13 @@ namespace TGA
 		Vector2D operator-(Vector2D);
 
 		/**
-		* scalarProduct
+		* operator*
 		*
 		* Calculates the scalar product given a scalar.
-		* @param int  - the scalar to multiply by
+		* @param float  - the scalar to multiply by
 		* @return TGA::Vector2D - the resultant vector
 		*/
-		Vector2D scalarProduct(int);
+		Vector2D operator*(float);
 
 		/**
 		* normalize

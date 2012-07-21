@@ -7,6 +7,8 @@
  */
 #pragma once
 
+#include <Engine.h>
+#include <Singleton.h>
 #include <Texture.h>
 #include <string>
 #include <vector>
@@ -49,6 +51,13 @@ public:
   * @param int height - the height of the platform
   */
   void addPlatform (std::string textureStr, int x, int y, int width, int height);
+
+  /**
+   * draw
+   *
+   * Draw the background and all platforms.
+   */
+  void draw();
 
 private:
    TGA::Texture background;

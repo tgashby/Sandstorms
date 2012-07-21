@@ -8,6 +8,9 @@
 #pragma once
 
 #include "Character.h"
+#include <Timer.h>
+#include <Collision.h>
+#include "Platform.h"
 
 /**
  * @class Player
@@ -29,14 +32,9 @@ public:
   Player (TGA::Vector2D position = TGA::Vector2D(0,0));
   
   /**
-  * @copydoc Character::update()
+  * @copydoc Character::update(float dt)
   */
-  virtual void update ();
-  
-  /**
-  * @copydoc Character::draw()
-  */
-  virtual void draw ();
+  virtual void update (float dt);
   
   /**
   * getHealthPercent
@@ -47,11 +45,23 @@ public:
   */
   float getHealthPercent ();
 
+  /**
+   * handleCollision
+   *
+   * Update the state of the Player based on what it collided with.
+   * @param TGA::Collidable collidedWith - the entity collided with
+   */
+  virtual void handleCollision (TGA::Collidable& collidedWith);
+
 private:
   void jump ();
+  void makeSubBounds();
+  bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
 
+  int maxHealth;
   bool hasJumped;
   bool hasDoubleJumped;
-  Uint64 lastJumpTime;
+  Uint32 lastJumpTime;
+  TGA::BoundingBox subBounds[4];
 };
 

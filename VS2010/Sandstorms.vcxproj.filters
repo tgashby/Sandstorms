@@ -249,6 +249,18 @@
     <ClInclude Include="..\include\Platform.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\TGAEngine\BoundingBox.h">
+      <Filter>include\TGAEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TGAEngine\Collidable.h">
+      <Filter>include\TGAEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TGAEngine\Collision.h">
+      <Filter>include\TGAEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TGAEngine\Timer.h">
+      <Filter>include\TGAEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">

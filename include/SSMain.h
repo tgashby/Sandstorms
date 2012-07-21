@@ -2,6 +2,7 @@
 
 #include <Key.h>
 #include <Engine.h>
+#include "Level.h"
 
 #include "Player.h"
 
@@ -21,10 +22,11 @@ namespace Sandstorms
 
 	private:
 		bool processEvents();
-		void processLogic();
+		void processLogic(float dt);
 		void render();
 
-		TGA::Engine theEngine;
-		Player player;
+		TGA::Engine Engine;
+      Level* level;
+		Player* player;
 	};
 }

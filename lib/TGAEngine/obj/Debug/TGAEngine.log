@@ -1,19 +1,26 @@
-﻿Build started 7/16/2012 9:49:34 PM.
+﻿Build started 7/20/2012 10:16:59 PM.
      1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "obj\Debug\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Vector2D.cpp
-         Vector2D.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Engine.cpp
+         Animation.cpp
+         AnimationManager.cpp
+         Engine.cpp
+         Generating Code...
        Lib:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Debug\Animation.obj
          obj\Debug\AnimationManager.obj
+         obj\Debug\BoundingBox.obj
          obj\Debug\Camera.obj
+         obj\Debug\Collidable.obj
+         obj\Debug\Collision.obj
          obj\Debug\Engine.obj
          obj\Debug\GraphicsManager.obj
          obj\Debug\InputManager.obj
          obj\Debug\Texture.obj
          obj\Debug\TextureManager.obj
+         obj\Debug\Timer.obj
          obj\Debug\Vector2D.obj
          TGAEngine.vcxproj -> C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\.\TGAEngine.lib
        PostBuildEvent:
@@ -28,7 +35,7 @@
             ROBOCOPY     ::     Robust File Copy for Windows                              
          -------------------------------------------------------------------------------
          
-           Started : Mon Jul 16 21:49:34 2012
+           Started : Fri Jul 20 22:17:02 2012
          
             Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
               Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\lib\obj\
@@ -39,3 +46,29 @@
          
          ------------------------------------------------------------------------------
          
+         	                   0	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
+         	                  26	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\Debug\
+         	    Newer     		  304676	Animation.obj
+           0%  
+          43%  
+          86%  
+         100%  
+         	    Newer     		  198045	AnimationManager.obj
+           0%  
+          66%  
+         100%  
+         	    Newer     		   10030	cl.command.1.tlog
+           0%  
+         100%  
+         	    Newer     		  260436	CL.read.1.tlog
+           0%  
+          50%  
+         100%  
+         	    Newer     		   13130	CL.write.1.tlog
+           0%  
+         100%  
+         	    Newer     		   66603	Engine.obj
+           0%  
+         100%  
+         	    Newer     		    2738	lib.command.1.tlog
+           0%  

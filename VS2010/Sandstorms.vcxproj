@@ -182,7 +182,10 @@ exit 0</Command>
     <ClInclude Include="..\include\SDL_image\SDL_image.h" />
     <ClInclude Include="..\include\TGAEngine\Animation.h" />
     <ClInclude Include="..\include\TGAEngine\AnimationManager.h" />
+    <ClInclude Include="..\include\TGAEngine\BoundingBox.h" />
     <ClInclude Include="..\include\TGAEngine\Camera.h" />
+    <ClInclude Include="..\include\TGAEngine\Collidable.h" />
+    <ClInclude Include="..\include\TGAEngine\Collision.h" />
     <ClInclude Include="..\include\TGAEngine\Engine.h" />
     <ClInclude Include="..\include\TGAEngine\GraphicsManager.h" />
     <ClInclude Include="..\include\TGAEngine\InputManager.h" />
@@ -191,6 +194,7 @@ exit 0</Command>
     <ClInclude Include="..\include\TGAEngine\Singleton.h" />
     <ClInclude Include="..\include\TGAEngine\Texture.h" />
     <ClInclude Include="..\include\TGAEngine\TextureManager.h" />
+    <ClInclude Include="..\include\TGAEngine\Timer.h" />
     <ClInclude Include="..\include\TGAEngine\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>

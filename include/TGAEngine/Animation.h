@@ -10,6 +10,7 @@
 
 #include "ProjIncludes.h"
 #include "TextureManager.h"
+#include "BoundingBox.h"
  
 namespace TGA
 {
@@ -111,10 +112,10 @@ namespace TGA
 		*
 		* Adds a frame to the animation given the dimensions and amount of time 
       * it should play.
-		* @param SDL_Rect frameRect - A rectangle encompassing the frame in the image.
+		* @param BoundingBox frameRect - A rectangle encompassing the frame in the image.
 		* @param Uint32 delay - The amount of time the frame should be shown for.
 		*/
-		void addFrame(SDL_Rect frameRect, Uint32 delay);
+		void addFrame(BoundingBox frameRect, Uint32 delay);
       
 		/**
 		* deleteFrame
@@ -172,9 +173,9 @@ namespace TGA
 		*
 		* Sets the position and dimensions of a frame on the image.
 		* @param GLuint frame - the index (0-based) of the frame to change.
-		* @param SDL_Rect newBounds - the new dimensions of the frame.
+		* @param BoundingBox newBounds - the new dimensions of the frame.
 		*/
-		void setFrameBounds(GLuint frame, SDL_Rect newBounds);
+		void setFrameBounds(GLuint frame, BoundingBox newBounds);
 
 		/**
 		* draw
@@ -197,9 +198,9 @@ namespace TGA
        * getCurrentFrameDimensions()
        *
        * Gets the current frame's dimensions
-       * @return SDL_Rect - the rectangle determining it's position and dimensions
+       * @return BoundingBox - the rectangle determining it's position and dimensions
        */
-      SDL_Rect getCurrentFrameDimensions();
+      BoundingBox getCurrentFrameDimensions();
 
 		/**
 		* printFrames
@@ -217,12 +218,12 @@ namespace TGA
 		*/
 		std::string printFrames();
 
-	private:
+	//private:
 		// The texture panel that has all the frames
 		Texture* texture;
 
 		// The individual frames, with delays
-		std::vector<std::pair<SDL_Rect, Uint32> > frames;
+		std::vector<std::pair<BoundingBox, Uint32> > frames;
 
 		GLuint currFrame;
 

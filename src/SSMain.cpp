@@ -3,7 +3,6 @@
 namespace Sandstorms
 {
 	SSMain::SSMain(void)
-		: player("../resources/player/idle.png", 1337, 512 / 2, 1024 - 50)
 	{
 	}
 	
@@ -15,12 +14,10 @@ namespace Sandstorms
 	void SSMain::init()
 	{
 		// Call the Graphics init method
-		theEngine.Graphics->init();
-		
-		// Create a player
-		player.initAttributes(1337);
+		Engine.Graphics->init(1280, 800, "Sandstorms");
 
-		// Create the background
+      player = new Player(TGA::Vector2D(600, 200));
+      level = new Level("../resources/level/Oasis.jpg", false);
 	}
 
 	void SSMain::run()
@@ -28,14 +25,19 @@ namespace Sandstorms
 		// Create a bool for whether or not the game is running
 		bool running = true;
 
+      Uint32 lastUpdate = TGA::Timer::getTicks();
+      float dt;
+
 		// WHILE running
 		while(running)
 		{
 			// Call processEvents()
 			running = processEvents();
 
+         dt = (float)(TGA::Timer::getTicks() - lastUpdate) / 10000;
+
 			// Call processLogic()
-			processLogic();
+			processLogic(dt);
 
 			// Call render()
 			render();
@@ -45,54 +47,35 @@ namespace Sandstorms
 	void SSMain::shutDown()
 	{
 		// Call Graphics shutDown method
-		theEngine.Graphics->shutDown();
+		Engine.Graphics->shutDown();
 	}
 
 	bool SSMain::processEvents()
 	{
 		// Update the Input
-		bool stillGoing = theEngine.Input->update();
-
-		// IF 'D' is down
-		if(theEngine.Input->keyDown(TGA::Key::key_D))
-		{
-			// Move right
-			player.increaseAccels(3, 0);
-		}
-
-		// IF 'A' is down
-		if(theEngine.Input->keyDown(TGA::Key::key_A))
-		{
-			// Move left
-			player.increaseAccels(-3, 0);
-		}
-
-		// IF 'W' OR 'SPACE' is down AND it's been long enough
-		if(theEngine.Input->keyDown(TGA::Key::key_W) || 
-			theEngine.Input->keyDown(TGA::Key::key_SPACE))
-		{
-			player.jump();
-		}
+		bool stillGoing = Engine.Input->update();
 
 		return stillGoing;
 	}
 
-	void SSMain::processLogic()
+	void SSMain::processLogic(float dt)
 	{
 		// Update the AnimationManager
-		theEngine.Animations->updateAll();
+		Engine.Animations->updateAll();
 
 		// Update the Player
-		player.updatePosition();
+      player->update(dt);
 	}
 
 	void SSMain::render()
 	{
 		// Draw the background
+      level->draw();
+
 		// Draw all Animations
-		player.draw();
+		player->draw();
 
 		// Call Graphics Swap Buffers
-		theEngine.Graphics->swapBuffers();
+		Engine.Graphics->swapBuffers();
 	}
 }

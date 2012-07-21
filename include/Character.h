@@ -10,6 +10,7 @@
 #include <Collidable.h>
 #include <Vector2D.h>
 #include <Animation.h>
+#include <Engine.h>
 #include <map>
 #include <string>
 
@@ -31,7 +32,8 @@ public:
   * @param TGA::Vector2D position - the position of the character
   * @param TGA::Vector2D velocity - the velocity of the character
   */
-  Character (int health = 100, TGA::Vector2D position = TGA::Vector2D(0,0), TGA::Vector2D velocity = TGA::Vector2D(0,0));
+  Character (int health = 100, TGA::Vector2D position = TGA::Vector2D(0,0), 
+     TGA::Vector2D velocity = TGA::Vector2D(0,0), TGA::Vector2D acceleration = TGA::Vector2D(0, 0.5));
 
   ~Character ();
 
@@ -40,8 +42,9 @@ public:
   *
   * Updates the character, handling position changes and
   * checking collisions as well as anything else desired.
+  * @param Uint32 dt - time elapsed since the last update
   */
-  virtual void update ();
+  virtual void update (float dt);
 
   /**
   * draw
@@ -73,14 +76,13 @@ public:
    * @param TGA::Collidable collidedWith - the entity collided with
    * @return void -
    */
-  virtual void handleCollision (TGA::Collidable collidedWith);
+  virtual void handleCollision (TGA::Collidable& collidedWith) = 0;
 
 protected:
   int health;
-  TGA::Vector2D position;
-  TGA::Vector2D velocity;
-  std::map<std::string, TGA::Animation> animations;
-  TGA::Animation currAnimation;
+  TGA::Vector2D position, velocity, acceleration;
+  std::map<std::string, TGA::Animation*> animations;
+  TGA::Animation* currAnimation;
   bool alive;
 };
 
