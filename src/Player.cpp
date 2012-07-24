@@ -54,6 +54,8 @@ void Player::update(Uint32 dt)
 {
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
    
+   std::cout << dt << "\n";
+   
    if (!engine->Input->keyDown(TGA::key_A) && 
        !engine->Input->keyDown(TGA::key_D))
    {
