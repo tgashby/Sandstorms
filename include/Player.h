@@ -32,9 +32,14 @@ public:
   Player (TGA::Vector2D position = TGA::Vector2D(0,0));
   
   /**
-  * @copydoc Character::update(float dt)
+  * @copydoc Character::update(Uint32 dt)
   */
-  virtual void update (float dt);
+  virtual void update (Uint32 dt);
+
+  /**
+   * @copydoc Character::draw(bool flipped)
+   */
+  virtual void draw(bool flipped = false);
   
   /**
   * getHealthPercent
@@ -59,9 +64,10 @@ private:
   bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
 
   int maxHealth;
+  bool justJumped;
   bool hasJumped;
   bool hasDoubleJumped;
-  Uint32 lastJumpTime;
   TGA::BoundingBox subBounds[4];
+  std::string currAnimationName;
 };
 

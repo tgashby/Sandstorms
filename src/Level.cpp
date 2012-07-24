@@ -41,3 +41,8 @@ void Level::draw()
       (*i)->draw();
    }
 }
+
+std::vector<Platform*> Level::getPlatforms()
+{
+   return platforms;
+}

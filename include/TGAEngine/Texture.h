@@ -70,36 +70,41 @@ namespace TGA
 		* draw
 		*
 		* Draws the entire texture at a location.
-      * @param GLfloat xPos - the x position at which to start drawing
-      * @param GLfloat yPos - the y position at which to start drawing
+      * @param float xPos - the x position at which to start drawing
+      * @param float yPos - the y position at which to start drawing
+      * @param float scaleX - a scalar in x
+      * @param float scaleY - a scalar in y
+      * @param float rotation - a rotation amount, in degrees
 		*/
-		void draw(GLfloat xPos, GLfloat yPos);
+		void draw(float xPos, float yPos, bool flipped = false);
 
 		/**
 		* drawSection
 		*
       * Draws a small portion of a texture, useful, for example, in a
       * sprite sheet.
-		* @param GLfloat xPos - the x position at which to start drawing
-		* @param GLfloat yPos - the y position at which to start drawing
+		* @param float xPos - the x position at which to start drawing
+		* @param float yPos - the y position at which to start drawing
 		* @param SDL_Rect section - a rectangle representation of the section to draw
+      * @param bool flipped - whether the image is flipped
 		*/
-		void drawSection(GLfloat xPos, GLfloat yPos, SDL_Rect section);
+      void drawSection(float xPos, float yPos, SDL_Rect section, bool flipped = false);
 
 		/**
 		* drawSection
 		*
 		* Draws a small portion of a texture, useful, for example, in a
       * sprite sheet.
-      * @param GLfloat xPos - the x position at which to start drawing
-      * @param GLfloat yPos - the y position at which to start drawing 
+      * @param float xPos - the x position at which to start drawing
+      * @param float yPos - the y position at which to start drawing 
 		* @param int sectX - the x position on the texture to start the section
 		* @param int sectY - the y position on the texture to start the section
 		* @param int sectWidth - the width of the section
 		* @param int sectHeight - the height of the section
+      * @param bool flipped - whether the image is flipped
 		*/
-		void drawSection(GLfloat xPos, GLfloat yPos, int sectX, int sectY,
-			int sectWidth, int sectHeight);
+		void drawSection(float xPos, float yPos, int sectX, int sectY,
+         int sectWidth, int sectHeight, bool flipped = false);
 
 		/**
 		* getWidth

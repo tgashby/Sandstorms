@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <ostream>
+
 namespace TGA
 {
    /**
@@ -24,10 +26,10 @@ namespace TGA
 		* Vector2D
 		*
 		* Creates a Vector2D
-		* @param float x - the x component of the vector
-		* @param float y - the y component of the vector
+		* @param double x - the x component of the vector
+		* @param double y - the y component of the vector
 		*/
-		Vector2D(float x, float y);
+		Vector2D(double x, double y);
 		~Vector2D();
 
      /**
@@ -70,10 +72,10 @@ namespace TGA
 		* operator*
 		*
 		* Calculates the scalar product given a scalar.
-		* @param float  - the scalar to multiply by
+		* @param double  - the scalar to multiply by
 		* @return TGA::Vector2D - the resultant vector
 		*/
-		Vector2D operator*(float);
+		Vector2D operator*(double);
 
 		/**
 		* normalize
@@ -88,48 +90,49 @@ namespace TGA
 		*
 		* Calculates the dot product with another vector.
 		* @param Vector2D - the vector to dot with
-		* @return float - the dot product
+		* @return double - the dot product
 		*/
-		float dotProduct(Vector2D);
+		double dotProduct(Vector2D);
 
 		/**
 		* length
 		*
 		* Returns the length of the vector.
-		* @return float - the length
+		* @return double - the length
 		*/
-		float length();
+		double length();
 
 		/**
 		* distanceFrom
 		*
 		* Gets the distance from the given "point" to another "point".
 		* @param Vector2D - the point to calculate distance from
-		* @return float - the distance
+		* @return double - the distance
 		*/
-		float distanceFrom(Vector2D);
+		double distanceFrom(Vector2D);
 
 		/**
 		* getX
 		*
 		* Gets the X component of the vector.
-		* @return float - the X component
+		* @return double - the X component
 		*/
-		float getX();
+		double getX();
 
 		/**
 		* getY
 		*
 		* Gets the Y component of the vector.
-		* @return float - the Y component
+		* @return double - the Y component
 		*/
-		float getY();
+		double getY();
 
-      void setX(float x);
+      void setX(double x);
 
-      void setY(float y);
+      void setY(double y);
 
 	private:
-		float x, y;
+      friend std::ostream& operator<<(std::ostream& os, const Vector2D& v);
+		double x, y;
 	};
 }

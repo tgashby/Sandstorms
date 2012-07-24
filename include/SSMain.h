@@ -22,7 +22,7 @@ namespace Sandstorms
 
 	private:
 		bool processEvents();
-		void processLogic(float dt);
+		void processLogic(Uint32 dt);
 		void render();
 
 		TGA::Engine Engine;

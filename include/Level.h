@@ -59,6 +59,8 @@ public:
    */
   void draw();
 
+  std::vector<Platform*> getPlatforms();
+
 private:
    TGA::Texture background;
    bool tiled;

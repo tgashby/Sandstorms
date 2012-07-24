@@ -33,7 +33,7 @@ public:
   * @param TGA::Vector2D velocity - the velocity of the character
   */
   Character (int health = 100, TGA::Vector2D position = TGA::Vector2D(0,0), 
-     TGA::Vector2D velocity = TGA::Vector2D(0,0), TGA::Vector2D acceleration = TGA::Vector2D(0, 0.5));
+     TGA::Vector2D velocity = TGA::Vector2D(0,0), TGA::Vector2D acceleration = TGA::Vector2D(0, 0.003));
 
   ~Character ();
 
@@ -44,14 +44,15 @@ public:
   * checking collisions as well as anything else desired.
   * @param Uint32 dt - time elapsed since the last update
   */
-  virtual void update (float dt);
+  virtual void update (Uint32 dt);
 
   /**
   * draw
   *
   * Draw the character using its current Animation.
+  * @param bool flipped - whether to flip the image
   */
-  virtual void draw ();
+  virtual void draw (bool flipped = false);
 
   /**
   * getPosition

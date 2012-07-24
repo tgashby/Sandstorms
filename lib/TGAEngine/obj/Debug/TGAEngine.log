@@ -1,12 +1,15 @@
-﻿Build started 7/20/2012 10:16:59 PM.
+﻿Build started 7/23/2012 5:57:35 PM.
      1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "obj\Debug\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "obj\Debug\TGAEngine.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Engine.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Engine.cpp ..\src\GraphicsManager.cpp ..\src\Texture.cpp ..\src\TextureManager.cpp
          Animation.cpp
          AnimationManager.cpp
          Engine.cpp
+         GraphicsManager.cpp
+         Texture.cpp
+         TextureManager.cpp
          Generating Code...
        Lib:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Debug\Animation.obj
@@ -35,7 +38,7 @@
             ROBOCOPY     ::     Robust File Copy for Windows                              
          -------------------------------------------------------------------------------
          
-           Started : Fri Jul 20 22:17:02 2012
+           Started : Mon Jul 23 17:57:38 2012
          
             Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
               Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\lib\obj\
@@ -48,7 +51,7 @@
          
          	                   0	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
          	                  26	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\Debug\
-         	    Newer     		  304676	Animation.obj
+         	    Newer     		  304704	Animation.obj
            0%  
           43%  
           86%  
@@ -60,14 +63,18 @@
          	    Newer     		   10030	cl.command.1.tlog
            0%  
          100%  
-         	    Newer     		  260436	CL.read.1.tlog
+         	    Newer     		  273368	CL.read.1.tlog
            0%  
-          50%  
+          47%  
+          95%  
          100%  
-         	    Newer     		   13130	CL.write.1.tlog
+         	    Newer     		   16076	CL.write.1.tlog
            0%  
          100%  
-         	    Newer     		   66603	Engine.obj
+         	    Newer     		   66623	Engine.obj
+           0%  
+         100%  
+         	    Newer     		  103091	GraphicsManager.obj
            0%  
          100%  
          	    Newer     		    2738	lib.command.1.tlog
