@@ -1,10 +1,12 @@
 #include "Player.h"
 
+// BUG: Game Speed/Player Speed is not doing correct time-based movements.
+// TODO: Jump needs to be overhauled. 1. Holding space runs animation forever. 2. Animation doesn't reflect action.
+
 const int PLAYER_MAX_HEALTH = 250;
-const double HORIZ_ACCEL = 0.05;
-const double VERT_ACCEL = 0.003;
-const double MAX_VEL = 0.3;
-const int MAX_JUMP_LENGTH = 10000;
+const double HORIZ_ACCEL = 1;
+const double MAX_VEL = 8;
+const double JUMP_VEL = -27;
 
 typedef std::pair<std::string, TGA::Animation*> animPair;
 
@@ -50,11 +52,9 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    currAnimationName = "idle";
 }
 
-void Player::update(Uint32 dt)
+void Player::update()
 {
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
-   
-   std::cout << dt << "\n";
    
    if (!engine->Input->keyDown(TGA::key_A) && 
        !engine->Input->keyDown(TGA::key_D))
@@ -126,42 +126,20 @@ void Player::update(Uint32 dt)
       justJumped = false;
    }
 
-   /*if (velocity.getY() != 0)
-   {
-      if (velocity.getY() < -VERT_ACCEL - 0.001)
-      {
-         if (currAnimationName.compare("jump") != 0)
-         {
-            currAnimation = animations["jump"];
-            currAnimation->goToFrame(2);
-            currAnimationName = "jump";
-         }
-      }
-
-      if (velocity.getY() > VERT_ACCEL + 0.001)
-      {
-         if (currAnimationName.compare("jump") != 0)
-         {
-            currAnimation = animations["jump"];
-            currAnimationName = "jump";
-         }
-      }
-   }*/
-
    makeSubBounds();
 
-   Character::update(dt);
+   Character::update();
 }
 
-void Player::draw(bool flipped /* = false */)
+void Player::draw(float interpolation, bool flipped /* = false */)
 {
    if (velocity.getX() < 0)
    {
-      Character::draw(true);
+      Character::draw(interpolation, true);
    }
    else
    {
-      Character::draw();
+      Character::draw(interpolation);
    }
 }
 
@@ -172,8 +150,8 @@ float Player::getHealthPercent()
 
 void Player::jump()
 {
-   position.setY(position.getY() - 29); // 27 makes up for the difference in jump animation height
-   velocity.setY(-1.25);
+   position.setY(position.getY() - 29); // 29 makes up for the difference in jump animation height
+   velocity.setY(JUMP_VEL);
 
    if (!hasJumped)
    {

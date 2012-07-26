@@ -18,26 +18,20 @@ Character::~Character()
    // TODO: Memory management?
 }
 
-void Character::update(Uint32 dt)
+void Character::update()
 {
-   velocity += acceleration * dt;
+   velocity += acceleration;
 
-   //if (velocity.length() != 0.0)
-   //{
-   //   std::cout << "Position: " << position;
-   //   std::cout << "Velocity: " << velocity;
-   //   std::cout << "Acceleration: " << acceleration;
-   //   std::cout << "dt: " << dt << "\n";
-   //}
-
-   position += velocity * dt;
+   position += velocity;
 
    assert(currAnimation);
    currAnimation->update();
 }
 
-void Character::draw(bool flipped /* = false */)
+void Character::draw(float interpolation, bool flipped /* = false */)
 {
+   // TODO: Handle interpolation
+
    assert(currAnimation);
    currAnimation->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
       flipped);

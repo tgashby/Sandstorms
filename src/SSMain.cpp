@@ -32,27 +32,35 @@ namespace Sandstorms
 		// Create a bool for whether or not the game is running
 		bool running = true;
 
-      Uint32 lastUpdate = TGA::Timer::getTicks();
-      Uint32 now, dt;
+      const int TICKS_PER_SECOND = 60;
+      const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
+      const int MAX_FRAMESKIP = 5;
 
-		// WHILE running
-		while(running)
-		{
-			// Call processEvents()
-			running = processEvents();
+      Uint32 next_game_tick = TGA::Timer::getTicks();
+      int loops;
+      float interpolation;
 
-         now = TGA::Timer::getTicks();
+      while (running) {
 
-         dt = now - lastUpdate;
+         loops = 0;
+         while (TGA::Timer::getTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
+            running = processEvents();
+            if (!running)
+            {
+               break;
+            }
 
-			// Call processLogic()
-			processLogic(dt);
+            processLogic();
 
-         lastUpdate = now;
+            next_game_tick += SKIP_TICKS;
+            loops++;
+         }
 
-			// Call render()
-			render();
-		}
+         interpolation = float(TGA::Timer::getTicks() + SKIP_TICKS - next_game_tick)
+            / float(SKIP_TICKS);
+         
+         render(interpolation);
+      }
 	}
 
 	void SSMain::shutDown()
@@ -74,7 +82,7 @@ namespace Sandstorms
 		return stillGoing;
 	}
 
-	void SSMain::processLogic(Uint32 dt)
+	void SSMain::processLogic()
 	{
       std::vector<Platform*> platforms = level->getPlatforms();
 
@@ -88,16 +96,16 @@ namespace Sandstorms
 		Engine.Animations->updateAll();
 
 		// Update the Player
-      player->update(dt);
+      player->update();
 	}
 
-	void SSMain::render()
+	void SSMain::render(float interpolation)
 	{
 		// Draw the background
       level->draw();
 
 		// Draw all Animations
-		player->draw();
+		player->draw(interpolation);
 
 		// Call Graphics Swap Buffers
 		Engine.Graphics->swapBuffers();

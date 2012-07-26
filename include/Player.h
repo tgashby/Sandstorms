@@ -34,19 +34,19 @@ public:
   /**
   * @copydoc Character::update(Uint32 dt)
   */
-  virtual void update (Uint32 dt);
+  virtual void update ();
 
   /**
-   * @copydoc Character::draw(bool flipped)
+   * @copydoc Character::draw(float interpolation, bool flipped)
    */
-  virtual void draw(bool flipped = false);
+  virtual void draw(float interpolation, bool flipped = false);
   
   /**
   * getHealthPercent
   *
   * Gets the player's current health as a percentage.
   * Used for generating the health bar.
-  * @return float -
+  * @return float - percentage of health remaining
   */
   float getHealthPercent ();
 

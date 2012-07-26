@@ -22,8 +22,8 @@ namespace Sandstorms
 
 	private:
 		bool processEvents();
-		void processLogic(Uint32 dt);
-		void render();
+		void processLogic();
+		void render(float interpolation);
 
 		TGA::Engine Engine;
       Level* level;
