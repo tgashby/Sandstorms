@@ -46,6 +46,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Sandstorms</TargetName>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
+    <CustomBuildBeforeTargets Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    </CustomBuildBeforeTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -79,6 +81,10 @@
 robocopy $(OutDir)..\..\Libraries\TGAEngine\include\ $(OutDir)..\include\TGAEngine *.h 
 exit 0</Command>
     </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,7 +121,11 @@ exit 0</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Artifact.h" />
     <ClInclude Include="..\include\Character.h" />
+    <ClInclude Include="..\include\Consumable.h" />
+    <ClInclude Include="..\include\HealthManaElement.h" />
+    <ClInclude Include="..\include\HUDElement.h" />
     <ClInclude Include="..\include\Level.h" />
     <ClInclude Include="..\include\Main.h" />
     <ClInclude Include="..\include\Platform.h" />
@@ -198,8 +208,12 @@ exit 0</Command>
     <ClInclude Include="..\include\TGAEngine\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Artifact.cpp" />
     <ClCompile Include="..\src\Character.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\Consumable.cpp" />
+    <ClCompile Include="..\src\HealthManaElement.cpp" />
+    <ClCompile Include="..\src\HUDElement.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp">
     </ClCompile>

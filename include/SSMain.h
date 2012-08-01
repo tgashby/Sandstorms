@@ -3,8 +3,9 @@
 #include <Key.h>
 #include <Engine.h>
 #include "Level.h"
-
 #include "Player.h"
+#include "HealthManaElement.h"
+#include "Artifact.h"
 
 namespace Sandstorms
 {
@@ -28,5 +29,6 @@ namespace Sandstorms
 		TGA::Engine Engine;
       Level* level;
 		Player* player;
+      HealthManaElement* healthMana;
 	};
 }

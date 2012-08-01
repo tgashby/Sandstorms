@@ -20,12 +20,13 @@ namespace Sandstorms
 
       std::vector<Platform*> platforms;
 
-      platforms.push_back(new Platform("../resources/level/platform.png", 200, 500, 100, 20));
-      platforms.push_back(new Platform("../resources/level/platform.png", 650, 250, 100, 20));
+      platforms.push_back(new Platform("../resources/level/large_oasis.png", 200, 500, 125, 37));
+      platforms.push_back(new Platform("../resources/level/large_oasis.png", 650, 250, 125, 37));
       platforms.push_back(new Platform("../resources/level/platform.png", -40, 800, 1360, 20));
 
-      level = new Level("../resources/level/Oasis.jpg", false, platforms);
-	}
+      level = new Level("../resources/level/oasis.png", 1.0, false, std::vector<Artifact*>(), platforms);
+	   healthMana = new HealthManaElement("../resources/ui/healthManaContainer.png");
+   }
 
 	void SSMain::run()
 	{
@@ -97,6 +98,8 @@ namespace Sandstorms
 
 		// Update the Player
       player->update();
+      
+      healthMana->update(player->getHealthPercent(), player->getManaPercent());
 	}
 
 	void SSMain::render(float interpolation)
@@ -106,6 +109,8 @@ namespace Sandstorms
 
 		// Draw all Animations
 		player->draw(interpolation);
+
+      healthMana->draw();
 
 		// Call Graphics Swap Buffers
 		Engine.Graphics->swapBuffers();

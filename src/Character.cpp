@@ -28,13 +28,13 @@ void Character::update()
    currAnimation->update();
 }
 
-void Character::draw(float interpolation, bool flipped /* = false */)
+void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
 {
    // TODO: Handle interpolation
 
    assert(currAnimation);
    currAnimation->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
-      flipped);
+      scaleX, scaleY, rotation);
 }
 
 TGA::Vector2D Character::getPosition()

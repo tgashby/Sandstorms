@@ -8,14 +8,18 @@
 
 #include "Level.h"
 
-Level::Level( std::string backgroundTex, bool tiled, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/ )
+Level::Level( std::string backgroundTex, double moveRate /*= 1*/, bool tiled /*= false*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/ )
 {
    if (!background.loadTexture(backgroundTex))
    {
       std::cerr << "Failed to load level texture: " << backgroundTex << "\n";
    }
 
+   this->moveRate = moveRate;
+
    this->tiled = tiled;
+
+   this->artifacts = artifacts;
 
    this->platforms = platforms;
 }

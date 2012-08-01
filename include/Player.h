@@ -10,7 +10,9 @@
 #include "Character.h"
 #include <Timer.h>
 #include <Collision.h>
+#include <Camera.h>
 #include "Platform.h"
+#include "Artifact.h"
 
 /**
  * @class Player
@@ -37,18 +39,35 @@ public:
   virtual void update ();
 
   /**
-   * @copydoc Character::draw(float interpolation, bool flipped)
+   * @copydoc Character::draw(float interpolation, float scaleX, float scaleY, float rotation)
    */
-  virtual void draw(float interpolation, bool flipped = false);
+  virtual void draw(float interpolation, float scaleX = 1, float scaleY = 1, float rotation = 0);
   
   /**
   * getHealthPercent
   *
   * Gets the player's current health as a percentage.
   * Used for generating the health bar.
-  * @return float - percentage of health remaining
+  * @return double - percentage of health remaining
   */
-  float getHealthPercent ();
+  double getHealthPercent ();
+
+  /**
+  * getManaPercent
+  *
+  * Gets the player's current mana as a percentage.
+  * Used for generating the mana bar.
+  * @return double - percentage of mana remaining
+  */
+  double getManaPercent ();
+
+  /**
+  * getArtifactCount
+  *
+  * Returns the number of artifacts the player has.
+  * @return int - the number of artifacts obtained.
+  */
+  int getArtifactCount ();
 
   /**
    * handleCollision
@@ -62,12 +81,14 @@ private:
   void jump ();
   void makeSubBounds();
   bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
-
-  int maxHealth;
+  void initAnimations();
+  void handleKeyboard();
+  int maxHealth, mana, maxMana;
   bool justJumped;
   bool hasJumped;
   bool hasDoubleJumped;
   TGA::BoundingBox subBounds[4];
   std::string currAnimationName;
+  std::vector<Artifact*> artifacts;
 };
 

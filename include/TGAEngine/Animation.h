@@ -38,7 +38,7 @@ namespace TGA
       * Animation
       *
       * Constructs an Animation with the given Texture (image).
-      * @param Texture * texture - a pointer to an image containing the frames.
+      * @param texture - a pointer to an image containing the frames.
       */
       Animation(Texture* texture);
 
@@ -112,8 +112,8 @@ namespace TGA
 		*
 		* Adds a frame to the animation given the dimensions and amount of time 
       * it should play.
-		* @param BoundingBox frameRect - A rectangle encompassing the frame in the image.
-		* @param Uint32 delay - The amount of time the frame should be shown for.
+		* @param frameRect - A rectangle encompassing the frame in the image.
+		* @param delay - The amount of time the frame should be shown for.
 		*/
 		void addFrame(BoundingBox frameRect, Uint32 delay);
       
@@ -121,7 +121,7 @@ namespace TGA
 		* deleteFrame
 		*
 		* Removes the frame at the given index from the animation.
-		* @param GLuint frameNum - the index (0-based) of the frame to remove.
+		* @param frameNum - the index (0-based) of the frame to remove.
 		*/
 		void deleteFrame(GLuint frameNum);
       
@@ -137,7 +137,7 @@ namespace TGA
 		*
 		* Sets the currently visible frame to the one specified by the
       * given index.
-		* @param GLuint frame - the index (0-based) of the frame to show.
+		* @param frame - the index (0-based) of the frame to show.
 		*/
 		void goToFrame(GLuint frame);
       
@@ -146,7 +146,7 @@ namespace TGA
 		*
 		* Sets the number of times the animation should play. If the animation
       * had already finished, it starts the animation over again.
-		* @param int repetitions - the number of times to play the animation. -1 for indefinitely
+		* @param repetitions - the number of times to play the animation. -1 for indefinitely
 		*/
 		void setRepetitions(int repetitions);
       
@@ -155,7 +155,7 @@ namespace TGA
 		*
 		* Sets the image to use as the basis for the animation. Especially important if
       * the Animation was created with the empty constructor.
-		* @param Texture * texture - the pointer to a Texture to use as the image
+		* @param texture - the pointer to a Texture to use as the image
 		*/
 		void setTexture(Texture* texture);
       
@@ -163,8 +163,8 @@ namespace TGA
 		* setDelay
 		*
 		* Sets the amount of time a frame is shown.
-		* @param GLuint frame - the index (0-based) of the frame to change.
-		* @param Uint32 delay - the new amount of time to show the frame.
+		* @param frame - the index (0-based) of the frame to change.
+		* @param delay - the new amount of time to show the frame.
 		*/
 		void setDelay(GLuint frame, Uint32 delay);
       
@@ -172,8 +172,8 @@ namespace TGA
 		* setFrameBounds
 		*
 		* Sets the position and dimensions of a frame on the image.
-		* @param GLuint frame - the index (0-based) of the frame to change.
-		* @param BoundingBox newBounds - the new dimensions of the frame.
+		* @param frame - the index (0-based) of the frame to change.
+		* @param newBounds - the new dimensions of the frame.
 		*/
 		void setFrameBounds(GLuint frame, BoundingBox newBounds);
 
@@ -181,11 +181,13 @@ namespace TGA
 		* draw
 		*
 		* Draws the current frame at the specified position.
-		* @param GLfloat xPos - the x position of the point at which to draw.
-		* @param GLfloat yPos - the y position of the point at which to draw.
-      * @param bool flipped - whether the image is flipped
+		* @param xPos - the x position of the point at which to draw.
+      * @param yPos - the y position of the point at which to draw.
+      * @param scaleX - a scale factor in X
+      * @param scaleY - a scale factor in Y
+      * @param rotation - a rotation, in degrees
 		*/
-      void draw(GLfloat xPos, GLfloat yPos, bool flipped = false);
+      void draw(GLfloat xPos, GLfloat yPos, float scaleX = 1, float scaleY = 1, float rotation = 0);
 
 		/**
 		* getFrameCount

@@ -26,8 +26,8 @@ namespace TGA
 		* Vector2D
 		*
 		* Creates a Vector2D
-		* @param double x - the x component of the vector
-		* @param double y - the y component of the vector
+		* @param x - the x component of the vector
+		* @param y - the y component of the vector
 		*/
 		Vector2D(double x, double y);
 		~Vector2D();
@@ -36,46 +36,46 @@ namespace TGA
       * operator+=
       *
       * Add a vector to the current vector.
-      * @param const Vector2D - the right hand side
+      * @param v - the right hand side
       * @return Vector2D& - reference to the new vector
       */
-      Vector2D& operator+=(const Vector2D);
+      Vector2D& operator+=(const Vector2D v);
 
 		/**
 		* operator+
 		*
       * Adds two vectors.
-      * @param Vector2D - the right hand side of the addition
+      * @param v - the right hand side of the addition
       * @return TGA::Vector2D - the new Vector2D that is the result
 		*/
-		Vector2D operator+(Vector2D);
+		Vector2D operator+(Vector2D v);
       
       /**
       * operator-=
       *
       * Subtract a vector to the current vector.
-      * @param const Vector2D - the right hand side
+      * @param v - the right hand side
       * @return Vector2D& - reference to the new vector
       */
-      Vector2D& operator-=(const Vector2D);
+      Vector2D& operator-=(const Vector2D v);
 
 		/**
 		* operator-
 		*
 		* Subtracts two vectors.
-		* @param Vector2D - the right hand side of the subtraction
+		* @param v - the right hand side of the subtraction
 		* @return TGA::Vector2D - the new Vector2D that is the result
 		*/
-		Vector2D operator-(Vector2D);
+		Vector2D operator-(Vector2D v);
 
 		/**
 		* operator*
 		*
 		* Calculates the scalar product given a scalar.
-		* @param double  - the scalar to multiply by
+		* @param scalar - the scalar to multiply by
 		* @return TGA::Vector2D - the resultant vector
 		*/
-		Vector2D operator*(double);
+		Vector2D operator*(double scalar);
 
 		/**
 		* normalize
@@ -89,10 +89,10 @@ namespace TGA
 		* dotProduct
 		*
 		* Calculates the dot product with another vector.
-		* @param Vector2D - the vector to dot with
+		* @param v - the vector to dot with
 		* @return double - the dot product
 		*/
-		double dotProduct(Vector2D);
+		double dotProduct(Vector2D v);
 
 		/**
 		* length
@@ -106,10 +106,10 @@ namespace TGA
 		* distanceFrom
 		*
 		* Gets the distance from the given "point" to another "point".
-		* @param Vector2D - the point to calculate distance from
+		* @param v - the point to calculate distance from
 		* @return double - the distance
 		*/
-		double distanceFrom(Vector2D);
+		double distanceFrom(Vector2D v);
 
 		/**
 		* getX
@@ -127,8 +127,20 @@ namespace TGA
 		*/
 		double getY();
 
+      /**
+      * setX
+      *
+      * Set the x component of the vector.
+      * @param x - the new x component
+      */
       void setX(double x);
 
+      /**
+      * setY
+      *
+      * Set the y component of the vector.
+      * @param y - the new y component
+      */
       void setY(double y);
 
 	private:

@@ -50,9 +50,11 @@ public:
   *
   * Draw the character using its current Animation.
   * @param float interpolation - percentage between update frames
-  * @param bool flipped - whether to flip the image
+  * @param scaleX - a scale factor in X
+  * @param scaleY - a scale factor in Y
+  * @param rotation - a rotation, in degrees
   */
-  virtual void draw (float interpolation, bool flipped = false);
+  virtual void draw (float interpolation, float scaleX = 1, float scaleY = 1, float rotation = 0);
 
   /**
   * getPosition

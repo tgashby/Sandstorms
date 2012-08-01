@@ -261,6 +261,18 @@
     <ClInclude Include="..\include\TGAEngine\Timer.h">
       <Filter>include\TGAEngine</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Artifact.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Consumable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HealthManaElement.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\HUDElement.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">
@@ -279,6 +291,18 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Platform.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Consumable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HealthManaElement.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HUDElement.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Artifact.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

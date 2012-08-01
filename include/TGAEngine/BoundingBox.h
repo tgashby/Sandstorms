@@ -28,10 +28,10 @@ namespace TGA
       * BoundingBox
       *
       * Create a bounding box with the given dimensions.
-      * @param int x - the x position of the box
-      * @param int y - the y position of the box
-      * @param int width - the width of the box
-      * @param int height - the height of the box 
+      * @param x - the x position of the box
+      * @param y - the y position of the box
+      * @param width - the width of the box
+      * @param height - the height of the box 
       */
       BoundingBox(int x, int y, int width, int height);
 
@@ -78,7 +78,7 @@ namespace TGA
       * setX
       *
       * Set the box's x position.
-      * @param int newX - the new x position
+      * @param newX - the new x position
       */
       void setX (int newX);
 
@@ -86,23 +86,23 @@ namespace TGA
       * setY
       *
       * Sets the box's y position.
-      * @param int newY - the new y position
+      * @param newY - the new y position
       */
       void setY (int newY);
 
       /**
       * setX
       *
-      * Set the box's x position.
-      * @param int newX - the new x position
+      * Set the box's width.
+      * @param newWidth - the new width
       */
       void setWidth (int newWidth);
 
       /**
       * setY
       *
-      * Sets the box's y position.
-      * @param int newY - the new y position
+      * Sets the box's height.
+      * @param newHeight - the new height
       */
       void setHeight (int newHeight);
 

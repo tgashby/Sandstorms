@@ -1,12 +1,14 @@
 #include "Player.h"
 
-// BUG: Game Speed/Player Speed is not doing correct time-based movements.
-// TODO: Jump needs to be overhauled. 1. Holding space runs animation forever. 2. Animation doesn't reflect action.
+// TODO: Keep track of which way player is facing
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
 const double MAX_VEL = 8;
-const double JUMP_VEL = -27;
+const double JUMP_VEL = -21;
+
+// DEBUG: For simulating life/mana loss
+int updateCount = 0;
 
 typedef std::pair<std::string, TGA::Animation*> animPair;
 
@@ -14,128 +16,54 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    : Character(PLAYER_MAX_HEALTH, position)
 {
    maxHealth = PLAYER_MAX_HEALTH;
+   mana = maxMana = 100;
    justJumped = hasJumped = hasDoubleJumped = false;
 
-   TGA::Texture* idleTex = new TGA::Texture("../resources/player/idle.png");
-   TGA::Animation* idleAnim = new TGA::Animation(idleTex);
-   idleAnim->addFrame(TGA::BoundingBox(0, 0, 138, 202), 1000000);
-   idleAnim->setRepetitions(-1);
+   initAnimations();
 
-   TGA::Texture* runTex = new TGA::Texture("../resources/player/run.png");
-   TGA::Animation* runAnim = new TGA::Animation(runTex);
-   runAnim->addFrame(TGA::BoundingBox(0, 0, 172, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(172, 0, 160, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(332, 0, 128, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(460, 0, 130, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(595, 0, 150, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(745, 0, 180, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(925, 0, 150, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(1075, 0, 135, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(1210, 0, 145, 214), 75);
-   runAnim->addFrame(TGA::BoundingBox(1355, 0, 133, 214), 75);
-   runAnim->setRepetitions(-1);
-
-   TGA::Texture* jumpTex = new TGA::Texture("../resources/player/jump.png");
-   TGA::Animation* jumpAnim = new TGA::Animation(jumpTex);
-   jumpAnim->addFrame(TGA::BoundingBox(0, 0, 105, 229), 500);
-   jumpAnim->addFrame(TGA::BoundingBox(120, 0, 135, 229), 500);
-   jumpAnim->addFrame(TGA::BoundingBox(290, 0, 133, 229), 500);
-   jumpAnim->setRepetitions(-1);
-
-   // TODO: Finishing adding player animations
-
-   animations.insert(animations.begin(), animPair("idle", idleAnim));
-   animations.insert(animations.begin(), animPair("run", runAnim));
-   animations.insert(animations.begin(), animPair("jump", jumpAnim));
-
-   currAnimation = idleAnim;
+   currAnimation = animations["idle"];
    currAnimationName = "idle";
 }
 
 void Player::update()
 {
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+
+   // DEBUG: Simulate life/mana loss
+   updateCount++;
+   if (updateCount % 25 == 0)
+   {
+      //health -= 1;
+      //mana -= 1;
+      //TGA::Singleton<TGA::Camera>::GetSingletonPtr()->moveOver(-1, 0);
+   }
+
+   handleKeyboard();
    
-   if (!engine->Input->keyDown(TGA::key_A) && 
-       !engine->Input->keyDown(TGA::key_D))
+   // If the player is falling (like off a platform)
+   if (velocity.getY() > MAX_VEL)
    {
-      velocity.setX(0);
-      acceleration.setX(0);
-      
-      if (!justJumped && currAnimationName.compare("idle") != 0)
+      if (currAnimationName.compare("jump") != 0)
       {
-         currAnimation = animations["idle"];
-         currAnimationName = "idle";
+         currAnimation = animations["jump"];
+         currAnimationName = "jump";
+
+         currAnimation->setRepetitions(1);
+         currAnimation->pause();
       }
-   }
-   else
-   {
-      if (engine->Input->keyDown(TGA::key_D))
-      {
-         if (!justJumped && currAnimationName.compare("run") != 0)
-         {
-            currAnimation = animations["run"];
-            currAnimationName = "run";
-         }
 
-         if (velocity.getX() < MAX_VEL)
-         {
-            acceleration.setX(HORIZ_ACCEL);
-         }
-         else
-         {
-            acceleration.setX(0);
-         }
-      }
-      else if (engine->Input->keyDown(TGA::key_A))
-      {
-         if (!justJumped && currAnimationName.compare("run") != 0)
-         {
-            currAnimation = animations["run"];
-            currAnimationName = "run";
-         }
-
-         if (velocity.getX() > -MAX_VEL)
-         {
-            acceleration.setX(-HORIZ_ACCEL);
-         }
-         else
-         {
-            acceleration.setX(0);
-         }
-      }
-   }
-
-   if (engine->Input->keyDown(TGA::key_SPACE))
-   {
-      if (!hasDoubleJumped && !justJumped)
-      {
-         justJumped = true;
-         jump();
-
-         if (currAnimationName.compare("jump") != 0)
-         {
-            currAnimation = animations["jump"];
-            currAnimationName = "jump";
-         }
-      }
-   }
-
-   if (!engine->Input->keyDown(TGA::key_SPACE))
-   {
-      justJumped = false;
+      currAnimation->goToFrame(2);
    }
 
    makeSubBounds();
-
    Character::update();
 }
 
-void Player::draw(float interpolation, bool flipped /* = false */)
+void Player::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
 {
    if (velocity.getX() < 0)
    {
-      Character::draw(interpolation, true);
+      Character::draw(interpolation, -1);
    }
    else
    {
@@ -143,14 +71,14 @@ void Player::draw(float interpolation, bool flipped /* = false */)
    }
 }
 
-float Player::getHealthPercent()
+double Player::getHealthPercent()
 {
-   return ((float)health / maxHealth);
+   return ((double)health / maxHealth);
 }
 
 void Player::jump()
 {
-   position.setY(position.getY() - 29); // 29 makes up for the difference in jump animation height
+   position.setY(position.getY() - 30); // 30 makes up for the difference in jump frame height
    velocity.setY(JUMP_VEL);
 
    if (!hasJumped)
@@ -172,6 +100,8 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
 
    if (typeid(collidedWith) == typeid(Platform))
    {
+      currAnimation->resume();
+
       // If only head is colliding, below platform
       if (onlyHeadColliding)
       {
@@ -254,4 +184,147 @@ bool Player::collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith)
       && !TGA::Collision::checkCollision(subBounds[(ndx + 3) % 4], collidedWith.getBounds()));
 
    return onlyNdx;
+}
+
+void Player::initAnimations()
+{
+   TGA::Texture* idleTex = new TGA::Texture("../resources/player/idle.png");
+   TGA::Animation* idleAnim = new TGA::Animation(idleTex);
+   idleAnim->addFrame(TGA::BoundingBox(0, 0, 138, 200), 1000000);
+   idleAnim->setRepetitions(-1);
+
+   TGA::Texture* runTex = new TGA::Texture("../resources/player/run.png");
+   TGA::Animation* runAnim = new TGA::Animation(runTex);
+   runAnim->addFrame(TGA::BoundingBox(0, 0, 156, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(164, 0, 144, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(312, 0, 116, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(432, 0, 119, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(560, 0, 135, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(699, 0, 155, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(866, 0, 122, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(1010, 0, 111, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(1133, 0, 116, 200), 75);
+   runAnim->addFrame(TGA::BoundingBox(1275, 0, 114, 200), 75);
+   runAnim->setRepetitions(-1);
+
+   TGA::Texture* jumpTex = new TGA::Texture("../resources/player/jump.png");
+   TGA::Animation* jumpAnim = new TGA::Animation(jumpTex);
+   jumpAnim->addFrame(TGA::BoundingBox(0, 0, 105, 229), 1);
+   jumpAnim->addFrame(TGA::BoundingBox(120, 0, 135, 229), 1);
+   jumpAnim->addFrame(TGA::BoundingBox(290, 0, 133, 229), 1);
+   jumpAnim->setRepetitions(-1);
+
+   TGA::Texture* punchTex = new TGA::Texture("../resources/player/punch.png");
+   TGA::Animation* punchAnim = new TGA::Animation(punchTex);
+   punchAnim->addFrame(TGA::BoundingBox(0, 0, 174, 200), 100);
+   punchAnim->addFrame(TGA::BoundingBox(175, 0, 133, 200), 100);
+   punchAnim->setRepetitions(-1);
+
+   // TODO: Finishing adding player animations
+
+   animations.insert(animations.begin(), animPair("idle", idleAnim));
+   animations.insert(animations.begin(), animPair("run", runAnim));
+   animations.insert(animations.begin(), animPair("jump", jumpAnim));
+   animations.insert(animations.begin(), animPair("punch", punchAnim));
+}
+
+void Player::handleKeyboard()
+{
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+
+   if (!engine->Input->keyDown(TGA::key_A) && 
+      !engine->Input->keyDown(TGA::key_D))
+   {
+      velocity.setX(0);
+      acceleration.setX(0);
+
+      if ((currAnimation->isDone() || currAnimationName.compare("run") == 0) 
+         && currAnimationName.compare("idle") != 0)
+      {
+         currAnimation = animations["idle"];
+         currAnimationName = "idle";
+      }
+   }
+   else
+   {
+      if (engine->Input->keyDown(TGA::key_D))
+      {
+         if (!hasJumped && currAnimationName.compare("run") != 0)
+         {
+            currAnimation = animations["run"];
+            currAnimationName = "run";
+         }
+
+         if (velocity.getX() < MAX_VEL)
+         {
+            acceleration.setX(HORIZ_ACCEL);
+         }
+         else
+         {
+            acceleration.setX(0);
+         }
+      }
+      else if (engine->Input->keyDown(TGA::key_A))
+      {
+         if (!hasJumped && currAnimationName.compare("run") != 0)
+         {
+            currAnimation = animations["run"];
+            currAnimationName = "run";
+         }
+
+         if (velocity.getX() > -MAX_VEL)
+         {
+            acceleration.setX(-HORIZ_ACCEL);
+         }
+         else
+         {
+            acceleration.setX(0);
+         }
+      }
+   }
+
+   if (engine->Input->keyDown(TGA::key_SPACE))
+   {
+      if (!hasDoubleJumped && !justJumped)
+      {
+         justJumped = true;
+         jump();
+
+         if (currAnimationName.compare("jump") != 0)
+         {
+            currAnimation = animations["jump"];
+            currAnimationName = "jump";
+
+            currAnimation->setRepetitions(1);
+            currAnimation->pause();
+            currAnimation->goToFrame(0);
+         }
+      }
+   }
+
+   if (!engine->Input->keyDown(TGA::key_SPACE))
+   {
+      justJumped = false;
+   }
+
+   if (engine->Input->keyDown(TGA::key_Q))
+   {
+      if (currAnimationName.compare("punch") != 0)
+      {
+         currAnimation = animations["punch"];
+         currAnimationName = "punch";
+
+         currAnimation->setRepetitions(2);
+      }
+   }
+}
+
+double Player::getManaPercent()
+{
+   return (double)mana / maxMana;
+}
+
+int Player::getArtifactCount()
+{
+   return 0;//artifacts.size();
 }

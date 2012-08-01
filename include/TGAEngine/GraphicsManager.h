@@ -44,11 +44,11 @@ namespace TGA
 		* Initializes the window to a specific size, title, and position.
       * All parameters are optional.
       * Default values are: 1024x512, no title, and the window centered in the screen.
-		* @param int screenWidth - the window width
-		* @param int screenHeight - the window height
-		* @param std::string winTitle - the title of the window (what appears in its upper-left corner)
-		* @param int screenX - the x position of the window on the screen
-		* @param int screenY - the y position of the window on the screen
+		* @param screenWidth - the window width
+		* @param screenHeight - the window height
+		* @param winTitle - the title of the window (what appears in its upper-left corner)
+		* @param screenX - the x position of the window on the screen
+		* @param screenY - the y position of the window on the screen
 		*/
 		void init(int screenWidth = 1024, int screenHeight = 512, 
 		 std::string winTitle = "", int screenX = SDL_WINDOWPOS_CENTERED, int screenY = SDL_WINDOWPOS_CENTERED);
@@ -71,8 +71,8 @@ namespace TGA
 		* resizeWindow
 		*
 		* Resizes the window to new dimensions.
-		* @param int screenWidth - the new width
-		* @param int screenHeight - the new height
+		* @param screenWidth - the new width
+		* @param screenHeight - the new height
 		*/
 		void resizeWindow(int screenWidth, int screenHeight);
 		

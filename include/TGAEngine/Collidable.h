@@ -26,7 +26,7 @@ namespace TGA
       * handleCollision
       *
       * Updates the collidable entity based on what it collided with.
-      * @param Collidable collidedWith - the collidable entity collided with
+      * @param collidedWith - the collidable entity collided with
       */
       virtual void handleCollision (Collidable& collidedWith) = 0;
 

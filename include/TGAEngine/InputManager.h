@@ -30,7 +30,7 @@ namespace TGA
 		* keyDown
 		*
 		* Determines if the given key is currently depressed.
-		* @param Key key - the key being polled
+		* @param key - the key being polled
 		* @return bool - true if the key is depressed
 		*/
 		bool keyDown(Key key);
