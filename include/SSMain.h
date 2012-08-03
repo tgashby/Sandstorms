@@ -2,6 +2,7 @@
 
 #include <Key.h>
 #include <Engine.h>
+#include <time.h>
 #include "Level.h"
 #include "Player.h"
 #include "HealthManaElement.h"
@@ -22,10 +23,10 @@ namespace Sandstorms
 		void shutDown();
 
 	private:
-		bool processEvents();
-		void processLogic();
+		bool handleEvents();
+		void updateGame();
 		void render(float interpolation);
-
+      void generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight );
 		TGA::Engine Engine;
       Level* level;
 		Player* player;

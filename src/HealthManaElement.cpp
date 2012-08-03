@@ -10,14 +10,14 @@
 
 const int BAR_HEIGHT = 24;
 
-HealthManaElement::HealthManaElement(std::string baseTexStr)
+HealthManaElement::HealthManaElement()
    : containerPos(10, 10)
    , healthPos(35, 25)
    , manaPos(55, 56)
 {
    healthBar = new TGA::Texture("../resources/ui/health.png");
    manaBar = new TGA::Texture("../resources/ui/mana.png");
-   container = new TGA::Texture(baseTexStr);
+   container = new TGA::Texture("../resources/ui/healthManaContainer.png");
 }
 
 void HealthManaElement::update( double healthPercent, double manaPercent )
@@ -29,6 +29,7 @@ void HealthManaElement::update( double healthPercent, double manaPercent )
 
    healthPos.setX(camera->getX() + 35);
    manaPos.setX(camera->getX() + 55);
+   containerPos.setX(camera->getX() + 10);
 }
 
 void HealthManaElement::draw()
@@ -38,5 +39,5 @@ void HealthManaElement::draw()
    manaBar->drawSection(static_cast<float>(manaPos.getX()), static_cast<float>(manaPos.getY()), 
       0, 0, static_cast<int>(manaPercent * manaBar->getWidth()), BAR_HEIGHT);
 
-   container->draw(containerPos.getX(), containerPos.getY());
+   container->draw(static_cast<float>(containerPos.getX()), static_cast<float>(containerPos.getY()));
 }

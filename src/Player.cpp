@@ -1,14 +1,13 @@
 #include "Player.h"
 
-// TODO: Keep track of which way player is facing
+// TODO: Add kick controls
+// TODO: Add cast controls
+// TODO: Add projectiles
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
 const double MAX_VEL = 8;
 const double JUMP_VEL = -21;
-
-// DEBUG: For simulating life/mana loss
-int updateCount = 0;
 
 typedef std::pair<std::string, TGA::Animation*> animPair;
 
@@ -18,6 +17,7 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    maxHealth = PLAYER_MAX_HEALTH;
    mana = maxMana = 100;
    justJumped = hasJumped = hasDoubleJumped = false;
+   facingLeft = false;
 
    initAnimations();
 
@@ -27,17 +27,6 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
 
 void Player::update()
 {
-   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
-
-   // DEBUG: Simulate life/mana loss
-   updateCount++;
-   if (updateCount % 25 == 0)
-   {
-      //health -= 1;
-      //mana -= 1;
-      //TGA::Singleton<TGA::Camera>::GetSingletonPtr()->moveOver(-1, 0);
-   }
-
    handleKeyboard();
    
    // If the player is falling (like off a platform)
@@ -61,7 +50,7 @@ void Player::update()
 
 void Player::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
 {
-   if (velocity.getX() < 0)
+   if (facingLeft)
    {
       Character::draw(interpolation, -1);
    }
@@ -132,23 +121,25 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
       }
       else // More than one sub-boundary
       {
-         // TODO: Implement more than one collision
-         std::cout << "Multiple Collision:\n";
-         if (TGA::Collision::checkCollision(subBounds[0], collidedWith.getBounds()))
+         TGA::BoundingBox leftSide(position.getX(), position.getY(), 
+            currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
+            currAnimation->getCurrentFrameDimensions().getHeight());
+
+         TGA::BoundingBox rightSide(position.getX() + 
+            currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+            position.getY(), currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
+            currAnimation->getCurrentFrameDimensions().getHeight());
+
+         if (TGA::Collision::checkCollision(leftSide, collidedWith.getBounds()))
          {
-            std::cout << "Head\n";
+            position.setX(collidedWith.getBounds().getX() 
+               + collidedWith.getBounds().getWidth());
          }
-         if (TGA::Collision::checkCollision(subBounds[1], collidedWith.getBounds()))
+
+         if (TGA::Collision::checkCollision(rightSide, collidedWith.getBounds()))
          {
-            std::cout << "Left\n";
-         }
-         if (TGA::Collision::checkCollision(subBounds[2], collidedWith.getBounds()))
-         {
-            std::cout << "Right\n";
-         }
-         if (TGA::Collision::checkCollision(subBounds[3], collidedWith.getBounds()))
-         {
-            std::cout << "Feet\n";
+            position.setX(collidedWith.getBounds().getX()
+               - currAnimation->getCurrentFrameDimensions().getWidth());
          }
       }
    }
@@ -220,12 +211,30 @@ void Player::initAnimations()
    punchAnim->addFrame(TGA::BoundingBox(175, 0, 133, 200), 100);
    punchAnim->setRepetitions(-1);
 
-   // TODO: Finishing adding player animations
+   TGA::Texture* kickTex = new TGA::Texture("../resources/player/kick.png");
+   TGA::Animation* kickAnim = new TGA::Animation(kickTex);
+   kickAnim->addFrame(TGA::BoundingBox(0, 0, 165, 200), 500);
+   kickAnim->addFrame(TGA::BoundingBox(173, 0, 218, 200), 500);
+   kickAnim->setRepetitions(-1);
+
+   TGA::Texture* castTex = new TGA::Texture("../resources/player/cast.png");
+   TGA::Animation* castAnim = new TGA::Animation(castTex);
+   castAnim->addFrame(TGA::BoundingBox(0, 0, 127, 200), 1000);
+   castAnim->addFrame(TGA::BoundingBox(130, 0, 156, 200), 500);
+   castAnim->setRepetitions(-1);
+
+   TGA::Texture* hurtTex = new TGA::Texture("../resources/player/hurt.png");
+   TGA::Animation* hurtAnim = new TGA::Animation(hurtTex);
+   hurtAnim->addFrame(TGA::BoundingBox(0, 0, 129, 200), 1000);
+   hurtAnim->setRepetitions(-1);
 
    animations.insert(animations.begin(), animPair("idle", idleAnim));
    animations.insert(animations.begin(), animPair("run", runAnim));
    animations.insert(animations.begin(), animPair("jump", jumpAnim));
    animations.insert(animations.begin(), animPair("punch", punchAnim));
+   animations.insert(animations.begin(), animPair("kick", kickAnim));
+   animations.insert(animations.begin(), animPair("cast", castAnim));
+   animations.insert(animations.begin(), animPair("hurt", hurtAnim));
 }
 
 void Player::handleKeyboard()
@@ -263,6 +272,8 @@ void Player::handleKeyboard()
          {
             acceleration.setX(0);
          }
+
+         facingLeft = false;
       }
       else if (engine->Input->keyDown(TGA::key_A))
       {
@@ -280,6 +291,8 @@ void Player::handleKeyboard()
          {
             acceleration.setX(0);
          }
+
+         facingLeft = true;
       }
    }
 
@@ -326,5 +339,5 @@ double Player::getManaPercent()
 
 int Player::getArtifactCount()
 {
-   return 0;//artifacts.size();
+   return artifacts.size();
 }

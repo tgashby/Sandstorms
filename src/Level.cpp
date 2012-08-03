@@ -8,20 +8,22 @@
 
 #include "Level.h"
 
-Level::Level( std::string backgroundTex, double moveRate /*= 1*/, bool tiled /*= false*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/ )
+Level::Level( std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/ )
+   : layers(layers)
+   , platforms(platforms)
+   , artifacts(artifacts)
 {
-   if (!background.loadTexture(backgroundTex))
-   {
-      std::cerr << "Failed to load level texture: " << backgroundTex << "\n";
-   }
 
-   this->moveRate = moveRate;
+}
 
-   this->tiled = tiled;
+void Level::addLayer( Layer* newLayer )
+{
+   layers.push_back(newLayer);
+}
 
-   this->artifacts = artifacts;
-
-   this->platforms = platforms;
+void Level::addLayer( std::string texStr, double moveRate, bool tiled )
+{
+   layers.push_back(new Layer(texStr, moveRate, tiled));
 }
 
 void Level::addPlatform(Platform* newPlatform)
@@ -38,9 +40,19 @@ void Level::addPlatform(std::string textureStr, int x, int y, int width, int hei
 
 void Level::draw()
 {
-   background.draw(0, 0);
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   
+   for (std::vector<Layer*>::iterator i = layers.begin(); i < layers.end(); i++)
+   {
+      (*i)->draw(engine->GameCamera->getX());
+   }
 
    for(std::vector<Platform*>::iterator i = platforms.begin(); i < platforms.end(); i++)
+   {
+      (*i)->draw();
+   }
+
+   for(std::vector<Artifact*>::iterator i = artifacts.begin(); i < artifacts.end(); i++)
    {
       (*i)->draw();
    }

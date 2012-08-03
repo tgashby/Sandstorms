@@ -270,7 +270,7 @@
     <ClInclude Include="..\include\HealthManaElement.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\HUDElement.h">
+    <ClInclude Include="..\include\Layer.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -299,10 +299,10 @@
     <ClCompile Include="..\src\HealthManaElement.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\HUDElement.cpp">
+    <ClCompile Include="..\src\Artifact.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Artifact.cpp">
+    <ClCompile Include="..\src\Layer.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

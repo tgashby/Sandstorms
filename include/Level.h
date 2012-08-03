@@ -14,6 +14,7 @@
 #include <vector>
 #include "Platform.h"
 #include "Artifact.h"
+#include "Layer.h"
 
 /**
  * @class Level
@@ -29,14 +30,32 @@ public:
   *
   * Creates a new Level with the specified background texture.
   * @param std::string backgroundTex - path to the texture file
-  * @param moveRate - the rate at which the background moves with the camera
+  * @param moveRate - how many pixels the camera must move before the level moves one, 0 for a stationary background
   * @param bool tiled - whether or not the background should be tiled as we progress
   * @param artifacts - the artifacts in the level
   * @param std::vector<Platform * > platforms - a collection of platforms in the level
   */
-  Level (std::string backgroundTex, double moveRate = 1, bool tiled = false, 
-     std::vector<Artifact*> artifacts = std::vector<Artifact*>(), 
-     std::vector<Platform*> platforms = std::vector<Platform*>());
+  Level (std::vector<Layer*> layers, 
+     std::vector<Platform*> platforms = std::vector<Platform*>(), 
+     std::vector<Artifact*> artifacts = std::vector<Artifact*>());
+
+  /**
+   * addLayer
+   *
+   * Add a new layer to the level
+   * @param newLayer - the layer to add
+   */
+  void addLayer (Layer* newLayer);
+
+  /**
+   * addLayer
+   *
+   * Add a new layer to the level
+   * @param texStr - the path to the texture
+   * @param moveRate - the rate at which to progress the layer as the camera moves
+   * @param tiled - whether or not the layer tiles with itself
+   */
+  void addLayer (std::string texStr, double moveRate, bool tiled);
 
   /**
   * addPlatform
@@ -88,9 +107,7 @@ public:
   std::vector<Platform*> getPlatforms();
 
 private:
-   TGA::Texture background;
-   bool tiled;
-   double moveRate;
+   std::vector<Layer*> layers;
    std::vector<Platform*> platforms;
    std::vector<Artifact*> artifacts;
 };

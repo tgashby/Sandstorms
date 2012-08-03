@@ -125,7 +125,7 @@ exit 0</Command>
     <ClInclude Include="..\include\Character.h" />
     <ClInclude Include="..\include\Consumable.h" />
     <ClInclude Include="..\include\HealthManaElement.h" />
-    <ClInclude Include="..\include\HUDElement.h" />
+    <ClInclude Include="..\include\Layer.h" />
     <ClInclude Include="..\include\Level.h" />
     <ClInclude Include="..\include\Main.h" />
     <ClInclude Include="..\include\Platform.h" />
@@ -213,7 +213,7 @@ exit 0</Command>
     </ClCompile>
     <ClCompile Include="..\src\Consumable.cpp" />
     <ClCompile Include="..\src\HealthManaElement.cpp" />
-    <ClCompile Include="..\src\HUDElement.cpp" />
+    <ClCompile Include="..\src\Layer.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp">
     </ClCompile>

@@ -87,6 +87,7 @@ private:
   bool justJumped;
   bool hasJumped;
   bool hasDoubleJumped;
+  bool facingLeft;
   TGA::BoundingBox subBounds[4];
   std::string currAnimationName;
   std::vector<Artifact*> artifacts;

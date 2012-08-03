@@ -7,7 +7,9 @@
  */
 #pragma once
 
-#include "HUDElement.h"
+#include <string>
+#include <Vector2D.h>
+#include <Texture.h>
 
 /**
  * @class HealthManaElement
@@ -24,7 +26,7 @@ public:
   *
   * Creates a new HealthManaElement, there should never be more than one of these.
   */
-  HealthManaElement (std::string baseTexStr);
+  HealthManaElement ();
 
   /**
   * update
