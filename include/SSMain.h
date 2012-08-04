@@ -27,8 +27,10 @@ namespace Sandstorms
 		void updateGame();
 		void render(float interpolation);
       void generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight );
-		TGA::Engine Engine;
-      Level* level;
+      void makeLevels();
+      TGA::Engine Engine;
+      std::map<std::string, Level*> levels;
+      std::string currLevel;
 		Player* player;
       HealthManaElement* healthMana;
 	};

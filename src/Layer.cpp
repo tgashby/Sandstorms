@@ -29,5 +29,5 @@ void Layer::draw( double camX )
       offsetX -= texture.getWidth() / 2;
    }
 
-   texture.draw(camX * moveRate + offsetX, 0);
+   texture.draw(static_cast<float>(camX * moveRate + offsetX), 0);
 }

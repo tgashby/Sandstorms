@@ -8,12 +8,12 @@
 
 #include "Level.h"
 
-Level::Level( std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/ )
+Level::Level(int rightBound, std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/ )
    : layers(layers)
    , platforms(platforms)
    , artifacts(artifacts)
 {
-
+   this->rightBound = rightBound;
 }
 
 void Level::addLayer( Layer* newLayer )
@@ -61,4 +61,9 @@ void Level::draw()
 std::vector<Platform*> Level::getPlatforms()
 {
    return platforms;
+}
+
+int Level::getRightBound()
+{
+   return rightBound;
 }

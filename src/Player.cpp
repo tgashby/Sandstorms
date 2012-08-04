@@ -121,13 +121,14 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
       }
       else // More than one sub-boundary
       {
-         TGA::BoundingBox leftSide(position.getX(), position.getY(), 
+         TGA::BoundingBox leftSide(static_cast<int>(position.getX()), static_cast<int>(position.getY()), 
             currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
             currAnimation->getCurrentFrameDimensions().getHeight());
 
-         TGA::BoundingBox rightSide(position.getX() + 
+         TGA::BoundingBox rightSide(static_cast<int>(position.getX()) + 
             currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-            position.getY(), currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
+            static_cast<int>(position.getY()), 
+            currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
             currAnimation->getCurrentFrameDimensions().getHeight());
 
          if (TGA::Collision::checkCollision(leftSide, collidedWith.getBounds()))

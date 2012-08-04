@@ -35,7 +35,7 @@ public:
   * @param artifacts - the artifacts in the level
   * @param std::vector<Platform * > platforms - a collection of platforms in the level
   */
-  Level (std::vector<Layer*> layers, 
+  Level (int rightBound, std::vector<Layer*> layers, 
      std::vector<Platform*> platforms = std::vector<Platform*>(), 
      std::vector<Artifact*> artifacts = std::vector<Artifact*>());
 
@@ -106,9 +106,12 @@ public:
 
   std::vector<Platform*> getPlatforms();
 
+  int getRightBound();
+
 private:
    std::vector<Layer*> layers;
    std::vector<Platform*> platforms;
    std::vector<Artifact*> artifacts;
+   int rightBound;
 };
 

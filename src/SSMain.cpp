@@ -1,8 +1,9 @@
 #include "SSMain.h"
 
-const int RIGHT_BOUND = 5000;
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
+
+typedef std::pair<std::string, Level*> lvlPair;
 
 float randFloat(float a, float b)
 {
@@ -23,26 +24,16 @@ namespace Sandstorms
 
 	void SSMain::init()
 	{
-      std::vector<Platform*> platforms;
-      std::vector<Layer*> layers;
-      std::vector<Artifact*> artifacts;
-
 		// Call the Graphics init method
 		Engine.Graphics->init(1280, 800, "Sandstorms");
 
       player = new Player(TGA::Vector2D(0, 570));
 
-      // Ground platform, invisible texture
-      platforms.push_back(new Platform("../resources/level/invis.png", -40, 750, 5500, 20));
-
-      layers.push_back(new Layer("../resources/level/oasis.png", 0.9, false));
-      layers.push_back(new Layer("../resources/level/oasis_ground.png", 0.0, true));
-
-      level = new Level(layers, platforms, artifacts);
-
-      generatePlatforms(level, "../resources/level/large_oasis.png", 125, 37);
+      makeLevels();
 
 	   healthMana = new HealthManaElement();
+
+      currLevel = "oasis";
    }
 
 	void SSMain::run()
@@ -102,7 +93,7 @@ namespace Sandstorms
 
 	void SSMain::updateGame()
 	{
-      std::vector<Platform*> platforms = level->getPlatforms();
+      std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
 
       for (std::vector<Platform*>::iterator i = platforms.begin();
          i < platforms.end(); i++)
@@ -116,16 +107,16 @@ namespace Sandstorms
 		// Update the Player
       player->update();
 
-      Engine.GameCamera->setPosition(player->getPosition().getX() - SCREEN_WIDTH / 2, 0);
+      Engine.GameCamera->setPosition(static_cast<float>(player->getPosition().getX()) - SCREEN_WIDTH / 2, 0);
 
       if (Engine.GameCamera->getX() < 0)
       {
          Engine.GameCamera->setPosition(0, Engine.GameCamera->getY());
       }
 
-      if (Engine.GameCamera->getX() > RIGHT_BOUND - SCREEN_WIDTH)
+      if (Engine.GameCamera->getX() > levels[currLevel]->getRightBound() - SCREEN_WIDTH)
       {
-         Engine.GameCamera->setPosition(RIGHT_BOUND - SCREEN_WIDTH, Engine.GameCamera->getY());
+         Engine.GameCamera->setPosition(static_cast<float>(levels[currLevel]->getRightBound() - SCREEN_WIDTH), Engine.GameCamera->getY());
       }
 
       healthMana->update(player->getHealthPercent(), player->getManaPercent());
@@ -134,7 +125,7 @@ namespace Sandstorms
 	void SSMain::render(float interpolation)
 	{
 		// Draw the background
-      level->draw();
+      levels[currLevel]->draw();
 
 		// Draw all Animations
 		player->draw(interpolation);
@@ -148,15 +139,82 @@ namespace Sandstorms
    void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight )
    {
       // TODO: Make this actually smart.
+      // Need to be at least 2*platWidth apart
+      // Varying by ~ 1.5*platHeight
+      
+      std::vector<Platform*> platforms;
+      Platform* platform;
+      TGA::BoundingBox bounds;
+      std::vector<Platform*>::iterator currPlatform;
 
       double xPos, yPos;
+      bool platformCreated;
+      int attempts;
+      int rightBound = lvl->getRightBound();
 
-      for (int i = 0; i < 40; i++)
+      for (int i = 0; i < rightBound / 230; i++) // 230 comes from experimentation
       {
-         xPos = randFloat(0, RIGHT_BOUND - platWidth);
-         yPos = randFloat(0, 510);
+         platformCreated = false;
+         attempts = 0;
 
-         lvl->addPlatform(platformTex, xPos, yPos, platWidth, platHeight);
+         while (!platformCreated && attempts < 300)
+         {
+            xPos = randFloat(100, static_cast<float>(rightBound - platWidth));
+            yPos = randFloat(200, 660);
+
+            currPlatform = platforms.begin();
+            for (; currPlatform < platforms.end(); currPlatform++)
+            {
+               bounds = (*currPlatform)->getBounds();
+
+               if (abs(bounds.getX() - xPos) < platWidth * 2
+                  && (abs(bounds.getY() - yPos < platHeight * 6)))
+               {
+                  break;
+               }
+            }
+
+            if (currPlatform == platforms.end())
+            {
+               platform = new Platform(platformTex, static_cast<int>(xPos), static_cast<int>(yPos), 
+                  platWidth, platHeight);
+               lvl->addPlatform(platform);
+               platforms.push_back(platform);
+
+               platformCreated = true;
+            }
+
+            if (attempts == 299)
+            {
+               std::cout << "Too many attempts\n";
+            }
+
+            attempts++;
+         }
       }
+
+      std::cout << platforms.size();
    }
+
+   void SSMain::makeLevels()
+   {
+      std::vector<Platform*> platforms;
+      std::vector<Layer*> layers;
+      std::vector<Artifact*> artifacts;
+
+      const int oasis_width = 15000;
+
+      // Boundary platforms, invisible textures
+      platforms.push_back(new Platform("../resources/level/invis.png", -40, 750, oasis_width, 20));
+      platforms.push_back(new Platform("../resources/level/invis.png", -10, -10, 10, 810));
+      platforms.push_back(new Platform("../resources/level/invis.png", oasis_width, -10, 10, 810));
+
+      layers.push_back(new Layer("../resources/level/oasis.png", 0.94, false));
+      layers.push_back(new Layer("../resources/level/oasis_ground.png", 0.0, true));
+
+      levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, artifacts)));
+
+      generatePlatforms(levels["oasis"], "../resources/level/large_oasis.png", 125, 37);
+   }
+
 }
