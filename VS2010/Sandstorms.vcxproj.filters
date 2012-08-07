@@ -273,6 +273,12 @@
     <ClInclude Include="..\include\Layer.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Projectile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ProjectileFactory.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">
@@ -303,6 +309,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Layer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Projectile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ProjectileFactory.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

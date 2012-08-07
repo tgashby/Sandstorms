@@ -14,6 +14,7 @@
 #include "Camera.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 
 namespace TGA
 {
@@ -47,6 +48,7 @@ namespace TGA
 		Camera* GameCamera;
 		GraphicsManager* Graphics;
 		InputManager* Input;
+      SoundManager* Sounds;
 
    private:
       void initalize();

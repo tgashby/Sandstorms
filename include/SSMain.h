@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "HealthManaElement.h"
 #include "Artifact.h"
+#include "ProjectileFactory.h"
 
 namespace Sandstorms
 {

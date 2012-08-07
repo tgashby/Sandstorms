@@ -198,6 +198,14 @@ namespace TGA
 		GLuint getFrameCount();
       
       /**
+      * getFrameNum
+      *
+      * Returns the current frame's number.
+      * @return GLuint - the current frame number
+      */
+      GLuint getFrameNum();
+      
+      /**
        * getCurrentFrameDimensions()
        *
        * Gets the current frame's dimensions

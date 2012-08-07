@@ -7,11 +7,13 @@
  */
 #pragma once
 
-#include "Character.h"
 #include <Timer.h>
 #include <Collision.h>
 #include <Camera.h>
+#include "Character.h"
 #include "Platform.h"
+#include "ProjectileFactory.h"
+#include "Projectile.h"
 #include "Artifact.h"
 
 /**
@@ -83,8 +85,13 @@ private:
   bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
   void initAnimations();
   void handleKeyboard();
+  void addSounds();
+  Projectile* generateFireball( bool facingLeft );
+  void handleMovements();
+  void handleAttacks();
+
   int maxHealth, mana, maxMana;
-  bool justJumped;
+  bool jumping, falling, punching, kicking, casting;
   bool hasJumped;
   bool hasDoubleJumped;
   bool facingLeft;

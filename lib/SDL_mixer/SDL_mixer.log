@@ -1,0 +1,108 @@
+﻿Build started 8/4/2012 1:37:35 PM.
+     1>Project "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\SDL_mixer.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching ".\Debug\SDL_mixer.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\timidity /I..\native_midi /Iexternal\include /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D WIN32 /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D WAV_MUSIC /D MOD_MUSIC /D "MOD_DYNAMIC=\"libmikmod-2.dll\"" /D OGG_MUSIC /D "OGG_DYNAMIC=\"libvorbisfile-3.dll\"" /D FLAC_MUSIC /D "FLAC_DYNAMIC=\"libFLAC-8.dll\"" /D MID_MUSIC /D USE_TIMIDITY_MIDI /D USE_NATIVE_MIDI /D _VC80_UPGRADE=0x0600 /D _WINDLL /Gm /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt ..\dynamic_flac.c ..\dynamic_fluidsynth.c ..\dynamic_mod.c ..\dynamic_mp3.c ..\dynamic_ogg.c ..\effect_position.c ..\effect_stereoreverse.c ..\effects_internal.c ..\fluidsynth.c ..\load_aiff.c ..\load_flac.c ..\load_ogg.c ..\load_voc.c ..\mixer.c ..\music.c ..\music_cmd.c ..\music_flac.c ..\music_mad.c ..\music_mod.c ..\music_ogg.c ..\wavestream.c /D OGG_DYNAMIC=\"libvorbisfile-3.dll\" 
+         wavestream.c
+         music_ogg.c
+         music_mod.c
+         music_mad.c
+         music_flac.c
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\music_flac.c(87): warning C4244: 'function' : conversion from 'FLAC__uint64' to 'long', possible loss of data
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\music_flac.c(421): warning C4018: '>' : signed/unsigned mismatch
+         music_cmd.c
+         music.c
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\music.c(166): warning C4090: 'function' : different 'const' qualifiers
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\music.c(625): warning C4047: 'return' : 'Mix_Music *' differs in levels of indirection from 'int'
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\music.c(1529): warning C4090: 'function' : different 'const' qualifiers
+         mixer.c
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\mixer.c(129): warning C4090: 'function' : different 'const' qualifiers
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\mixer.c(1143): warning C4090: 'function' : different 'const' qualifiers
+         load_voc.c
+         load_ogg.c
+         load_flac.c
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\load_flac.c(86): warning C4244: 'function' : conversion from 'FLAC__uint64' to 'long', possible loss of data
+     1>c:\users\tag\downloads\sdl_mixer-1.2.12\sdl_mixer-1.2.12\load_flac.c(234): warning C4244: '=' : conversion from 'FLAC__uint64' to 'Uint32', possible loss of data
+         load_aiff.c
+         fluidsynth.c
+         effects_internal.c
+         effect_stereoreverse.c
+         effect_position.c
+         dynamic_ogg.c
+         dynamic_mp3.c
+         dynamic_mod.c
+         dynamic_fluidsynth.c
+         Generating Code...
+         Compiling...
+         dynamic_flac.c
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0600 /l"0x0409" /nologo /fo".\Debug\Version.res" Version.rc 
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\SDL_mixer.dll.embed.manifest.res" .\Debug\SDL_mixer_manifest.rc 
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\SDL_mixer.dll" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Tag\Google Drive\Projects\Libraries\SDL_2.0\VisualC\SDL\Win32\Debug" winmm.lib SDL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\SDL_mixer.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/SDL_mixer.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\SDL_mixer.lib" /MACHINE:X86 /DLL .\Debug\Version.res
+         .\Debug\SDL_mixer.dll.embed.manifest.res
+         .\Debug\dynamic_flac.obj
+         .\Debug\dynamic_fluidsynth.obj
+         .\Debug\dynamic_mod.obj
+         .\Debug\dynamic_mp3.obj
+         .\Debug\dynamic_ogg.obj
+         .\Debug\effect_position.obj
+         .\Debug\effect_stereoreverse.obj
+         .\Debug\effects_internal.obj
+         .\Debug\fluidsynth.obj
+         .\Debug\load_aiff.obj
+         .\Debug\load_flac.obj
+         .\Debug\load_ogg.obj
+         .\Debug\load_voc.obj
+         .\Debug\mixer.obj
+         .\Debug\music.obj
+         .\Debug\music_cmd.obj
+         .\Debug\music_flac.obj
+         .\Debug\music_mad.obj
+         .\Debug\music_mod.obj
+         .\Debug\music_ogg.obj
+         .\Debug\wavestream.obj
+         "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\native_midi\Debug\native_midi.lib"
+         "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\timidity\Debug\timidity.lib"
+            Creating library .\Debug\SDL_mixer.lib and object .\Debug\SDL_mixer.exp
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:".\Debug\SDL_mixer.dll.embed.manifest" /manifest .\Debug\SDL_mixer.dll.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\SDL_mixer.dll.embed.manifest.res" .\Debug\SDL_mixer_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\SDL_mixer.dll" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Tag\Google Drive\Projects\Libraries\SDL_2.0\VisualC\SDL\Win32\Debug" winmm.lib SDL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\SDL_mixer.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:".\Debug/SDL_mixer.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\SDL_mixer.lib" /MACHINE:X86 /DLL .\Debug\Version.res
+         .\Debug\SDL_mixer.dll.embed.manifest.res
+         .\Debug\dynamic_flac.obj
+         .\Debug\dynamic_fluidsynth.obj
+         .\Debug\dynamic_mod.obj
+         .\Debug\dynamic_mp3.obj
+         .\Debug\dynamic_ogg.obj
+         .\Debug\effect_position.obj
+         .\Debug\effect_stereoreverse.obj
+         .\Debug\effects_internal.obj
+         .\Debug\fluidsynth.obj
+         .\Debug\load_aiff.obj
+         .\Debug\load_flac.obj
+         .\Debug\load_ogg.obj
+         .\Debug\load_voc.obj
+         .\Debug\mixer.obj
+         .\Debug\music.obj
+         .\Debug\music_cmd.obj
+         .\Debug\music_flac.obj
+         .\Debug\music_mad.obj
+         .\Debug\music_mod.obj
+         .\Debug\music_ogg.obj
+         .\Debug\wavestream.obj
+         "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\native_midi\Debug\native_midi.lib"
+         "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\timidity\Debug\timidity.lib"
+         SDL_mixer.vcxproj -> C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\.\Debug\SDL_mixer.dll
+       FinalizeBuildStatus:
+         Deleting file ".\Debug\SDL_mixer.unsuccessfulbuild".
+         Touching ".\Debug\SDL_mixer.lastbuildstate".
+     1>Done Building Project "C:\Users\Tag\Downloads\SDL_mixer-1.2.12\SDL_mixer-1.2.12\VisualC\SDL_mixer.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.34

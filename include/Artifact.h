@@ -7,7 +7,9 @@
  */
 #pragma once
 
-#include "Consumable.h"
+#include <Collidable.h>
+#include <Vector2D.h>
+#include <Texture.h>
 
 /**
  * @class Artifact
@@ -16,7 +18,7 @@
  * to proceed to further levels.
  *
  */
-class Artifact : public Consumable 
+class Artifact : public TGA::Collidable
 {
 public:
   /**
@@ -28,6 +30,8 @@ public:
   */
   Artifact (std::string fileName, TGA::Vector2D position);
 
+  void draw ();
+
   /**
   * handleCollision
   *
@@ -36,5 +40,11 @@ public:
   * @param collidedWith - the object collided with
   */
   void handleCollision (TGA::Collidable& collidedWith);
+
+  void setPosition(double x, double y);
+
+private:
+   TGA::Vector2D position;
+   TGA::Texture* texture;
 };
 

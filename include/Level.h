@@ -106,6 +106,8 @@ public:
 
   std::vector<Platform*> getPlatforms();
 
+  std::vector<Artifact*> getArtifacts();
+
   int getRightBound();
 
 private:

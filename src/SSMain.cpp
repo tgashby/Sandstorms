@@ -17,7 +17,6 @@ namespace Sandstorms
       srand((int)time(NULL));
 	}
 	
-	
 	SSMain::~SSMain(void)
 	{
 	}
@@ -94,11 +93,31 @@ namespace Sandstorms
 	void SSMain::updateGame()
 	{
       std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
+      std::vector<Artifact*> artifacts = levels[currLevel]->getArtifacts();
+      std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
 
       for (std::vector<Platform*>::iterator i = platforms.begin();
          i < platforms.end(); i++)
       {
          TGA::Collision::handleCollisions((*player), *(*i));
+      }
+
+      for (std::vector<Artifact*>::iterator i = artifacts.begin();
+         i < artifacts.end(); i++)
+      {
+         TGA::Collision::handleCollisions((*player), *(*i));
+      }
+
+      for (std::vector<Projectile*>::iterator i = projectiles.begin();
+         i < projectiles.end(); i++)
+      {
+         TGA::Collision::handleCollisions((*player), *(*i));
+
+         for (std::vector<Platform*>::iterator j = platforms.begin();
+            j < platforms.end(); j++)
+         {
+            TGA::Collision::handleCollisions(*(*j), *(*i));
+         }
       }
 
 		// Update the AnimationManager
@@ -120,6 +139,8 @@ namespace Sandstorms
       }
 
       healthMana->update(player->getHealthPercent(), player->getManaPercent());
+
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->update();
 	}
 
 	void SSMain::render(float interpolation)
@@ -132,15 +153,15 @@ namespace Sandstorms
 
       healthMana->draw();
 
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->draw();
+
 		// Call Graphics Swap Buffers
 		Engine.Graphics->swapBuffers();
 	}
 
    void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight )
    {
-      // TODO: Make this actually smart.
-      // Need to be at least 2*platWidth apart
-      // Varying by ~ 1.5*platHeight
+      // TODO: Make this smarter?
       
       std::vector<Platform*> platforms;
       Platform* platform;
@@ -152,7 +173,7 @@ namespace Sandstorms
       int attempts;
       int rightBound = lvl->getRightBound();
 
-      for (int i = 0; i < rightBound / 230; i++) // 230 comes from experimentation
+      for (int i = 0; i < rightBound / 460; i++) // 460 comes from experimentation
       {
          platformCreated = false;
          attempts = 0;
@@ -206,11 +227,13 @@ namespace Sandstorms
 
       // Boundary platforms, invisible textures
       platforms.push_back(new Platform("../resources/level/invis.png", -40, 750, oasis_width, 20));
-      platforms.push_back(new Platform("../resources/level/invis.png", -10, -10, 10, 810));
-      platforms.push_back(new Platform("../resources/level/invis.png", oasis_width, -10, 10, 810));
+      platforms.push_back(new Platform("../resources/level/invis.png", -10, -100, 10, 900));
+      platforms.push_back(new Platform("../resources/level/invis.png", oasis_width, -100, 10, 900));
 
       layers.push_back(new Layer("../resources/level/oasis.png", 0.94, false));
       layers.push_back(new Layer("../resources/level/oasis_ground.png", 0.0, true));
+
+      artifacts.push_back(new Artifact("../resources/artifacts/smiley.png", TGA::Vector2D(100, 400)));
 
       levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, artifacts)));
 

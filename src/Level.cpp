@@ -63,6 +63,11 @@ std::vector<Platform*> Level::getPlatforms()
    return platforms;
 }
 
+std::vector<Artifact*> Level::getArtifacts()
+{
+   return artifacts;
+}
+
 int Level::getRightBound()
 {
    return rightBound;

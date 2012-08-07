@@ -11,6 +11,8 @@
 #include <Texture.h>
 #include <Vector2D.h>
 
+class Player;
+
 /**
  * @class Consumable
  *
@@ -28,7 +30,7 @@ public:
   * Deal with collisions with the player.
   * @param collidedWith - the other object collided with
   */
-  virtual void handleCollision (TGA::Collidable& collidedWith) = 0;
+  virtual void handleCollision (TGA::Collidable& collidedWith);
 
   /**
   * draw
@@ -39,5 +41,6 @@ public:
 protected:
    TGA::Vector2D position;
    TGA::Texture* texture;
+   bool used;
 };
 

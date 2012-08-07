@@ -5,6 +5,9 @@
  * @date 7/2012
  * 
  */
+#include <SDL.h>
+#include <map>
+#include <string>
 #include "Sound.h"
 #include "Music.h"
 
@@ -71,7 +74,7 @@ namespace TGA
       * @param music - the pointer to the Music
       * @param musicName - the name to give to the music track
       */
-      void addMusic (Music* music, std::string musicName);
+      void addMusic (Music* musicTrack, std::string musicName);
 
       /**
       * removeMusic
@@ -109,5 +112,5 @@ namespace TGA
    private:
       std::map<std::string, Sound*> sounds;
       std::map<std::string, Music*> music;
-   }
+   };
 }

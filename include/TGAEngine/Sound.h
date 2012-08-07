@@ -6,6 +6,9 @@
  * 
  */
 
+#include <string>
+#include <iostream>
+#include <SDL_mixer.h>
 
 namespace TGA
 {
@@ -42,5 +45,6 @@ namespace TGA
       void pause ();
    private:
       Mix_Chunk* sound;
+      int soundChannel;
    };
 }
