@@ -7,6 +7,7 @@
  */
 
 #include "Consumable.h"
+#include "Player.h"
 
 
 Consumable::Consumable(std::string texName, TGA::Vector2D position )

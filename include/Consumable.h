@@ -11,8 +11,6 @@
 #include <Texture.h>
 #include <Vector2D.h>
 
-class Player;
-
 /**
  * @class Consumable
  *

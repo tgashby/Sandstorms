@@ -1,4 +1,4 @@
-#include "..\include\Layer.h"
+#include "Layer.h"
 
 Layer::Layer( std::string texStr, double moveRate, bool tiled )
    : moveRate(moveRate)

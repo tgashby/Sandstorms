@@ -1,4 +1,6 @@
 #include "Projectile.h"
+#include "Player.h"
+#include "Platform.h"
 
 Projectile::Projectile(std::string textureName, 
    TGA::BoundingBox bounds, TGA::Vector2D pos, TGA::Vector2D vel)

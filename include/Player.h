@@ -12,9 +12,9 @@
 #include <Camera.h>
 #include "Character.h"
 #include "Platform.h"
-#include "ProjectileFactory.h"
-#include "Projectile.h"
 #include "Artifact.h"
+
+class Projectile;
 
 /**
  * @class Player
@@ -86,7 +86,7 @@ private:
   void initAnimations();
   void handleKeyboard();
   void addSounds();
-  Projectile* generateFireball( bool facingLeft );
+  Projectile* generateFireball(bool facingLeft);
   void handleMovements();
   void handleAttacks();
 

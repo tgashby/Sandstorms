@@ -8,9 +8,10 @@
 #ifndef _PROJECTILE_FACTORY_
 #define _PROJECTILE_FACTORY_
 
-#include <list>
+#include <vector>
 #include <algorithm>
 #include "Projectile.h"
+//class Projectile;
 
 class ProjectileFactory
 {

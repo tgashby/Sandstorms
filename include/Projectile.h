@@ -11,9 +11,6 @@
 #include <Vector2D.h>
 #include <Texture.h>
 
-class Platform;
-class Player;
-
 /**
  * @class Projectile
  *

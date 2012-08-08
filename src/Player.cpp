@@ -1,6 +1,9 @@
 #include "Player.h"
+#include "Projectile.h"
+#include "ProjectileFactory.h"
 
 // TODO: Add kick effects
+// TODO: Drain mana from casting
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
@@ -280,7 +283,7 @@ void Player::addSounds()
 
    sound = new TGA::Sound("../resources/sound/punch.wav");
    engine->Sounds->addSound(sound, "player_punch");
-// TODO: Get kick sound
+
    sound = new TGA::Sound("../resources/sound/kick.wav");
    engine->Sounds->addSound(sound, "player_kick");
 
