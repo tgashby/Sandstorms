@@ -3,12 +3,13 @@
 #include "ProjectileFactory.h"
 
 // TODO: Add kick effects
-// TODO: Drain mana from casting
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
 const double MAX_VEL = 8;
 const double JUMP_VEL = -21;
+const int FIREBALL_COST = 20;
+int manaCycle = 0;
 
 typedef std::pair<std::string, TGA::Animation*> animPair;
 
@@ -52,6 +53,19 @@ void Player::update()
    {
       falling = false;
    }
+
+   if (manaCycle > 25)
+   {
+      mana += 1;
+      manaCycle = 0;
+
+      if (mana > maxMana)
+      {
+         mana = maxMana;
+      }
+   }
+
+   manaCycle++;
 
    makeSubBounds();
    Character::update();
@@ -164,7 +178,11 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
 
    if (typeid(collidedWith) == typeid(Artifact))
    {
-      artifacts.push_back(&((Artifact&)collidedWith));
+      Artifact* artifact = &((Artifact&)collidedWith); 
+      if (find(artifacts.begin(), artifacts.end(), artifact) == artifacts.end())
+      {
+         artifacts.push_back(artifact);
+      }
    }
 }
 
@@ -440,20 +458,23 @@ void Player::handleAttacks()
          velocity.setX(0);
       }
 
-      if (engine->Input->keyDown(TGA::key_F)
-         && !(punching || kicking))
+      if (mana > FIREBALL_COST)
       {
-         if (currAnimationName.compare("cast") != 0)
+         if (engine->Input->keyDown(TGA::key_F)
+            && !(punching || kicking))
          {
-            casting = true;
-            currAnimation = animations["cast"];
-            currAnimationName = "cast";
+            if (currAnimationName.compare("cast") != 0)
+            {
+               casting = true;
+               currAnimation = animations["cast"];
+               currAnimationName = "cast";
 
-            currAnimation->setRepetitions(1);
+               currAnimation->setRepetitions(1);
 
-            engine->Sounds->playSound("player_cast", 0);
+               engine->Sounds->playSound("player_cast", 0);
+            }
+            velocity.setX(0);
          }
-         velocity.setX(0);
       }
    }
 
@@ -464,6 +485,7 @@ void Player::handleAttacks()
          TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->addProjectile(
             generateFireball(facingLeft));
          casting = false;
+         mana -= FIREBALL_COST;
       }
    }
 
