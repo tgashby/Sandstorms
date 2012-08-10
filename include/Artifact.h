@@ -46,5 +46,6 @@ public:
 private:
    TGA::Vector2D position;
    TGA::Texture* texture;
+   bool collected;
 };
 

@@ -7,6 +7,7 @@
  */
 
 #include "Artifact.h"
+#include "Player.h"
 
 
 Artifact::Artifact( std::string fileName, TGA::Vector2D position )
@@ -19,16 +20,32 @@ Artifact::Artifact( std::string fileName, TGA::Vector2D position )
    bounds.setY(static_cast<int>(position.getY()));
    bounds.setWidth(texture->getWidth());
    bounds.setHeight(texture->getHeight());
+
+   collected = false;
 }
 
 void Artifact::draw()
 {
-   texture->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()));
+   if (!collected)
+   {
+      texture->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()));
+   }
+   else
+   {
+      TGA::Camera* camera = TGA::Singleton<TGA::Camera>::GetSingletonPtr();
+
+      texture->draw(camera->getX() + (1270 - texture->getWidth()), 10);
+   }
 }
 
 void Artifact::handleCollision( TGA::Collidable& collidedWith )
 {
-
+   if (typeid(collidedWith) == typeid(Player))
+   {
+      collected = true;
+      position.setX(-1);
+      position.setY(-1);
+   }
 }
 
 void Artifact::setPosition(double xPos, double yPos)

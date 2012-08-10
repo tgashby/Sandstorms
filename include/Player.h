@@ -11,10 +11,10 @@
 #include <Collision.h>
 #include <Camera.h>
 #include "Character.h"
-#include "Platform.h"
-#include "Artifact.h"
 
 class Projectile;
+class Platform;
+class Artifact;
 
 /**
  * @class Player
@@ -89,7 +89,7 @@ private:
   Projectile* generateFireball(bool facingLeft);
   void handleMovements();
   void handleAttacks();
-
+  void collideWithPlatform( Platform& collidedWith );
   int maxHealth, mana, maxMana;
   bool jumping, falling, punching, kicking, casting;
   bool hasJumped;
@@ -97,6 +97,6 @@ private:
   bool facingLeft;
   TGA::BoundingBox subBounds[4];
   std::string currAnimationName;
-  std::vector<Artifact*> artifacts;
+  int artifactCount;
 };
 

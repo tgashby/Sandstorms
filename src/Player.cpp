@@ -1,8 +1,8 @@
 #include "Player.h"
 #include "Projectile.h"
 #include "ProjectileFactory.h"
-
-// TODO: Add kick effects
+#include "Platform.h"
+#include "Artifact.h"
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
@@ -32,6 +32,8 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
 void Player::update()
 {
    handleKeyboard();
+
+   assert(abs(velocity.getX()) < MAX_VEL + 1.5f);
    
    // If the player is falling (like off a platform)
    if (velocity.getY() > MAX_VEL)
@@ -81,13 +83,6 @@ void Player::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1
    {
       Character::draw(interpolation);
    }
-
-   for (std::vector<Artifact*>::iterator i = artifacts.begin(); i < artifacts.end(); i++)
-   {
-      (*i)->setPosition(getPosition().getX() + getBounds().getWidth() / 2,
-         getPosition().getY() + getBounds().getHeight() / 2);
-      (*i)->draw();
-   }
 }
 
 double Player::getHealthPercent()
@@ -112,77 +107,14 @@ void Player::jump()
 
 void Player::handleCollision( TGA::Collidable& collidedWith )
 {
-   bool onlyHeadColliding = collidedWithOnlySubBound(0, collidedWith);
-   bool onlyLeftColliding = collidedWithOnlySubBound(1, collidedWith);
-   bool onlyRightColliding = collidedWithOnlySubBound(2, collidedWith);
-   bool onlyFeetColliding = collidedWithOnlySubBound(3, collidedWith);
-
    if (typeid(collidedWith) == typeid(Platform))
    {
-      currAnimation->resume();
-
-      // If only head is colliding, below platform
-      if (onlyHeadColliding)
-      {
-         velocity.setY(0);
-         position.setY(collidedWith.getBounds().getY() 
-            + collidedWith.getBounds().getHeight());
-      }
-      // Left side of torso is colliding, on right side of platform
-      else if (onlyLeftColliding) 
-      {
-         position.setX(collidedWith.getBounds().getX() 
-            + collidedWith.getBounds().getWidth());
-      }
-      // Right side of torso colliding, on left side of platform
-      else if (onlyRightColliding) 
-      {
-         position.setX(collidedWith.getBounds().getX()
-            - currAnimation->getCurrentFrameDimensions().getWidth());
-      }
-      // Feet colliding, above platform
-      else if (onlyFeetColliding) 
-      {
-         velocity.setY(0);
-         position.setY(collidedWith.getBounds().getY() 
-            - currAnimation->getCurrentFrameDimensions().getHeight() + 1);
-
-         hasJumped = hasDoubleJumped = false;
-         jumping = false;
-      }
-      else // More than one sub-boundary
-      {
-         TGA::BoundingBox leftSide(static_cast<int>(position.getX()), static_cast<int>(position.getY()), 
-            currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
-            currAnimation->getCurrentFrameDimensions().getHeight());
-
-         TGA::BoundingBox rightSide(static_cast<int>(position.getX()) + 
-            currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-            static_cast<int>(position.getY()), 
-            currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
-            currAnimation->getCurrentFrameDimensions().getHeight());
-
-         if (TGA::Collision::checkCollision(leftSide, collidedWith.getBounds()))
-         {
-            position.setX(collidedWith.getBounds().getX() 
-               + collidedWith.getBounds().getWidth());
-         }
-
-         if (TGA::Collision::checkCollision(rightSide, collidedWith.getBounds()))
-         {
-            position.setX(collidedWith.getBounds().getX()
-               - currAnimation->getCurrentFrameDimensions().getWidth());
-         }
-      }
+      collideWithPlatform((Platform&)collidedWith);
    }
 
    if (typeid(collidedWith) == typeid(Artifact))
    {
-      Artifact* artifact = &((Artifact&)collidedWith); 
-      if (find(artifacts.begin(), artifacts.end(), artifact) == artifacts.end())
-      {
-         artifacts.push_back(artifact);
-      }
+      artifactCount++;
    }
 }
 
@@ -291,7 +223,7 @@ double Player::getManaPercent()
 
 int Player::getArtifactCount()
 {
-   return artifacts.size();
+   return artifactCount;
 }
 
 void Player::addSounds()
@@ -429,6 +361,7 @@ void Player::handleAttacks()
       {
          if (currAnimationName.compare("punch") != 0)
          {
+            punching = true;
             currAnimation = animations["punch"];
             currAnimationName = "punch";
 
@@ -437,7 +370,6 @@ void Player::handleAttacks()
             engine->Sounds->playSound("player_punch", 0);
          }
 
-         punching = true;
          velocity.setX(0);
       }
 
@@ -446,6 +378,7 @@ void Player::handleAttacks()
       {
          if (currAnimationName.compare("kick") != 0)
          {
+            kicking = true;
             currAnimation = animations["kick"];
             currAnimationName = "kick";
 
@@ -454,7 +387,6 @@ void Player::handleAttacks()
             engine->Sounds->playSound("player_kick", 0);
          }
 
-         kicking = true;
          velocity.setX(0);
       }
 
@@ -501,5 +433,69 @@ void Player::handleAttacks()
    if (currAnimationName.compare("punch") == 0)
    {
       punching = !currAnimation->isDone();
+   }
+}
+
+void Player::collideWithPlatform( Platform& collidedWith )
+{
+   bool onlyHeadColliding = collidedWithOnlySubBound(0, collidedWith);
+   bool onlyLeftColliding = collidedWithOnlySubBound(1, collidedWith);
+   bool onlyRightColliding = collidedWithOnlySubBound(2, collidedWith);
+   bool onlyFeetColliding = collidedWithOnlySubBound(3, collidedWith);
+
+   currAnimation->resume();
+
+   // If only head is colliding, below platform
+   if (onlyHeadColliding)
+   {
+      velocity.setY(0);
+      position.setY(collidedWith.getBounds().getY() 
+         + collidedWith.getBounds().getHeight());
+   }
+   // Left side of torso is colliding, on right side of platform
+   else if (onlyLeftColliding) 
+   {
+      position.setX(collidedWith.getBounds().getX() 
+         + collidedWith.getBounds().getWidth());
+   }
+   // Right side of torso colliding, on left side of platform
+   else if (onlyRightColliding) 
+   {
+      position.setX(collidedWith.getBounds().getX()
+         - currAnimation->getCurrentFrameDimensions().getWidth());
+   }
+   // Feet colliding, above platform
+   else if (onlyFeetColliding) 
+   {
+      velocity.setY(0);
+      position.setY(collidedWith.getBounds().getY() 
+         - currAnimation->getCurrentFrameDimensions().getHeight() + 1);
+
+      hasJumped = hasDoubleJumped = false;
+      jumping = false;
+   }
+   else // More than one sub-boundary
+   {
+      TGA::BoundingBox leftSide(static_cast<int>(position.getX()), static_cast<int>(position.getY()), 
+         currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
+         currAnimation->getCurrentFrameDimensions().getHeight());
+
+      TGA::BoundingBox rightSide(static_cast<int>(position.getX()) + 
+         currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+         static_cast<int>(position.getY()), 
+         currAnimation->getCurrentFrameDimensions().getWidth() / 2, 
+         currAnimation->getCurrentFrameDimensions().getHeight());
+
+      if (TGA::Collision::checkCollision(leftSide, collidedWith.getBounds()))
+      {
+         position.setX(collidedWith.getBounds().getX() 
+            + collidedWith.getBounds().getWidth());
+      }
+
+      if (TGA::Collision::checkCollision(rightSide, collidedWith.getBounds()))
+      {
+         position.setX(collidedWith.getBounds().getX()
+            - currAnimation->getCurrentFrameDimensions().getWidth());
+      }
    }
 }
