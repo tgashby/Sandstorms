@@ -43,8 +43,8 @@ void Artifact::handleCollision( TGA::Collidable& collidedWith )
    if (typeid(collidedWith) == typeid(Player))
    {
       collected = true;
-      position.setX(-1);
-      position.setY(-1);
+      bounds.setX(-1);
+      bounds.setY(-1);
    }
 }
 

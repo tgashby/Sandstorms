@@ -21,6 +21,7 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    jumping = hasJumped = hasDoubleJumped = false;
    falling = punching = kicking = casting = false;
    facingLeft = false;
+   artifactCount = 0;
 
    initAnimations();
    addSounds();
