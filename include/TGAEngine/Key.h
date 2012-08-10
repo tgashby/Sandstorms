@@ -71,6 +71,10 @@ namespace TGA
       key_F11 = SDLK_F11,
       key_F12 = SDLK_F12,
       key_BACKQUOTE = SDLK_BACKQUOTE,
-      key_ESC = SDLK_ESCAPE
+      key_ESC = SDLK_ESCAPE,
+      key_LEFT_ARROW = SDLK_LEFT,
+      key_RIGHT_ARROW = SDLK_RIGHT,
+      key_UP_ARROW = SDLK_UP,
+      key_DOWN_ARROW = SDLK_DOWN
 	};
 }

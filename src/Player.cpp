@@ -138,7 +138,14 @@ void Player::makeSubBounds()
       frameWidth / 2 + 1, (int)(frameHeight * 0.6) + 1);
 
    // "Legs" box
-   subBounds[3] = TGA::BoundingBox((int)position.getX(), (int)position.getY() + (int)(frameHeight * 0.8) + 1, frameWidth, frameHeight / 5 + 1);
+   if (facingLeft)
+   {
+      subBounds[3] = TGA::BoundingBox((int)position.getX(), (int)position.getY() + (int)(frameHeight * 0.8) + 1, frameWidth - 46, frameHeight / 5 + 1);
+   }
+   else
+   {
+      subBounds[3] = TGA::BoundingBox((int)position.getX() + 46, (int)position.getY() + (int)(frameHeight * 0.8) + 1, frameWidth, frameHeight / 5 + 1);
+   }
 }
 
 bool Player::collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith)
@@ -277,6 +284,8 @@ void Player::handleMovements()
 
    if (!engine->Input->keyDown(TGA::key_A) && 
       !engine->Input->keyDown(TGA::key_D) && 
+      !engine->Input->keyDown(TGA::key_LEFT_ARROW) && 
+      !engine->Input->keyDown(TGA::key_RIGHT_ARROW) && 
       !(jumping || falling || punching || kicking || casting))
    {
       velocity.setX(0);
@@ -291,7 +300,7 @@ void Player::handleMovements()
    }
    else if (!(punching || kicking || casting))
    {
-      if (engine->Input->keyDown(TGA::key_D))
+      if (engine->Input->keyDown(TGA::key_D) || engine->Input->keyDown(TGA::key_RIGHT_ARROW))
       {
          if (!(jumping || falling || hasJumped) && currAnimationName.compare("run") != 0)
          {
@@ -306,7 +315,7 @@ void Player::handleMovements()
 
          facingLeft = false;
       }
-      else if (engine->Input->keyDown(TGA::key_A))
+      else if (engine->Input->keyDown(TGA::key_A) || engine->Input->keyDown(TGA::key_LEFT_ARROW))
       {
          if (!(jumping || falling || hasJumped) && currAnimationName.compare("run") != 0)
          {
