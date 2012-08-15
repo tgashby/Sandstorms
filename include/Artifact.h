@@ -10,6 +10,7 @@
 #include <Collidable.h>
 #include <Vector2D.h>
 #include <Texture.h>
+#include "Consumable.h"
 
 /**
  * @class Artifact
@@ -18,7 +19,7 @@
  * to proceed to further levels.
  *
  */
-class Artifact : public TGA::Collidable
+class Artifact : public Consumable
 {
 public:
   /**
@@ -44,8 +45,5 @@ public:
   void setPosition(double x, double y);
 
 private:
-   TGA::Vector2D position;
-   TGA::Texture* texture;
-   bool collected;
 };
 

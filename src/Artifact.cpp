@@ -11,22 +11,13 @@
 
 
 Artifact::Artifact( std::string fileName, TGA::Vector2D position )
-   : TGA::Collidable(TGA::BoundingBox(0,0,0,0))
-   , position(position)
+   : Consumable(fileName, position)
 {
-   texture = new TGA::Texture(fileName);
-
-   bounds.setX(static_cast<int>(position.getX()));
-   bounds.setY(static_cast<int>(position.getY()));
-   bounds.setWidth(texture->getWidth());
-   bounds.setHeight(texture->getHeight());
-
-   collected = false;
 }
 
 void Artifact::draw()
 {
-   if (!collected)
+   if (!used)
    {
       texture->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()));
    }
@@ -42,7 +33,7 @@ void Artifact::handleCollision( TGA::Collidable& collidedWith )
 {
    if (typeid(collidedWith) == typeid(Player))
    {
-      collected = true;
+      used = true;
       bounds.setX(-1);
       bounds.setY(-1);
    }

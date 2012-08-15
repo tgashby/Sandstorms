@@ -32,6 +32,11 @@ void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*
 {
    // TODO: Handle interpolation
 
+   if (facingLeft)
+   {
+      scaleX = -1;
+   }
+
    assert(currAnimation);
    currAnimation->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
       scaleX, scaleY, rotation);

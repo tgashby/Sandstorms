@@ -279,6 +279,12 @@
     <ClInclude Include="..\include\ProjectileFactory.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\HealthPickup.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ManaPickup.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">
@@ -315,6 +321,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ProjectileFactory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HealthPickup.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ManaPickup.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

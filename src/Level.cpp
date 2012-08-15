@@ -7,11 +7,15 @@
  */
 
 #include "Level.h"
+#include <Engine.h>
+#include <Singleton.h>
+#include <Texture.h>
+#include <Collidable.h>
 
-Level::Level(int rightBound, std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Artifact*> artifacts /*= std::vector<Artifact*>()*/ )
+Level::Level(int rightBound, std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Consumable*> consumables /*= std::vector<Artifact*>()*/ )
    : layers(layers)
    , platforms(platforms)
-   , artifacts(artifacts)
+   , consumables(consumables)
 {
    this->rightBound = rightBound;
 }
@@ -38,6 +42,11 @@ void Level::addPlatform(std::string textureStr, int x, int y, int width, int hei
    platforms.push_back(platform);
 }
 
+void Level::addConsumable( Consumable* newConsumable )
+{
+   consumables.push_back(newConsumable);
+}
+
 void Level::draw()
 {
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
@@ -52,7 +61,7 @@ void Level::draw()
       (*i)->draw();
    }
 
-   for(std::vector<Artifact*>::iterator i = artifacts.begin(); i < artifacts.end(); i++)
+   for(std::vector<Consumable*>::iterator i = consumables.begin(); i < consumables.end(); i++)
    {
       (*i)->draw();
    }
@@ -63,9 +72,9 @@ std::vector<Platform*> Level::getPlatforms()
    return platforms;
 }
 
-std::vector<Artifact*> Level::getArtifacts()
+std::vector<Consumable*> Level::getConsumables()
 {
-   return artifacts;
+   return consumables;
 }
 
 int Level::getRightBound()

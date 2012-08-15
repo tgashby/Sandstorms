@@ -1,4 +1,13 @@
 #include "SSMain.h"
+#include <Key.h>
+#include <time.h>
+#include "Level.h"
+#include "Player.h"
+#include "HealthManaElement.h"
+#include "Artifact.h"
+#include "ProjectileFactory.h"
+#include "HealthPickup.h"
+#include "ManaPickup.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -93,7 +102,7 @@ namespace Sandstorms
 	void SSMain::updateGame()
 	{
       std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
-      std::vector<Artifact*> artifacts = levels[currLevel]->getArtifacts();
+      std::vector<Consumable*> consumables = levels[currLevel]->getConsumables();
       std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
 
       for (std::vector<Platform*>::iterator i = platforms.begin();
@@ -102,8 +111,8 @@ namespace Sandstorms
          TGA::Collision::handleCollisions((*player), *(*i));
       }
 
-      for (std::vector<Artifact*>::iterator i = artifacts.begin();
-         i < artifacts.end(); i++)
+      for (std::vector<Consumable*>::iterator i = consumables.begin();
+         i < consumables.end(); i++)
       {
          TGA::Collision::handleCollisions((*player), *(*i));
       }
@@ -221,7 +230,7 @@ namespace Sandstorms
    {
       std::vector<Platform*> platforms;
       std::vector<Layer*> layers;
-      std::vector<Artifact*> artifacts;
+      std::vector<Consumable*> consumables;
 
       const int oasis_width = 15000;
 
@@ -233,9 +242,11 @@ namespace Sandstorms
       layers.push_back(new Layer("../resources/level/oasis.png", 0.94, false));
       layers.push_back(new Layer("../resources/level/oasis_ground.png", 0.0, true));
 
-      artifacts.push_back(new Artifact("../resources/artifacts/smiley.png", TGA::Vector2D(100, 400)));
+      consumables.push_back(new Artifact("../resources/artifacts/key_artifact.png", TGA::Vector2D(100, 400)));
+      consumables.push_back(new HealthPickup(50, TGA::Vector2D(300, 300)));
+      consumables.push_back(new ManaPickup(50, TGA::Vector2D(400, 300)));
 
-      levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, artifacts)));
+      levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, consumables)));
 
       generatePlatforms(levels["oasis"], "../resources/level/large_oasis.png", 125, 37);
    }

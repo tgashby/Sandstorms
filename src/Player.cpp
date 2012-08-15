@@ -28,6 +28,8 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
 
    currAnimation = animations["idle"];
    currAnimationName = "idle";
+
+   health = 0;
 }
 
 void Player::update()
@@ -72,18 +74,6 @@ void Player::update()
 
    makeSubBounds();
    Character::update();
-}
-
-void Player::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
-{
-   if (facingLeft)
-   {
-      Character::draw(interpolation, -1);
-   }
-   else
-   {
-      Character::draw(interpolation);
-   }
 }
 
 double Player::getHealthPercent()
@@ -232,6 +222,26 @@ double Player::getManaPercent()
 int Player::getArtifactCount()
 {
    return artifactCount;
+}
+
+void Player::addHealth(int howMuch)
+{
+   health += howMuch;
+
+   if (health > maxHealth)
+   {
+      health = maxHealth;
+   }
+}
+
+void Player::addMana(int howMuch)
+{
+   mana += howMuch;
+
+   if (mana > maxMana)
+   {
+      mana = maxMana;
+   }
 }
 
 void Player::addSounds()

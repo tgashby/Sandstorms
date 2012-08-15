@@ -36,14 +36,9 @@ public:
   Player (TGA::Vector2D position = TGA::Vector2D(0,0));
   
   /**
-  * @copydoc Character::update(Uint32 dt)
+  * @copydoc Character::update()
   */
   virtual void update ();
-
-  /**
-   * @copydoc Character::draw(float interpolation, float scaleX, float scaleY, float rotation)
-   */
-  virtual void draw(float interpolation, float scaleX = 1, float scaleY = 1, float rotation = 0);
   
   /**
   * getHealthPercent
@@ -71,6 +66,10 @@ public:
   */
   int getArtifactCount ();
 
+  void addHealth(int howMuch);
+
+  void addMana(int howMuch);
+
   /**
    * handleCollision
    *
@@ -89,14 +88,12 @@ private:
   Projectile* generateFireball(bool facingLeft);
   void handleMovements();
   void handleAttacks();
-  void collideWithPlatform( Platform& collidedWith );
+  void collideWithPlatform(Platform& collidedWith);
+
   int maxHealth, mana, maxMana;
   bool jumping, falling, punching, kicking, casting;
-  bool hasJumped;
-  bool hasDoubleJumped;
-  bool facingLeft;
+  bool hasJumped, hasDoubleJumped;
   TGA::BoundingBox subBounds[4];
-  std::string currAnimationName;
   int artifactCount;
 };
 

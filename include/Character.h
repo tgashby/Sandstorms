@@ -86,6 +86,7 @@ protected:
   TGA::Vector2D position, velocity, acceleration;
   std::map<std::string, TGA::Animation*> animations;
   TGA::Animation* currAnimation;
-  bool alive;
+  std::string currAnimationName;
+  bool alive, facingLeft;
 };
 

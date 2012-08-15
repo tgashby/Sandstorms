@@ -6,12 +6,10 @@
  * 
  */
 #pragma once
-
-#include <Engine.h>
-#include <Singleton.h>
-#include <Texture.h>
 #include <string>
 #include <vector>
+
+#include "Consumable.h"
 #include "Platform.h"
 #include "Artifact.h"
 #include "Layer.h"
@@ -37,7 +35,7 @@ public:
   */
   Level (int rightBound, std::vector<Layer*> layers, 
      std::vector<Platform*> platforms = std::vector<Platform*>(), 
-     std::vector<Artifact*> artifacts = std::vector<Artifact*>());
+     std::vector<Consumable*> artifacts = std::vector<Consumable*>());
 
   /**
    * addLayer
@@ -78,24 +76,12 @@ public:
   void addPlatform (std::string textureStr, int x, int y, int width, int height);
 
   /**
-  * addArtifact
+  * addConsumable
   *
-  * Add an artifact to the level.
-  * @param newArtifact - the new artifact
+  * Add a Consumable to the level.
+  * @param newConsumable - the new consumable
   */
-  void addArtifact (Artifact* newArtifact);
-
-  /**
-  * addArtifact
-  *
-  * Add an artifact to the level
-  * @param artifactStr - path to artifact's image
-  * @param x - the x position of the artifact
-  * @param y - the y position of the artifact
-  * @param width - the width of the artifact
-  * @param height - the height of the artifact
-  */
-  void addArtifact (std::string artifactStr, int x, int y, int width, int height);
+  void addConsumable (Consumable* newConsumable);
 
   /**
    * draw
@@ -106,14 +92,14 @@ public:
 
   std::vector<Platform*> getPlatforms();
 
-  std::vector<Artifact*> getArtifacts();
+  std::vector<Consumable*> getConsumables();
 
   int getRightBound();
 
 private:
    std::vector<Layer*> layers;
    std::vector<Platform*> platforms;
-   std::vector<Artifact*> artifacts;
+   std::vector<Consumable*> consumables;
    int rightBound;
 };
 

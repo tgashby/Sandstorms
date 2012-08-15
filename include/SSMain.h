@@ -1,13 +1,10 @@
 #pragma once
 
-#include <Key.h>
 #include <Engine.h>
-#include <time.h>
-#include "Level.h"
-#include "Player.h"
-#include "HealthManaElement.h"
-#include "Artifact.h"
-#include "ProjectileFactory.h"
+
+class Player;
+class HealthManaElement;
+class Level;
 
 namespace Sandstorms
 {

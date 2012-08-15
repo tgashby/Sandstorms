@@ -9,7 +9,7 @@
 #include "Platform.h"
 
 Platform::Platform(std::string textureStr, TGA::BoundingBox bounds)
-   : Collidable(bounds)
+   : TGA::Collidable(bounds)
 {
    if (!texture.loadTexture(textureStr))
    {
@@ -18,7 +18,7 @@ Platform::Platform(std::string textureStr, TGA::BoundingBox bounds)
 }
 
 Platform::Platform(std::string textureStr, int x, int y, int width, int height)
-   : Collidable(TGA::BoundingBox(x, y, width, height))
+   : TGA::Collidable(TGA::BoundingBox(x, y, width, height))
 {
    if (!texture.loadTexture(textureStr))
    {

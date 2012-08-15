@@ -31,11 +31,3 @@ void Consumable::draw()
       texture->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()));
    }
 }
-
-void Consumable::handleCollision (TGA::Collidable& collidedWith)
-{
-   if (typeid(collidedWith) == typeid(Player))
-   {
-      used = true;
-   }
-}

@@ -124,7 +124,9 @@ exit 0</Command>
     <ClInclude Include="..\include\Artifact.h" />
     <ClInclude Include="..\include\Character.h" />
     <ClInclude Include="..\include\Consumable.h" />
+    <ClInclude Include="..\include\ManaPickup.h" />
     <ClInclude Include="..\include\HealthManaElement.h" />
+    <ClInclude Include="..\include\HealthPickup.h" />
     <ClInclude Include="..\include\Layer.h" />
     <ClInclude Include="..\include\Level.h" />
     <ClInclude Include="..\include\Main.h" />
@@ -214,7 +216,9 @@ exit 0</Command>
     <ClCompile Include="..\src\Character.cpp">
     </ClCompile>
     <ClCompile Include="..\src\Consumable.cpp" />
+    <ClCompile Include="..\src\ManaPickup.cpp" />
     <ClCompile Include="..\src\HealthManaElement.cpp" />
+    <ClCompile Include="..\src\HealthPickup.cpp" />
     <ClCompile Include="..\src\Layer.cpp" />
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp">

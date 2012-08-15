@@ -28,14 +28,14 @@ public:
   * Deal with collisions with the player.
   * @param collidedWith - the other object collided with
   */
-  virtual void handleCollision (TGA::Collidable& collidedWith);
+  virtual void handleCollision (TGA::Collidable& collidedWith) = 0;
 
   /**
   * draw
   *
   * Draws the Consumable.
   */
-  void draw ();
+  virtual void draw ();
 protected:
    TGA::Vector2D position;
    TGA::Texture* texture;
