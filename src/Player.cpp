@@ -29,7 +29,7 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    currAnimation = animations["idle"];
    currAnimationName = "idle";
 
-   health = 0;
+   health = 50;
 }
 
 void Player::update()
@@ -150,12 +150,12 @@ bool Player::collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith)
 
 void Player::initAnimations()
 {
-   TGA::Texture* idleTex = new TGA::Texture("../resources/player/idle.png");
+   TGA::Texture* idleTex = new TGA::Texture("resources/player/idle.png");
    TGA::Animation* idleAnim = new TGA::Animation(idleTex);
    idleAnim->addFrame(TGA::BoundingBox(0, 0, 138, 200), 1000000);
    idleAnim->setRepetitions(-1);
 
-   TGA::Texture* runTex = new TGA::Texture("../resources/player/run.png");
+   TGA::Texture* runTex = new TGA::Texture("resources/player/run.png");
    TGA::Animation* runAnim = new TGA::Animation(runTex);
    runAnim->addFrame(TGA::BoundingBox(0, 0, 156, 200), 75);
    runAnim->addFrame(TGA::BoundingBox(164, 0, 144, 200), 75);
@@ -169,32 +169,32 @@ void Player::initAnimations()
    runAnim->addFrame(TGA::BoundingBox(1275, 0, 114, 200), 75);
    runAnim->setRepetitions(-1);
 
-   TGA::Texture* jumpTex = new TGA::Texture("../resources/player/jump.png");
+   TGA::Texture* jumpTex = new TGA::Texture("resources/player/jump.png");
    TGA::Animation* jumpAnim = new TGA::Animation(jumpTex);
    jumpAnim->addFrame(TGA::BoundingBox(0, 0, 105, 229), 1);
    jumpAnim->addFrame(TGA::BoundingBox(120, 0, 135, 229), 1);
    jumpAnim->addFrame(TGA::BoundingBox(290, 0, 133, 229), 1);
    jumpAnim->setRepetitions(-1);
 
-   TGA::Texture* punchTex = new TGA::Texture("../resources/player/punch.png");
+   TGA::Texture* punchTex = new TGA::Texture("resources/player/punch.png");
    TGA::Animation* punchAnim = new TGA::Animation(punchTex);
    punchAnim->addFrame(TGA::BoundingBox(0, 0, 174, 200), 100);
    punchAnim->addFrame(TGA::BoundingBox(175, 0, 133, 200), 100);
    punchAnim->setRepetitions(-1);
 
-   TGA::Texture* kickTex = new TGA::Texture("../resources/player/kick.png");
+   TGA::Texture* kickTex = new TGA::Texture("resources/player/kick.png");
    TGA::Animation* kickAnim = new TGA::Animation(kickTex);
    kickAnim->addFrame(TGA::BoundingBox(0, 0, 165, 200), 500);
    kickAnim->addFrame(TGA::BoundingBox(173, 0, 218, 200), 500);
    kickAnim->setRepetitions(-1);
 
-   TGA::Texture* castTex = new TGA::Texture("../resources/player/cast.png");
+   TGA::Texture* castTex = new TGA::Texture("resources/player/cast.png");
    TGA::Animation* castAnim = new TGA::Animation(castTex);
    castAnim->addFrame(TGA::BoundingBox(0, 0, 127, 200), 750);
    castAnim->addFrame(TGA::BoundingBox(130, 0, 156, 200), 250);
    castAnim->setRepetitions(-1);
 
-   TGA::Texture* hurtTex = new TGA::Texture("../resources/player/hurt.png");
+   TGA::Texture* hurtTex = new TGA::Texture("resources/player/hurt.png");
    TGA::Animation* hurtAnim = new TGA::Animation(hurtTex);
    hurtAnim->addFrame(TGA::BoundingBox(0, 0, 129, 200), 1000);
    hurtAnim->setRepetitions(-1);
@@ -249,23 +249,23 @@ void Player::addSounds()
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
    TGA::Sound* sound;
 
-   sound = new TGA::Sound("../resources/sound/punch.wav");
+   sound = new TGA::Sound("resources/sound/punch.wav");
    engine->Sounds->addSound(sound, "player_punch");
 
-   sound = new TGA::Sound("../resources/sound/kick.wav");
+   sound = new TGA::Sound("resources/sound/kick.wav");
    engine->Sounds->addSound(sound, "player_kick");
 
-   sound = new TGA::Sound("../resources/sound/fireball.wav");
+   sound = new TGA::Sound("resources/sound/fireball.wav");
    engine->Sounds->addSound(sound, "player_cast");
 
-   sound = new TGA::Sound("../resources/sound/jump.wav");
+   sound = new TGA::Sound("resources/sound/jump.wav");
    engine->Sounds->addSound(sound, "player_jump");
 }
 
 Projectile* Player::generateFireball( bool facingLeft )
 {
    TGA::BoundingBox bounds(0, 0, 46, 23);
-   std::string fireballTex("../resources/player/fireball.png");
+   std::string fireballTex("resources/player/fireball.png");
    TGA::Vector2D vel(10.0, 0);
    TGA::Vector2D position(getPosition());
    position.setY(position.getY() + 73);

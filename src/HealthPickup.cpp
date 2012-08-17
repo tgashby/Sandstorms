@@ -9,7 +9,7 @@
 #include "Player.h"
 
 HealthPickup::HealthPickup( int potency, TGA::Vector2D position )
-   : Consumable("../resources/pickups/health_pickup.png", position)
+   : Consumable("resources/pickups/health_pickup.png", position)
 {
    this->potency = potency;
 }

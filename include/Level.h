@@ -14,6 +14,8 @@
 #include "Artifact.h"
 #include "Layer.h"
 
+class Player;
+
 /**
  * @class Level
  *
@@ -36,6 +38,8 @@ public:
   Level (int rightBound, std::vector<Layer*> layers, 
      std::vector<Platform*> platforms = std::vector<Platform*>(), 
      std::vector<Consumable*> artifacts = std::vector<Consumable*>());
+   
+   void update(Player* player);
 
   /**
    * addLayer

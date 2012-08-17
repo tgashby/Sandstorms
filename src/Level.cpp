@@ -7,6 +7,8 @@
  */
 
 #include "Level.h"
+#include "Player.h"
+#include "ProjectileFactory.h"
 #include <Engine.h>
 #include <Singleton.h>
 #include <Texture.h>
@@ -18,6 +20,33 @@ Level::Level(int rightBound, std::vector<Layer*> layers, std::vector<Platform*> 
    , consumables(consumables)
 {
    this->rightBound = rightBound;
+}
+
+void Level::update(Player *player)
+{
+   std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
+   
+   for (std::vector<Platform*>::iterator i = platforms.begin();
+        i < platforms.end(); i++)
+   {
+      TGA::Collision::handleCollisions((*player), *(*i));
+   }
+   
+   for (std::vector<Consumable*>::iterator i = consumables.begin();
+        i < consumables.end(); i++)
+   {
+      TGA::Collision::handleCollisions((*player), *(*i));
+   }
+   
+   for (std::vector<Projectile*>::iterator i = projectiles.begin();
+        i < projectiles.end(); i++)
+   {
+      for (std::vector<Platform*>::iterator j = platforms.begin();
+           j < platforms.end(); j++)
+      {
+         TGA::Collision::handleCollisions(*(*j), *(*i));
+      }
+   }
 }
 
 void Level::addLayer( Layer* newLayer )

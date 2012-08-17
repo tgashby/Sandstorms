@@ -42,3 +42,8 @@ void Platform::handleCollision(TGA::Collidable& collidedWith)
       std::cerr << "Overlapping platforms." << "\n";
    }
 }
+
+bool Platform::operator<(Platform& p2)
+{
+   return getBounds().getX() < p2.getBounds().getX();
+}

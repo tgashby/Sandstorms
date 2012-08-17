@@ -15,9 +15,9 @@ HealthManaElement::HealthManaElement()
    , healthPos(35, 25)
    , manaPos(55, 56)
 {
-   healthBar = new TGA::Texture("../resources/ui/health.png");
-   manaBar = new TGA::Texture("../resources/ui/mana.png");
-   container = new TGA::Texture("../resources/ui/healthManaContainer.png");
+   healthBar = new TGA::Texture("resources/ui/health.png");
+   manaBar = new TGA::Texture("resources/ui/mana.png");
+   container = new TGA::Texture("resources/ui/healthManaContainer.png");
 }
 
 void HealthManaElement::update( double healthPercent, double manaPercent )

@@ -26,6 +26,9 @@ namespace Sandstorms
 		void render(float interpolation);
       void generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight );
       void makeLevels();
+      void placeConsumables(Level* lvl, int numHPickups, int numMPickups,
+                            int numArtifacts, std::string artifactTex,
+                            int artifactHeight);
       TGA::Engine Engine;
       std::map<std::string, Level*> levels;
       std::string currLevel;

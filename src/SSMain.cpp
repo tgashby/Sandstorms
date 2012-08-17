@@ -19,6 +19,11 @@ float randFloat(float a, float b)
    return ((b-a)*((float)rand()/RAND_MAX))+a;
 }
 
+bool sortPlatforms(Platform* p1, Platform* p2)
+{
+   return *p1 < *p2;
+}
+
 namespace Sandstorms
 {
 	SSMain::SSMain(void)
@@ -104,37 +109,21 @@ namespace Sandstorms
       std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
       std::vector<Consumable*> consumables = levels[currLevel]->getConsumables();
       std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
-
-      for (std::vector<Platform*>::iterator i = platforms.begin();
-         i < platforms.end(); i++)
-      {
-         TGA::Collision::handleCollisions((*player), *(*i));
-      }
-
-      for (std::vector<Consumable*>::iterator i = consumables.begin();
-         i < consumables.end(); i++)
-      {
-         TGA::Collision::handleCollisions((*player), *(*i));
-      }
+      
+      // Level.update handles player<->platform, player<->consumable, and projectile<->platform collision
+      levels[currLevel]->update(player);
 
       for (std::vector<Projectile*>::iterator i = projectiles.begin();
          i < projectiles.end(); i++)
       {
          TGA::Collision::handleCollisions((*player), *(*i));
-
-         for (std::vector<Platform*>::iterator j = platforms.begin();
-            j < platforms.end(); j++)
-         {
-            TGA::Collision::handleCollisions(*(*j), *(*i));
-         }
       }
-
-		// Update the AnimationManager
+      
 		Engine.Animations->updateAll();
-
-		// Update the Player
+      
       player->update();
 
+      // Scroll with player
       Engine.GameCamera->setPosition(static_cast<float>(player->getPosition().getX()) - SCREEN_WIDTH / 2, 0);
 
       if (Engine.GameCamera->getX() < 0)
@@ -173,7 +162,6 @@ namespace Sandstorms
       // TODO: Make this smarter?
       
       std::vector<Platform*> platforms;
-      Platform* platform;
       TGA::BoundingBox bounds;
       std::vector<Platform*>::iterator currPlatform;
 
@@ -206,10 +194,7 @@ namespace Sandstorms
 
             if (currPlatform == platforms.end())
             {
-               platform = new Platform(platformTex, static_cast<int>(xPos), static_cast<int>(yPos), 
-                  platWidth, platHeight);
-               lvl->addPlatform(platform);
-               platforms.push_back(platform);
+               platforms.push_back(new Platform(platformTex, static_cast<int>(xPos), static_cast<int>(yPos), platWidth, platHeight));
 
                platformCreated = true;
             }
@@ -223,7 +208,14 @@ namespace Sandstorms
          }
       }
 
-      std::cout << platforms.size();
+      // Sort the platforms so that Consumables can be placed better
+      sort(platforms.begin(), platforms.end(), sortPlatforms);
+      
+      for(std::vector<Platform*>::iterator i = platforms.begin();
+          i < platforms.end(); i++)
+      {
+         lvl->addPlatform(*i);
+      }
    }
 
    void SSMain::makeLevels()
@@ -233,22 +225,66 @@ namespace Sandstorms
       std::vector<Consumable*> consumables;
 
       const int oasis_width = 15000;
+      const int city_width = 15000;
 
       // Boundary platforms, invisible textures
-      platforms.push_back(new Platform("../resources/level/invis.png", -40, 750, oasis_width, 20));
-      platforms.push_back(new Platform("../resources/level/invis.png", -10, -100, 10, 900));
-      platforms.push_back(new Platform("../resources/level/invis.png", oasis_width, -100, 10, 900));
+      platforms.push_back(new Platform("resources/level/invis.png", -40, 750, oasis_width, 20));
+      platforms.push_back(new Platform("resources/level/invis.png", -10, -100, 10, 900));
+      platforms.push_back(new Platform("resources/level/invis.png", oasis_width, -100, 10, 900));
 
-      layers.push_back(new Layer("../resources/level/oasis.png", 0.94, false));
-      layers.push_back(new Layer("../resources/level/oasis_ground.png", 0.0, true));
-
-      consumables.push_back(new Artifact("../resources/artifacts/key_artifact.png", TGA::Vector2D(100, 400)));
-      consumables.push_back(new HealthPickup(50, TGA::Vector2D(300, 300)));
-      consumables.push_back(new ManaPickup(50, TGA::Vector2D(400, 300)));
+      // Oasis Layers
+      layers.push_back(new Layer("resources/level/oasis.png", 0.94, false));
+      layers.push_back(new Layer("resources/level/oasis_ground.png", 0.0, true));
 
       levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, consumables)));
 
-      generatePlatforms(levels["oasis"], "../resources/level/large_oasis.png", 125, 37);
+      generatePlatforms(levels["oasis"], "resources/level/large_oasis.png", 125, 37);
+      placeConsumables(levels["oasis"], 2, 2, 1, "resources/artifacts/key_artifact.png", 50);
+   }
+
+   void SSMain::placeConsumables(Level *lvl, int numHPickups, int numMPickups, int numArtifacts, std::string artifactTex, int artifactHeight)
+   {
+      const int H_PICKUP_HEIGHT = 50, M_PICKUP_HEIGHT = 61;
+      
+      std::vector<Platform*> platforms = lvl->getPlatforms();
+      
+      std::vector<Platform*>::size_type middle = platforms.size() / 2, end = platforms.size();
+      
+      int hStep = (end - middle) / numHPickups,
+         mStep = (end - middle) / numMPickups,
+         aStep = (end - middle) / numArtifacts;
+      
+      int ndx, xVal, yVal;
+      
+      // Place health pickups starting from the middle of the level with some 
+      for (int i = 0; i < numHPickups; i++)
+      {
+         ndx = middle + (hStep * i) + (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX();
+         yVal = platforms[ndx]->getBounds().getY() - H_PICKUP_HEIGHT;
+         lvl->addConsumable(new HealthPickup(50, TGA::Vector2D(xVal, yVal)));
+      }
+      
+      // Place mana pickups starting from the middle of the level
+      for (int i = 0; i < numMPickups; i++)
+      {
+         ndx = middle + (mStep * i) + (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() / 2;
+         yVal = platforms[ndx]->getBounds().getY() - M_PICKUP_HEIGHT;
+         lvl->addConsumable(new ManaPickup(50, TGA::Vector2D(xVal, yVal)));
+      }
+      
+      // Place artifacts starting from the END
+      for (int i = 0; i < numArtifacts; i++)
+      {
+         ndx = (end - 1) - (aStep * i) - (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() - 10;
+         yVal = platforms[ndx]->getBounds().getY() - artifactHeight;
+         lvl->addConsumable(new Artifact(artifactTex, TGA::Vector2D(xVal, yVal)));
+      }
    }
 
 }

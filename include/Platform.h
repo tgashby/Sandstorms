@@ -60,6 +60,8 @@ public:
    * @param TGA::Collidable collidedWith - the entity collided with
    */
    virtual void handleCollision (TGA::Collidable& collidedWith);
+   
+   bool operator<(Platform&);
 
 private:
    TGA::Texture texture;

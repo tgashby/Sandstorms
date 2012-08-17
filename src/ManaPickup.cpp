@@ -9,7 +9,7 @@
 #include "Player.h"
 
 ManaPickup::ManaPickup( int potency, TGA::Vector2D position )
-   : Consumable("../resources/pickups/mana_pickup.png", position)
+   : Consumable("resources/pickups/mana_pickup.png", position)
 {
    this->potency = potency;
 }

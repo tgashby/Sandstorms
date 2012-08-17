@@ -10,7 +10,7 @@
 #ifndef SINGLETON
 #define SINGLETON
 
-#define NULL 0
+#include <stddef.h>
 
 namespace TGA
 {
