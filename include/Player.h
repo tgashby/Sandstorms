@@ -80,20 +80,16 @@ public:
 
 private:
   void jump ();
-  void makeSubBounds();
-  bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
   void initAnimations();
   void handleKeyboard();
   void addSounds();
   Projectile* generateFireball(bool facingLeft);
   void handleMovements();
   void handleAttacks();
-  void collideWithPlatform(Platform& collidedWith);
 
   int maxHealth, mana, maxMana;
   bool jumping, falling, punching, kicking, casting;
   bool hasJumped, hasDoubleJumped;
-  TGA::BoundingBox subBounds[4];
   int artifactCount;
 };
 

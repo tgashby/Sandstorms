@@ -8,6 +8,10 @@
 #include "ProjectileFactory.h"
 #include "HealthPickup.h"
 #include "ManaPickup.h"
+#include "Layer.h"
+#include "Hound.h"
+#include "Warrior.h"
+#include "Caster.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -26,12 +30,12 @@ bool sortPlatforms(Platform* p1, Platform* p2)
 
 namespace Sandstorms
 {
-	SSMain::SSMain(void)
+	SSMain::SSMain()
 	{
       srand((int)time(NULL));
 	}
 	
-	SSMain::~SSMain(void)
+	SSMain::~SSMain()
 	{
 	}
 
@@ -222,11 +226,11 @@ namespace Sandstorms
    {
       std::vector<Platform*> platforms;
       std::vector<Layer*> layers;
-      std::vector<Consumable*> consumables;
 
       const int oasis_width = 15000;
       const int city_width = 15000;
 
+      // Oasis
       // Boundary platforms, invisible textures
       platforms.push_back(new Platform("resources/level/invis.png", -40, 750, oasis_width, 20));
       platforms.push_back(new Platform("resources/level/invis.png", -10, -100, 10, 900));
@@ -236,10 +240,33 @@ namespace Sandstorms
       layers.push_back(new Layer("resources/level/oasis.png", 0.94, false));
       layers.push_back(new Layer("resources/level/oasis_ground.png", 0.0, true));
 
-      levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms, consumables)));
+      levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms)));
 
       generatePlatforms(levels["oasis"], "resources/level/large_oasis.png", 125, 37);
       placeConsumables(levels["oasis"], 2, 2, 1, "resources/artifacts/key_artifact.png", 50);
+      placeEnemies(levels["oasis"], 1, 1, 1);
+      
+      platforms.clear();
+      layers.clear();
+      
+      assert(platforms.size() == 0);
+      assert(layers.size() == 0);
+      
+      // City
+      // Boundary platforms, invisible textures
+      platforms.push_back(new Platform("resources/level/invis.png", -40, 750, city_width, 20));
+      platforms.push_back(new Platform("resources/level/invis.png", -10, -100, 10, 900));
+      platforms.push_back(new Platform("resources/level/invis.png", city_width, -100, 10, 900));
+      
+      // City Layers
+      layers.push_back(new Layer("resources/level/city.png", 0.94, false));
+      layers.push_back(new Layer("resources/level/city_ground.png", 0.0, true));
+      
+      levels.insert(levels.begin(), lvlPair("city", new Level(oasis_width, layers, platforms)));
+      
+      generatePlatforms(levels["city"], "resources/level/large_city.png", 123, 37);
+      placeConsumables(levels["city"], 3, 3, 1, "resources/artifacts/crown_artifact.png", 50);
+      placeEnemies(levels["city"], 4, 2, 3);
    }
 
    void SSMain::placeConsumables(Level *lvl, int numHPickups, int numMPickups, int numArtifacts, std::string artifactTex, int artifactHeight)
@@ -286,5 +313,48 @@ namespace Sandstorms
          lvl->addConsumable(new Artifact(artifactTex, TGA::Vector2D(xVal, yVal)));
       }
    }
-
+   
+   void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCasters)
+   {
+      const int HOUND_HEIGHT = 75, CASTER_HEIGHT = 200, WARRIOR_HEIGHT = 266;
+      std::vector<Platform*> platforms = lvl->getPlatforms();
+      
+      std::vector<Platform*>::size_type middle = platforms.size() / 2, end = platforms.size();
+      
+      int hStep = (end - middle) / numHounds,
+      wStep = (end - middle) / numWarriors,
+      cStep = (end - middle) / numCasters;
+      
+      int ndx, xVal, yVal;
+      
+      // Place health pickups starting from the middle of the level with some
+      for (int i = 0; i < numHounds; i++)
+      {
+         ndx = middle + (hStep * i) + (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX();
+         yVal = platforms[ndx]->getBounds().getY() - HOUND_HEIGHT;
+         lvl->addEnemy(new Hound(50, TGA::Vector2D(xVal, yVal)));
+      }
+      
+      // Place mana pickups starting from the middle of the level
+      for (int i = 0; i < numWarriors; i++)
+      {
+         ndx = middle + (wStep * i) + (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() / 2;
+         yVal = platforms[ndx]->getBounds().getY() - WARRIOR_HEIGHT;
+         lvl->addEnemy(new Warrior(50, TGA::Vector2D(xVal, yVal)));
+      }
+      
+      // Place artifacts starting from the END
+      for (int i = 0; i < numCasters; i++)
+      {
+         ndx = middle + (cStep * i) - (rand() % 4);
+         ndx = ndx > end - 1 ? end - 1 : ndx;
+         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() - 10;
+         yVal = platforms[ndx]->getBounds().getY() - CASTER_HEIGHT;
+         lvl->addEnemy(new Caster(50, TGA::Vector2D(xVal, yVal)));
+      }
+   }
 }

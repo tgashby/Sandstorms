@@ -51,3 +51,103 @@ bool Character::isAlive()
 {
    return alive;
 }
+
+void Character::collideWithPlatform(Platform& collidedWith)
+{
+   bool onlyHeadColliding = collidedWithOnlySubBound(0, collidedWith);
+   bool onlyLeftColliding = collidedWithOnlySubBound(1, collidedWith);
+   bool onlyRightColliding = collidedWithOnlySubBound(2, collidedWith);
+   bool onlyFeetColliding = collidedWithOnlySubBound(3, collidedWith);
+   
+   currAnimation->resume();
+   
+   // If only head is colliding, below platform
+   if (onlyHeadColliding)
+   {
+      velocity.setY(0);
+      position.setY(collidedWith.getBounds().getY()
+                    + collidedWith.getBounds().getHeight());
+   }
+   // Left side of torso is colliding, on right side of platform
+   else if (onlyLeftColliding)
+   {
+      position.setX(collidedWith.getBounds().getX()
+                    + collidedWith.getBounds().getWidth());
+   }
+   // Right side of torso colliding, on left side of platform
+   else if (onlyRightColliding)
+   {
+      position.setX(collidedWith.getBounds().getX()
+                    - currAnimation->getCurrentFrameDimensions().getWidth());
+   }
+   // Feet colliding, above platform
+   else if (onlyFeetColliding)
+   {
+      velocity.setY(0);
+      position.setY(collidedWith.getBounds().getY()
+                    - currAnimation->getCurrentFrameDimensions().getHeight() + 1);
+   }
+   else // More than one sub-boundary
+   {
+      TGA::BoundingBox leftSide(static_cast<int>(position.getX()), static_cast<int>(position.getY()),
+                                currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                currAnimation->getCurrentFrameDimensions().getHeight());
+      
+      TGA::BoundingBox rightSide(static_cast<int>(position.getX()) +
+                                 currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                 static_cast<int>(position.getY()),
+                                 currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                 currAnimation->getCurrentFrameDimensions().getHeight());
+      
+      if (TGA::Collision::checkCollision(leftSide, collidedWith.getBounds()))
+      {
+         position.setX(collidedWith.getBounds().getX()
+                       + collidedWith.getBounds().getWidth());
+      }
+      
+      if (TGA::Collision::checkCollision(rightSide, collidedWith.getBounds()))
+      {
+         position.setX(collidedWith.getBounds().getX()
+                       - currAnimation->getCurrentFrameDimensions().getWidth());
+      }
+   }
+}
+
+void Character::makeSubBounds()
+{
+   int frameHeight = currAnimation->getCurrentFrameDimensions().getHeight();
+   int frameWidth = currAnimation->getCurrentFrameDimensions().getWidth();
+   
+   bounds = TGA::BoundingBox((int)position.getX(), (int)position.getY(), frameWidth, frameHeight);
+   
+   // "Head" box, top 20%
+   subBounds[0] = TGA::BoundingBox((int)position.getX(), (int)position.getY(), frameWidth, frameHeight / 5 + 1);
+   
+   // "Left torso" box, middle 60% left side
+   subBounds[1] = TGA::BoundingBox((int)position.getX(), (int)position.getY() + frameHeight / 5 + 1, frameWidth / 2 + 1,
+                                   (int)(frameHeight * 0.6) + 1);
+   
+   // "Right torso" box
+   subBounds[2] = TGA::BoundingBox((int)position.getX() + frameWidth / 2 + 1, (int)position.getY() + frameHeight / 5 + 1,
+                                   frameWidth / 2 + 1, (int)(frameHeight * 0.6) + 1);
+   
+   // "Legs" box
+   if (facingLeft)
+   {
+      subBounds[3] = TGA::BoundingBox((int)position.getX(), (int)position.getY() + (int)(frameHeight * 0.8) + 1, frameWidth - 46, frameHeight / 5 + 1);
+   }
+   else
+   {
+      subBounds[3] = TGA::BoundingBox((int)position.getX() + 46, (int)position.getY() + (int)(frameHeight * 0.8) + 1, frameWidth, frameHeight / 5 + 1);
+   }
+}
+
+bool Character::collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith)
+{
+   bool onlyNdx = (TGA::Collision::checkCollision(subBounds[ndx], collidedWith.getBounds())
+                   && !TGA::Collision::checkCollision(subBounds[(ndx + 1) % 4], collidedWith.getBounds())
+                   && !TGA::Collision::checkCollision(subBounds[(ndx + 2) % 4], collidedWith.getBounds())
+                   && !TGA::Collision::checkCollision(subBounds[(ndx + 3) % 4], collidedWith.getBounds()));
+   
+   return onlyNdx;
+}

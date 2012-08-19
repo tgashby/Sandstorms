@@ -8,12 +8,13 @@
 #pragma once
 
 #include <Collidable.h>
+#include <Collision.h>
 #include <Vector2D.h>
 #include <Animation.h>
 #include <Engine.h>
 #include <map>
 #include <string>
-
+#include "Platform.h"
 
 /**
  * @class Character
@@ -82,11 +83,16 @@ public:
   virtual void handleCollision (TGA::Collidable& collidedWith) = 0;
 
 protected:
+   void collideWithPlatform(Platform& collidedWith);
+   void makeSubBounds();
+   bool collidedWithOnlySubBound(int ndx, TGA::Collidable& collidedWith);
+   
   int health;
   TGA::Vector2D position, velocity, acceleration;
   std::map<std::string, TGA::Animation*> animations;
   TGA::Animation* currAnimation;
   std::string currAnimationName;
+   TGA::BoundingBox subBounds[4];
   bool alive, facingLeft;
 };
 

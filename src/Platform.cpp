@@ -7,6 +7,7 @@
  */
 
 #include "Platform.h"
+#include "Player.h"
 
 Platform::Platform(std::string textureStr, TGA::BoundingBox bounds)
    : TGA::Collidable(bounds)

@@ -29,6 +29,7 @@ namespace Sandstorms
       void placeConsumables(Level* lvl, int numHPickups, int numMPickups,
                             int numArtifacts, std::string artifactTex,
                             int artifactHeight);
+      void placeEnemies(Level* lvl, int numHounds, int numWarriors, int numCasters);
       TGA::Engine Engine;
       std::map<std::string, Level*> levels;
       std::string currLevel;

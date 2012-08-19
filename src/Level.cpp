@@ -9,6 +9,11 @@
 #include "Level.h"
 #include "Player.h"
 #include "ProjectileFactory.h"
+#include "Consumable.h"
+#include "Platform.h"
+#include "Artifact.h"
+#include "Layer.h"
+#include "Enemy.h"
 #include <Engine.h>
 #include <Singleton.h>
 #include <Texture.h>
@@ -30,6 +35,11 @@ void Level::update(Player *player)
         i < platforms.end(); i++)
    {
       TGA::Collision::handleCollisions((*player), *(*i));
+      
+      for (std::vector<Enemy*>::iterator j = enemies.begin(); j < enemies.end(); j++)
+      {
+         TGA::Collision::handleCollisions(*(*j), *(*i));
+      }
    }
    
    for (std::vector<Consumable*>::iterator i = consumables.begin();
@@ -46,6 +56,22 @@ void Level::update(Player *player)
       {
          TGA::Collision::handleCollisions(*(*j), *(*i));
       }
+      
+      for (std::vector<Enemy*>::iterator j = enemies.begin(); j < enemies.end(); j++)
+      {
+         TGA::Collision::handleCollisions(*(*j), *(*i));
+      }
+   }
+   
+   for (std::vector<Enemy*>::iterator i = enemies.begin();
+        i < enemies.end(); i++)
+   {
+      TGA::Collision::handleCollisions((*player), *(*i));
+   }
+   
+   for (std::vector<Enemy*>::iterator j = enemies.begin(); j < enemies.end(); j++)
+   {
+      (*j)->update();
    }
 }
 
@@ -54,26 +80,19 @@ void Level::addLayer( Layer* newLayer )
    layers.push_back(newLayer);
 }
 
-void Level::addLayer( std::string texStr, double moveRate, bool tiled )
-{
-   layers.push_back(new Layer(texStr, moveRate, tiled));
-}
-
 void Level::addPlatform(Platform* newPlatform)
 {
    platforms.push_back(newPlatform);
 }
 
-void Level::addPlatform(std::string textureStr, int x, int y, int width, int height)
-{
-   Platform* platform = new Platform(textureStr, x, y, width, height);
-
-   platforms.push_back(platform);
-}
-
 void Level::addConsumable( Consumable* newConsumable )
 {
    consumables.push_back(newConsumable);
+}
+
+void Level::addEnemy(Enemy* newEnemy)
+{
+   enemies.push_back(newEnemy);
 }
 
 void Level::draw()
@@ -93,6 +112,11 @@ void Level::draw()
    for(std::vector<Consumable*>::iterator i = consumables.begin(); i < consumables.end(); i++)
    {
       (*i)->draw();
+   }
+   
+   for(std::vector<Enemy*>::iterator i = enemies.begin(); i < enemies.end(); i++)
+   {
+      (*i)->draw(0);
    }
 }
 

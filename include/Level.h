@@ -9,12 +9,11 @@
 #include <string>
 #include <vector>
 
-#include "Consumable.h"
-#include "Platform.h"
-#include "Artifact.h"
-#include "Layer.h"
-
 class Player;
+class Layer;
+class Platform;
+class Consumable;
+class Enemy;
 
 /**
  * @class Level
@@ -50,16 +49,6 @@ public:
   void addLayer (Layer* newLayer);
 
   /**
-   * addLayer
-   *
-   * Add a new layer to the level
-   * @param texStr - the path to the texture
-   * @param moveRate - the rate at which to progress the layer as the camera moves
-   * @param tiled - whether or not the layer tiles with itself
-   */
-  void addLayer (std::string texStr, double moveRate, bool tiled);
-
-  /**
   * addPlatform
   *
   * Add a platform to the level.
@@ -68,24 +57,20 @@ public:
   void addPlatform (Platform* newPlatform);
 
   /**
-  * addPlatform
-  *
-  * Add a platform to the level.
-  * @param std::string textureStr - path to the platform's texture
-  * @param int x - the x position of the platform
-  * @param int y - the y position of the platform
-  * @param int width - the width of the platform
-  * @param int height - the height of the platform
-  */
-  void addPlatform (std::string textureStr, int x, int y, int width, int height);
-
-  /**
   * addConsumable
   *
   * Add a Consumable to the level.
   * @param newConsumable - the new consumable
   */
   void addConsumable (Consumable* newConsumable);
+   
+   /**
+    * addEnemy
+    *
+    * Adds an enemy to the level.
+    * @param newEnemy - the new enemy
+    */
+   void addEnemy (Enemy* newEnemy);
 
   /**
    * draw
@@ -104,6 +89,7 @@ private:
    std::vector<Layer*> layers;
    std::vector<Platform*> platforms;
    std::vector<Consumable*> consumables;
+   std::vector<Enemy*> enemies;
    int rightBound;
 };
 
