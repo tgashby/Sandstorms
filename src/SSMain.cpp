@@ -114,12 +114,18 @@ namespace Sandstorms
       std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
       std::vector<Consumable*> consumables = levels[currLevel]->getConsumables();
       std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
+      std::vector<Attack*> attacks = TGA::Singleton<AttackManager>::GetSingletonPtr()->getAttacks();
       
       // Level.update handles player<->platform, player<->consumable, and projectile<->platform, player<->enemy, attack<->enemy collision
       levels[currLevel]->update(player);
       
       for (std::vector<Projectile*>::iterator i = projectiles.begin();
            i < projectiles.end(); i++)
+      {
+         TGA::Collision::handleCollisions((*player), *(*i));
+      }
+      
+      for (std::vector<Attack*>::iterator i = attacks.begin(); i < attacks.end(); i++)
       {
          TGA::Collision::handleCollisions((*player), *(*i));
       }
@@ -184,7 +190,7 @@ namespace Sandstorms
          while (!platformCreated && attempts < 300)
          {
             xPos = randFloat(100, static_cast<float>(rightBound - platWidth));
-            yPos = randFloat(200, 660);
+            yPos = randFloat(200, 485);
             
             assert(xPos > 100 && xPos < rightBound - platWidth);
             
@@ -348,7 +354,7 @@ namespace Sandstorms
          ndx = ndx > end - 1 ? end - 1 : ndx;
          xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() / 2;
          yVal = 750 - WARRIOR_HEIGHT;
-         lvl->addEnemy(new Warrior(50, TGA::Vector2D(xVal, yVal)));
+         lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-3, 0)));
       }
       
       // Place artifacts starting from the END
@@ -358,7 +364,7 @@ namespace Sandstorms
          ndx = ndx > end - 1 ? end - 1 : ndx;
          xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() - 10;
          yVal = 750 - CASTER_HEIGHT;
-         lvl->addEnemy(new Caster(50, TGA::Vector2D(xVal, yVal)));
+         lvl->addEnemy(new Caster(60, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-7, 0)));
       }
    }
 }

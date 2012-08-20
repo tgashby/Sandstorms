@@ -79,7 +79,7 @@ void Level::update(Player *player)
    std::vector<int> removeNdxs;
    for (std::vector<Enemy*>::size_type i = 0; i < enemies.size(); i++)
    {
-      enemies.at(i)->update();
+      enemies.at(i)->update(player->getPosition());
       if (!enemies.at(i)->isAlive())
       {
          removeNdxs.push_back(i);

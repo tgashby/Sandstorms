@@ -27,7 +27,7 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    jumping = hasJumped = hasDoubleJumped = false;
    falling = punching = kicking = casting = hurting = false;
    kickPlaying = castPlaying = false;
-   facingLeft = false;
+   facingLeft = true; // This is flipped because the original image is flipped
    canBeHurt = true;
    artifactCount = 0;
    
@@ -277,7 +277,7 @@ void Player::addSounds()
    engine->Sounds->addSound(sound, "player_jump");
 }
 
-Projectile* Player::generateFireball( bool facingLeft )
+Projectile* Player::generateFireball(bool facingLeft)
 {
    TGA::BoundingBox bounds(0, 0, 46, 23);
    std::string fireballTex("resources/player/fireball.png");
@@ -286,7 +286,7 @@ Projectile* Player::generateFireball( bool facingLeft )
    position.setY(position.getY() + 73);
    bounds.setY(position.getY());
    
-   if (facingLeft)
+   if (!facingLeft)
    {
       vel.setX(-10.0);
       position.setX(position.getX() - 46);
@@ -341,7 +341,7 @@ void Player::handleMovements()
             acceleration.setX(HORIZ_ACCEL);
          }
          
-         facingLeft = false;
+         facingLeft = true; // This is flipped because the original image is flipped
       }
       else if (engine->Input->keyDown(TGA::key_A) || engine->Input->keyDown(TGA::key_LEFT_ARROW))
       {
@@ -356,7 +356,7 @@ void Player::handleMovements()
             acceleration.setX(-HORIZ_ACCEL);
          }
          
-         facingLeft = true;
+         facingLeft = false; // This is flipped because the original image is flipped
       }
    }
    

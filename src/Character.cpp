@@ -37,7 +37,7 @@ void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*
 {
    // TODO: Handle interpolation
    
-   if (facingLeft)
+   if (!facingLeft)
    {
       scaleX = -1;
    }

@@ -6,8 +6,11 @@
  *
  */
 #include "Warrior.h"
+#include "Attack.h"
 
-Warrior::Warrior( int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA::Vector2D(0, 0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/ )
+const int ATTACK_DAMAGE = 15;
+
+Warrior::Warrior(int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA::Vector2D(0, 0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/ )
    : Enemy(health, position, velocity, acceleration)
 {
    TGA::Texture* walkTex = new TGA::Texture("resources/enemies/warrior_walk.png");
@@ -20,8 +23,8 @@ Warrior::Warrior( int health, TGA::Vector2D position, TGA::Vector2D velocity /*=
    
    TGA::Texture* attackTex = new TGA::Texture("resources/enemies/warrior_attack.png");
    TGA::Animation* attackAnim = new TGA::Animation(attackTex);
-   attackAnim->addFrame(TGA::BoundingBox(0, 0, 244, 266), 75);
-   attackAnim->addFrame(TGA::BoundingBox(248, 0, 239, 266), 75);
+   attackAnim->addFrame(TGA::BoundingBox(0, 0, 244, 266), 500);
+   attackAnim->addFrame(TGA::BoundingBox(248, 0, 239, 266), 500);
    attackAnim->setRepetitions(-1);
    
    TGA::Texture* idleTex = new TGA::Texture("resources/enemies/warrior_idle.png");
@@ -35,11 +38,106 @@ Warrior::Warrior( int health, TGA::Vector2D position, TGA::Vector2D velocity /*=
    
    currAnimation = animations["idle"];
    currAnimationName = "idle";
+   
+   setLeftBound(position.getX() - 300, 0);
+   setRightBound(position.getX() + 300, 0);
+   
+   originalSpeed = abs(velocity.getX());
+   attacking = secondPunch = false;
 }
 
-void Warrior::update()
+void Warrior::update(TGA::Vector2D playerPosition)
 {
    // AI!
+   double distToPlayer = position.distanceFrom(playerPosition);
+   bool playerOnLeft = playerPosition.getX() < position.getX();
    
-   Enemy::update();
+   facingLeft = velocity.getX() < 0;
+   
+   if (distToPlayer > 500)
+   {
+      if (currAnimationName.compare("walk") != 0)
+      {
+         currAnimation = animations["walk"];
+         currAnimationName = "walk";
+      }
+      
+      velocity.setX(velocity.getX() < 0 ? -originalSpeed : originalSpeed);
+      if ((position.getX() < leftBound.getX() && velocity.getX() < 0)
+          || (position.getX() > rightBound.getX() && velocity.getX() > 0))
+      {
+         velocity.setX(-velocity.getX());
+      }
+   }
+   else if ((distToPlayer > 100 && playerOnLeft) || (distToPlayer > 200 && !playerOnLeft))
+   {
+      if (currAnimationName.compare("walk") != 0)
+      {
+         currAnimation = animations["walk"];
+         currAnimationName = "walk";
+      }
+      
+      // Switch direction and speed for the chase!
+      velocity.setX(originalSpeed + 1.0);
+      
+      if ((playerOnLeft && velocity.getX() > 0) || (!playerOnLeft && velocity.getX() < 0))
+      {
+         velocity.setX(-velocity.getX());
+      }
+   }
+   else
+   {
+      if (currAnimationName.compare("attack") != 0 || !attacking)
+      {
+         attacking = true;
+         secondPunch = false;
+         currAnimation = animations["attack"];
+         currAnimationName = "attack";
+         
+         currAnimation->setRepetitions(2);
+         
+         attack(playerOnLeft);
+      }
+      
+      velocity.setX(0);
+      
+      facingLeft = playerOnLeft;
+   }
+   
+   if (currAnimationName.compare("attack") == 0)
+   {
+      if (currAnimation->getFrameNum() == 1 && !secondPunch)
+      {
+         attack(playerOnLeft);
+         secondPunch = true;
+      }
+      attacking = !currAnimation->isDone();
+   }
+   else
+   {
+      attacking = false;
+   }
+   
+   Enemy::update(playerPosition);
+}
+
+void Warrior::attack(bool playerOnLeft)
+{
+   if (playerOnLeft)
+   {
+      new Attack(ATTACK_DAMAGE,
+                 TGA::BoundingBox(position.getX(), position.getY(),
+                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                  100),
+                 2, this);
+   }
+   else
+   {
+      new Attack(ATTACK_DAMAGE,
+                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                  position.getY(),
+                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                  100),
+                 2, this);
+   }
 }
