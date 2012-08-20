@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #include "Enemy.h"
 #include "Platform.h"
@@ -25,5 +25,10 @@ void Enemy::handleCollision(TGA::Collidable& collidedWith)
    if (typeid(collidedWith) == typeid(Platform))
    {
       collideWithPlatform((Platform&)collidedWith);
+      
+      if (collidedWithOnlySubBound(1, collidedWith) || collidedWithOnlySubBound(2, collidedWith))
+      {
+         velocity.setX(-velocity.getX());
+      }
    }
 }

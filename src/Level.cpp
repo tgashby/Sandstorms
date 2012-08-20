@@ -21,9 +21,9 @@
 #include <Collidable.h>
 
 Level::Level(int rightBound, std::vector<Layer*> layers, std::vector<Platform*> platforms /*= std::vector<Platform*>()*/, std::vector<Consumable*> consumables /*= std::vector<Artifact*>()*/ )
-: layers(layers)
-, platforms(platforms)
-, consumables(consumables)
+   : layers(layers)
+   , platforms(platforms)
+   , consumables(consumables)
 {
    this->rightBound = rightBound;
 }

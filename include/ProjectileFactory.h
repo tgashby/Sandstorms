@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #ifndef _PROJECTILE_FACTORY_
 #define _PROJECTILE_FACTORY_
@@ -20,9 +20,9 @@ public:
    void removeProjectile(Projectile* p);
    void update();
    void draw();
-
+   
    std::vector<Projectile*> getProjectiles();
-
+   
 private:
    std::vector<Projectile*> projectiles;
 };

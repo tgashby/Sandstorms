@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #include "ManaPickup.h"
 #include "Player.h"
@@ -22,7 +22,7 @@ void ManaPickup::handleCollision( TGA::Collidable& collidedWith )
       {
          ((Player&)collidedWith).addMana(potency);
       }
-
+      
       used = true;
    }
 }

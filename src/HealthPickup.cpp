@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #include "HealthPickup.h"
 #include "Player.h"
@@ -22,7 +22,7 @@ void HealthPickup::handleCollision( TGA::Collidable& collidedWith )
       {
          ((Player&)collidedWith).addHealth(potency);
       }
-
+      
       used = true;
    }
 }

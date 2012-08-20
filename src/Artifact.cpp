@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 7/2012
- * 
+ *
  */
 
 #include "Artifact.h"
@@ -24,7 +24,7 @@ void Artifact::draw()
    else
    {
       TGA::Camera* camera = TGA::Singleton<TGA::Camera>::GetSingletonPtr();
-
+      
       texture->draw(camera->getX() + (1270 - texture->getWidth()), 10);
    }
 }

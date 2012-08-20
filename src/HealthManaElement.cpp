@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 7/2012
- * 
+ *
  */
 
 #include "HealthManaElement.h"
@@ -23,10 +23,10 @@ HealthManaElement::HealthManaElement()
 void HealthManaElement::update( double healthPercent, double manaPercent )
 {
    TGA::Camera* camera = TGA::Singleton<TGA::Camera>::GetSingletonPtr();
-
+   
    this->healthPercent = healthPercent;
    this->manaPercent = manaPercent;
-
+   
    healthPos.setX(camera->getX() + 35);
    manaPos.setX(camera->getX() + 55);
    containerPos.setX(camera->getX() + 10);
@@ -34,10 +34,10 @@ void HealthManaElement::update( double healthPercent, double manaPercent )
 
 void HealthManaElement::draw()
 {
-   healthBar->drawSection(static_cast<float>(healthPos.getX()), static_cast<float>(healthPos.getY()), 
-      0, 0, static_cast<int>(healthPercent * healthBar->getWidth()), BAR_HEIGHT);
-   manaBar->drawSection(static_cast<float>(manaPos.getX()), static_cast<float>(manaPos.getY()), 
-      0, 0, static_cast<int>(manaPercent * manaBar->getWidth()), BAR_HEIGHT);
-
+   healthBar->drawSection(static_cast<float>(healthPos.getX()), static_cast<float>(healthPos.getY()),
+                          0, 0, static_cast<int>(healthPercent * healthBar->getWidth()), BAR_HEIGHT);
+   manaBar->drawSection(static_cast<float>(manaPos.getX()), static_cast<float>(manaPos.getY()),
+                        0, 0, static_cast<int>(manaPercent * manaBar->getWidth()), BAR_HEIGHT);
+   
    container->draw(static_cast<float>(containerPos.getX()), static_cast<float>(containerPos.getY()));
 }

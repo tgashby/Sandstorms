@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 7/2012
- * 
+ *
  */
 
 #include "Consumable.h"
@@ -15,12 +15,12 @@ Consumable::Consumable(std::string texName, TGA::Vector2D position )
    , position(position)
 {
    texture = new TGA::Texture(texName);
-
+   
    bounds.setX(static_cast<int>(position.getX()));
    bounds.setY(static_cast<int>(position.getY()));
    bounds.setWidth(texture->getWidth());
    bounds.setHeight(texture->getHeight());
-
+   
    used = false;
 }
 

@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #pragma once
 
@@ -11,7 +11,7 @@
 
 #include "Attack.h"
 
-class AttackManager 
+class AttackManager
 {
 public:
    AttackManager ();

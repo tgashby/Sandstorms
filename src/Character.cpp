@@ -1,8 +1,7 @@
 #include "Character.h"
 #include <Collision.h>
 
-Character::Character( int health /*= 100*/, TGA::Vector2D position /*= TGA::Vector2D(0,0)*/, 
-   TGA::Vector2D velocity /*= TGA::Vector2D(0,0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 0.05)*/)
+Character::Character( int health /*= 100*/, TGA::Vector2D position /*= TGA::Vector2D(0,0)*/, TGA::Vector2D velocity /*= TGA::Vector2D(0,0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/)
    : Collidable(TGA::BoundingBox(0,0,0,0))
    , position(position)
    , velocity(velocity)
@@ -10,7 +9,7 @@ Character::Character( int health /*= 100*/, TGA::Vector2D position /*= TGA::Vect
 {
    this->health = health;
    alive = true;
-
+   
    currAnimation = NULL;
 }
 
@@ -22,9 +21,9 @@ Character::~Character()
 void Character::update()
 {
    velocity += acceleration;
-
+   
    position += velocity;
-
+   
    assert(currAnimation);
    currAnimation->update();
    
@@ -37,15 +36,15 @@ void Character::update()
 void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
 {
    // TODO: Handle interpolation
-
+   
    if (facingLeft)
    {
       scaleX = -1;
    }
-
+   
    assert(currAnimation);
    currAnimation->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
-      scaleX, scaleY, rotation);
+                       scaleX, scaleY, rotation);
 }
 
 TGA::Vector2D Character::getPosition()

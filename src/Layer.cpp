@@ -5,7 +5,7 @@ Layer::Layer( std::string texStr, double moveRate, bool tiled )
    , tiled(tiled)
 {
    texture.loadTexture(texStr);
-
+   
    offsetX = 0;
    numShifts = 1;
 }
@@ -22,12 +22,12 @@ void Layer::draw( double camX )
       numShifts++;
       offsetX += texture.getWidth() / 2;
    }
-
+   
    if (tiled && camX <= offsetX)
    {
       numShifts--;
       offsetX -= texture.getWidth() / 2;
    }
-
+   
    texture.draw(static_cast<float>(camX * moveRate + offsetX), 0);
 }

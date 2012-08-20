@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 7/2012
- * 
+ *
  */
 #pragma once
 
@@ -21,33 +21,33 @@
 class HealthManaElement
 {
 public:
-  /**
-  * HealthManaElement
-  *
-  * Creates a new HealthManaElement, there should never be more than one of these.
-  */
-  HealthManaElement ();
-
-  /**
-  * update
-  *
-  * Update the health and mana bar lengths.
-  * @param healthPercent - the percent of health remaining
-  * @param manaPercent - the percent of mana remaining
-  */
-  void update (double healthPercent, double manaPercent);
-  
-  /**
-  * draw
-  *
-  * Draw the container and the bars with their relative lengths.
-  */
-  virtual void draw ();
-
-
-  // THIS IS CLEARY A DESIGN ISSUE
-  virtual void update() {}
-
+   /**
+    * HealthManaElement
+    *
+    * Creates a new HealthManaElement, there should never be more than one of these.
+    */
+   HealthManaElement ();
+   
+   /**
+    * update
+    *
+    * Update the health and mana bar lengths.
+    * @param healthPercent - the percent of health remaining
+    * @param manaPercent - the percent of mana remaining
+    */
+   void update (double healthPercent, double manaPercent);
+   
+   /**
+    * draw
+    *
+    * Draw the container and the bars with their relative lengths.
+    */
+   virtual void draw ();
+   
+   
+   // THIS IS CLEARY A DESIGN ISSUE
+   virtual void update() {}
+   
 private:
    TGA::Texture* healthBar;
    TGA::Texture* manaBar;

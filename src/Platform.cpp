@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 7/2012
- * 
+ *
  */
 
 #include "Platform.h"
@@ -37,7 +37,7 @@ void Platform::handleCollision(TGA::Collidable& collidedWith)
    if (typeid(collidedWith) == typeid(Player))
    {
    }
-
+   
    if (typeid(collidedWith) == typeid(Platform))
    {
       std::cerr << "Overlapping platforms." << "\n";

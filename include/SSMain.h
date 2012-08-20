@@ -13,13 +13,13 @@ namespace Sandstorms
 	public:
 		SSMain(void);
 		~SSMain(void);
-
+      
 		void init();
-
+      
 		void run();
-
+      
 		void shutDown();
-
+      
 	private:
 		bool handleEvents();
 		void updateGame();

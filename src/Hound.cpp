@@ -3,12 +3,14 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #include "Hound.h"
 
 Hound::Hound( int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA::Vector2D(0, 0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/ )
    : Enemy(health, position, velocity, acceleration)
+   , leftBound(position.getX() - 400, 0)
+   , rightBound(position.getX() + 400, 0)
 {
    TGA::Texture* runTex = new TGA::Texture("resources/enemies/scraps.png");
    TGA::Animation* runAnim = new TGA::Animation(runTex);
@@ -26,6 +28,13 @@ Hound::Hound( int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA
 void Hound::update()
 {
    // AI!
+   if (position.getX() < leftBound.getX() || position.getX() > rightBound.getX())
+   {
+      velocity.setX(-velocity.getX());
+      acceleration.setX(-acceleration.getX());
+   }
+   
+   facingLeft = velocity.getX() > 0;
    
    Enemy::update();
 }

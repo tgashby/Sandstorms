@@ -3,7 +3,7 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #pragma once
 
@@ -15,9 +15,9 @@ class Layer
 public:
    Layer(std::string texStr, double moveRate, bool tiled);
    ~Layer();
-
+   
    void draw(double camX);
-
+   
 private:
    TGA::Texture texture;
    double moveRate;

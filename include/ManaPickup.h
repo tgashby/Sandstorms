@@ -3,12 +3,12 @@
  *
  * @author Tag Ashby
  * @date 8/2012
- * 
+ *
  */
 #pragma once
 #include "Consumable.h"
 
-class ManaPickup : public Consumable 
+class ManaPickup : public Consumable
 {
 public:
    ManaPickup (int potency, TGA::Vector2D position);

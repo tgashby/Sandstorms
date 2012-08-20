@@ -39,36 +39,36 @@ namespace Sandstorms
 	SSMain::~SSMain()
 	{
 	}
-
+   
 	void SSMain::init()
 	{
 		// Call the Graphics init method
 		Engine.Graphics->init(1280, 800, "Sandstorms");
-
+      
       player = new Player(TGA::Vector2D(0, 570));
-
+      
       makeLevels();
-
+      
 	   healthMana = new HealthManaElement();
-
+      
       currLevel = "oasis";
    }
-
+   
 	void SSMain::run()
 	{
 		// Create a bool for whether or not the game is running
 		bool running = true;
-
+      
       const int TICKS_PER_SECOND = 60;
       const int SKIP_TICKS = 1000 / TICKS_PER_SECOND;
       const int MAX_FRAMESKIP = 5;
-
+      
       Uint32 next_game_tick = TGA::Timer::getTicks();
       int loops;
       float interpolation;
-
+      
       while (running) {
-
+         
          loops = 0;
          while (TGA::Timer::getTicks() > next_game_tick && loops < MAX_FRAMESKIP) {
             running = handleEvents();
@@ -76,39 +76,39 @@ namespace Sandstorms
             {
                break;
             }
-
+            
             updateGame();
-
+            
             next_game_tick += SKIP_TICKS;
             loops++;
          }
-
+         
          interpolation = float(TGA::Timer::getTicks() + SKIP_TICKS - next_game_tick)
-            / float(SKIP_TICKS);
+         / float(SKIP_TICKS);
          
          render(interpolation);
       }
 	}
-
+   
 	void SSMain::shutDown()
 	{
 		// Call Graphics shutDown method
 		Engine.Graphics->shutDown();
 	}
-
+   
 	bool SSMain::handleEvents()
 	{
 		// Update the Input
 		bool stillGoing = Engine.Input->update();
-
+      
       if (stillGoing)
       {
          stillGoing = !Engine.Input->keyDown(TGA::key_ESC);
       }
-
+      
 		return stillGoing;
 	}
-
+   
 	void SSMain::updateGame()
 	{
       std::vector<Platform*> platforms = levels[currLevel]->getPlatforms();
@@ -117,9 +117,9 @@ namespace Sandstorms
       
       // Level.update handles player<->platform, player<->consumable, and projectile<->platform, player<->enemy, attack<->enemy collision
       levels[currLevel]->update(player);
-
+      
       for (std::vector<Projectile*>::iterator i = projectiles.begin();
-         i < projectiles.end(); i++)
+           i < projectiles.end(); i++)
       {
          TGA::Collision::handleCollisions((*player), *(*i));
       }
@@ -127,42 +127,42 @@ namespace Sandstorms
 		Engine.Animations->updateAll();
       
       player->update();
-
+      
       // Scroll with player
       Engine.GameCamera->setPosition(static_cast<float>(player->getPosition().getX()) - SCREEN_WIDTH / 2, 0);
-
+      
       if (Engine.GameCamera->getX() < 0)
       {
          Engine.GameCamera->setPosition(0, Engine.GameCamera->getY());
       }
-
+      
       if (Engine.GameCamera->getX() > levels[currLevel]->getRightBound() - SCREEN_WIDTH)
       {
          Engine.GameCamera->setPosition(static_cast<float>(levels[currLevel]->getRightBound() - SCREEN_WIDTH), Engine.GameCamera->getY());
       }
-
+      
       healthMana->update(player->getHealthPercent(), player->getManaPercent());
-
+      
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->update();
       TGA::Singleton<AttackManager>::GetSingletonPtr()->UpdateAttacks();
 	}
-
+   
 	void SSMain::render(float interpolation)
 	{
 		// Draw the background
       levels[currLevel]->draw();
-
+      
 		// Draw all Animations
 		player->draw(interpolation);
-
+      
       healthMana->draw();
-
+      
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->draw();
-
+      
 		// Call Graphics Swap Buffers
 		Engine.Graphics->swapBuffers();
 	}
-
+   
    void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight )
    {
       // TODO: Make this smarter?
@@ -170,50 +170,52 @@ namespace Sandstorms
       std::vector<Platform*> platforms;
       TGA::BoundingBox bounds;
       std::vector<Platform*>::iterator currPlatform;
-
+      
       double xPos, yPos;
       bool platformCreated;
       int attempts;
       int rightBound = lvl->getRightBound();
-
+      
       for (int i = 0; i < rightBound / 460; i++) // 460 comes from experimentation
       {
          platformCreated = false;
          attempts = 0;
-
+         
          while (!platformCreated && attempts < 300)
          {
             xPos = randFloat(100, static_cast<float>(rightBound - platWidth));
             yPos = randFloat(200, 660);
-
+            
+            assert(xPos > 100 && xPos < rightBound - platWidth);
+            
             currPlatform = platforms.begin();
             for (; currPlatform < platforms.end(); currPlatform++)
             {
                bounds = (*currPlatform)->getBounds();
-
+               
                if (abs(bounds.getX() - xPos) < platWidth * 2
-                  && (abs(bounds.getY() - yPos < platHeight * 6)))
+                   && (abs(bounds.getY() - yPos < platHeight * 6)))
                {
                   break;
                }
             }
-
+            
             if (currPlatform == platforms.end())
             {
                platforms.push_back(new Platform(platformTex, static_cast<int>(xPos), static_cast<int>(yPos), platWidth, platHeight));
-
+               
                platformCreated = true;
             }
-
+            
             if (attempts == 299)
             {
                std::cout << "Too many attempts\n";
             }
-
+            
             attempts++;
          }
       }
-
+      
       // Sort the platforms so that Consumables can be placed better
       sort(platforms.begin(), platforms.end(), sortPlatforms);
       
@@ -223,27 +225,27 @@ namespace Sandstorms
          lvl->addPlatform(*i);
       }
    }
-
+   
    void SSMain::makeLevels()
    {
       std::vector<Platform*> platforms;
       std::vector<Layer*> layers;
-
+      
       const int oasis_width = 15000;
       const int city_width = 15000;
-
+      
       // Oasis
       // Boundary platforms, invisible textures
       platforms.push_back(new Platform("resources/level/invis.png", -40, 750, oasis_width, 20));
       platforms.push_back(new Platform("resources/level/invis.png", -10, -100, 10, 900));
       platforms.push_back(new Platform("resources/level/invis.png", oasis_width, -100, 10, 900));
-
+      
       // Oasis Layers
       layers.push_back(new Layer("resources/level/oasis.png", 0.94, false));
       layers.push_back(new Layer("resources/level/ground.png", 0.0, true));
-
+      
       levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms)));
-
+      
       generatePlatforms(levels["oasis"], "resources/level/large_oasis.png", 125, 37);
       placeConsumables(levels["oasis"], 2, 2, 1, "resources/artifacts/key_artifact.png", 50);
       placeEnemies(levels["oasis"], 1, 1, 1);
@@ -270,7 +272,7 @@ namespace Sandstorms
       placeConsumables(levels["city"], 3, 3, 1, "resources/artifacts/crown_artifact.png", 50);
       placeEnemies(levels["city"], 4, 2, 3);
    }
-
+   
    void SSMain::placeConsumables(Level *lvl, int numHPickups, int numMPickups, int numArtifacts, std::string artifactTex, int artifactHeight)
    {
       const int H_PICKUP_HEIGHT = 50, M_PICKUP_HEIGHT = 61;
@@ -280,12 +282,12 @@ namespace Sandstorms
       std::vector<Platform*>::size_type middle = platforms.size() / 2, end = platforms.size();
       
       int hStep = (end - middle) / numHPickups,
-         mStep = (end - middle) / numMPickups,
-         aStep = (end - middle) / numArtifacts;
+      mStep = (end - middle) / numMPickups,
+      aStep = (end - middle) / numArtifacts;
       
       int ndx, xVal, yVal;
       
-      // Place health pickups starting from the middle of the level with some 
+      // Place health pickups starting from the middle of the level with some
       for (int i = 0; i < numHPickups; i++)
       {
          ndx = middle + (hStep * i) + (rand() % 4);
@@ -335,8 +337,8 @@ namespace Sandstorms
          ndx = middle + (hStep * i) + (rand() % 4);
          ndx = ndx > end - 1 ? end - 1 : ndx;
          xVal = platforms[ndx]->getBounds().getX();
-         yVal = platforms[ndx]->getBounds().getY() - HOUND_HEIGHT;
-         lvl->addEnemy(new Hound(50, TGA::Vector2D(xVal, yVal)));
+         yVal = 750 - HOUND_HEIGHT;
+         lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-5, 0)));
       }
       
       // Place mana pickups starting from the middle of the level
@@ -345,7 +347,7 @@ namespace Sandstorms
          ndx = middle + (wStep * i) + (rand() % 4);
          ndx = ndx > end - 1 ? end - 1 : ndx;
          xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() / 2;
-         yVal = platforms[ndx]->getBounds().getY() - WARRIOR_HEIGHT;
+         yVal = 750 - WARRIOR_HEIGHT;
          lvl->addEnemy(new Warrior(50, TGA::Vector2D(xVal, yVal)));
       }
       
@@ -355,7 +357,7 @@ namespace Sandstorms
          ndx = middle + (cStep * i) - (rand() % 4);
          ndx = ndx > end - 1 ? end - 1 : ndx;
          xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() - 10;
-         yVal = platforms[ndx]->getBounds().getY() - CASTER_HEIGHT;
+         yVal = 750 - CASTER_HEIGHT;
          lvl->addEnemy(new Caster(50, TGA::Vector2D(xVal, yVal)));
       }
    }
