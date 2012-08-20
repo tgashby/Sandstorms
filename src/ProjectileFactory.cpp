@@ -10,7 +10,7 @@ void ProjectileFactory::addProjectile( Projectile* p )
 void ProjectileFactory::removeProjectile( Projectile* p )
 {
    projItr pos = find(projectiles.begin(), projectiles.end(), p);
-
+   
    if (pos != projectiles.end())
    {
       projectiles.erase(pos);
@@ -19,33 +19,17 @@ void ProjectileFactory::removeProjectile( Projectile* p )
 
 void ProjectileFactory::update()
 {
-   std::vector<int> removeNdxs;
-
-   if (projectiles.size() > 0)
+   for (std::vector<Projectile*>::size_type i = 0; i < projectiles.size(); i++)
    {
-      for (std::vector<Projectile*>::size_type i = 0; i < projectiles.size(); i++)
-      {
-         if (projectiles.at(i)->update())
-         {
-            removeNdxs.push_back(i);
-         }
-      }
-   }
-
-   for (std::vector<int>::iterator i = removeNdxs.begin(); i < removeNdxs.end(); i++)
-   {
-      removeProjectile(projectiles.at(*i));
+      projectiles.at(i)->update();
    }
 }
 
 void ProjectileFactory::draw()
 {
-   if (projectiles.size() > 0)
+   for (projItr i = projectiles.begin(); i < projectiles.end(); i++)
    {
-      for (projItr i = projectiles.begin(); i < projectiles.end(); i++)
-      {
-         (*i)->draw();
-      }
+      (*i)->draw();
    }
 }
 

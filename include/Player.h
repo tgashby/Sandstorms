@@ -88,8 +88,8 @@ private:
   void handleAttacks();
 
   int maxHealth, mana, maxMana;
-  bool jumping, falling, punching, kicking, casting;
-  bool hasJumped, hasDoubleJumped;
+  bool jumping, falling, punching, kicking, casting, hurting;
+  bool hasJumped, hasDoubleJumped, kickPlaying, canBeHurt;
   int artifactCount;
 };
 

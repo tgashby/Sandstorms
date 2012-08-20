@@ -12,6 +12,7 @@
 #include "Hound.h"
 #include "Warrior.h"
 #include "Caster.h"
+#include "AttackManager.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -114,7 +115,7 @@ namespace Sandstorms
       std::vector<Consumable*> consumables = levels[currLevel]->getConsumables();
       std::vector<Projectile*> projectiles = TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->getProjectiles();
       
-      // Level.update handles player<->platform, player<->consumable, and projectile<->platform collision
+      // Level.update handles player<->platform, player<->consumable, and projectile<->platform, player<->enemy, attack<->enemy collision
       levels[currLevel]->update(player);
 
       for (std::vector<Projectile*>::iterator i = projectiles.begin();
@@ -143,6 +144,7 @@ namespace Sandstorms
       healthMana->update(player->getHealthPercent(), player->getManaPercent());
 
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->update();
+      TGA::Singleton<AttackManager>::GetSingletonPtr()->UpdateAttacks();
 	}
 
 	void SSMain::render(float interpolation)
@@ -238,7 +240,7 @@ namespace Sandstorms
 
       // Oasis Layers
       layers.push_back(new Layer("resources/level/oasis.png", 0.94, false));
-      layers.push_back(new Layer("resources/level/oasis_ground.png", 0.0, true));
+      layers.push_back(new Layer("resources/level/ground.png", 0.0, true));
 
       levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms)));
 
@@ -260,9 +262,9 @@ namespace Sandstorms
       
       // City Layers
       layers.push_back(new Layer("resources/level/city.png", 0.94, false));
-      layers.push_back(new Layer("resources/level/city_ground.png", 0.0, true));
+      layers.push_back(new Layer("resources/level/ground.png", 0.0, true));
       
-      levels.insert(levels.begin(), lvlPair("city", new Level(oasis_width, layers, platforms)));
+      levels.insert(levels.begin(), lvlPair("city", new Level(city_width, layers, platforms)));
       
       generatePlatforms(levels["city"], "resources/level/large_city.png", 123, 37);
       placeConsumables(levels["city"], 3, 3, 1, "resources/artifacts/crown_artifact.png", 50);

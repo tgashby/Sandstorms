@@ -1,16 +1,19 @@
 #include "Projectile.h"
 #include "Player.h"
 #include "Platform.h"
+#include "ProjectileFactory.h"
+#include "Caster.h"
+#include "Warrior.h"
+#include "Hound.h"
 
-Projectile::Projectile(std::string textureName, 
+Projectile::Projectile(int damage, std::string textureName,
    TGA::BoundingBox bounds, TGA::Vector2D pos, TGA::Vector2D vel)
    : TGA::Collidable(bounds)
    , position(pos)
    , velocity(vel)
+   , damage(damage)
 {
    texture.loadTexture(textureName);
-   
-   collided = false;
 }
 
 
@@ -18,10 +21,12 @@ Projectile::~Projectile(void)
 {
 }
 
-bool Projectile::update()
+void Projectile::update()
 {
    position += velocity;
-   return collided;
+   
+   bounds.setX(position.getX());
+   bounds.setY(position.getY());
 }
 
 void Projectile::draw()
@@ -36,16 +41,15 @@ void Projectile::handleCollision( Collidable& collidedWith )
 {
    if (typeid(collidedWith) == typeid(Platform))
    {
-      collided = true;
-      std::cout << "Collided\n";
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
    }
 
-   if (typeid(collidedWith) == typeid(Player))
+   if (typeid(collidedWith) == typeid(Player)
+       || typeid(collidedWith) == typeid(Caster)
+       || typeid(collidedWith) == typeid(Warrior)
+       || typeid(collidedWith) == typeid(Hound))
    {
-
+      ((Character&)collidedWith).takeDamage(damage);
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
    }
-// TODO: Projectile to enemy collision
-   //if (typeid(collidedWith) == typeid(Enemy))
-   //{
-   //}
 }

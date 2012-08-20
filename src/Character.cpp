@@ -1,4 +1,5 @@
 #include "Character.h"
+#include <Collision.h>
 
 Character::Character( int health /*= 100*/, TGA::Vector2D position /*= TGA::Vector2D(0,0)*/, 
    TGA::Vector2D velocity /*= TGA::Vector2D(0,0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 0.05)*/)
@@ -26,6 +27,11 @@ void Character::update()
 
    assert(currAnimation);
    currAnimation->update();
+   
+   if (health <= 0)
+   {
+      alive = false;
+   }
 }
 
 void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
@@ -50,6 +56,11 @@ TGA::Vector2D Character::getPosition()
 bool Character::isAlive()
 {
    return alive;
+}
+
+void Character::takeDamage(int amount)
+{
+   health -= amount;
 }
 
 void Character::collideWithPlatform(Platform& collidedWith)

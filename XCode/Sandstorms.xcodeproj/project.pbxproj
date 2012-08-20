@@ -19,6 +19,10 @@
 		AE449E6E15DD4105006B38EB /* HealthPickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE449E6C15DD4105006B38EB /* HealthPickup.cpp */; };
 		AE449E6F15DD4105006B38EB /* ManaPickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE449E6D15DD4105006B38EB /* ManaPickup.cpp */; };
 		AE5C328615BEFB4000B6E1F5 /* Sandstorms in CopyFiles */ = {isa = PBXBuildFile; fileRef = 54AD34E803FC2DE1113C1672 /* Sandstorms */; };
+		AE5EC04415E0058100C3455C /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC04015E0058100C3455C /* Enemy.cpp */; };
+		AE5EC04715E02F1900C3455C /* Caster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC03F15E0058100C3455C /* Caster.cpp */; };
+		AE5EC04815E02F1900C3455C /* Hound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC04115E0058100C3455C /* Hound.cpp */; };
+		AE5EC04915E02F1900C3455C /* Warrior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC04215E0058100C3455C /* Warrior.cpp */; };
 		AEB2B5EA15D174E000BD9B25 /* Artifact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E415D174E000BD9B25 /* Artifact.cpp */; };
 		AEB2B5EB15D174E000BD9B25 /* Consumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E515D174E000BD9B25 /* Consumable.cpp */; };
 		AEB2B5EC15D174E000BD9B25 /* HealthManaElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E615D174E000BD9B25 /* HealthManaElement.cpp */; };
@@ -26,6 +30,8 @@
 		AEB2B5EE15D174E000BD9B25 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E815D174E000BD9B25 /* Projectile.cpp */; };
 		AEB2B5EF15D174E000BD9B25 /* ProjectileFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E915D174E000BD9B25 /* ProjectileFactory.cpp */; };
 		AEB2B61A15D1843300BD9B25 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB2B61915D1843300BD9B25 /* SDL2_mixer.framework */; };
+		AEB2DAD615E1CB6F0013F8B0 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */; };
+		AEB2DAD715E1CB6F0013F8B0 /* AttackManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +143,14 @@
 		AE449E6A15DD40F1006B38EB /* ManaPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManaPickup.h; sourceTree = "<group>"; };
 		AE449E6C15DD4105006B38EB /* HealthPickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HealthPickup.cpp; sourceTree = "<group>"; };
 		AE449E6D15DD4105006B38EB /* ManaPickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ManaPickup.cpp; sourceTree = "<group>"; };
+		AE5EC03A15E0056D00C3455C /* Caster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Caster.h; sourceTree = "<group>"; };
+		AE5EC03B15E0056D00C3455C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		AE5EC03C15E0056D00C3455C /* Hound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hound.h; sourceTree = "<group>"; };
+		AE5EC03D15E0056D00C3455C /* Warrior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warrior.h; sourceTree = "<group>"; };
+		AE5EC03F15E0058100C3455C /* Caster.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caster.cpp; sourceTree = "<group>"; };
+		AE5EC04015E0058100C3455C /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		AE5EC04115E0058100C3455C /* Hound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hound.cpp; sourceTree = "<group>"; };
+		AE5EC04215E0058100C3455C /* Warrior.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Warrior.cpp; sourceTree = "<group>"; };
 		AEB2B5DB15D174D200BD9B25 /* Artifact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artifact.h; sourceTree = "<group>"; };
 		AEB2B5DC15D174D200BD9B25 /* Consumable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consumable.h; sourceTree = "<group>"; };
 		AEB2B5DD15D174D200BD9B25 /* HealthManaElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthManaElement.h; sourceTree = "<group>"; };
@@ -151,6 +165,10 @@
 		AEB2B5E815D174E000BD9B25 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
 		AEB2B5E915D174E000BD9B25 /* ProjectileFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectileFactory.cpp; sourceTree = "<group>"; };
 		AEB2B61915D1843300BD9B25 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		AEB2DAD115E1CB4B0013F8B0 /* Attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Attack.h; sourceTree = "<group>"; };
+		AEB2DAD215E1CB4B0013F8B0 /* AttackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackManager.h; sourceTree = "<group>"; };
+		AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Attack.cpp; sourceTree = "<group>"; };
+		AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttackManager.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,11 +284,16 @@
 		43F60A4A27B573192C260E73 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				AEB2DAD115E1CB4B0013F8B0 /* Attack.h */,
+				AEB2DAD215E1CB4B0013F8B0 /* AttackManager.h */,
 				AEB2B5DB15D174D200BD9B25 /* Artifact.h */,
+				AE5EC03A15E0056D00C3455C /* Caster.h */,
 				55FE3A182F9117A20EBE61A9 /* Character.h */,
 				AEB2B5DC15D174D200BD9B25 /* Consumable.h */,
+				AE5EC03B15E0056D00C3455C /* Enemy.h */,
 				AEB2B5DD15D174D200BD9B25 /* HealthManaElement.h */,
 				AE449E6915DD40F1006B38EB /* HealthPickup.h */,
+				AE5EC03C15E0056D00C3455C /* Hound.h */,
 				AEB2B5DE15D174D200BD9B25 /* Layer.h */,
 				5778319356BA5ADE3C8018EE /* Level.h */,
 				53607DFF11FD1A495ECF0B61 /* Main.h */,
@@ -280,6 +303,7 @@
 				AEB2B5DF15D174D200BD9B25 /* Projectile.h */,
 				AEB2B5E015D174D200BD9B25 /* ProjectileFactory.h */,
 				7EE247EB4C940B8356705F0F /* SSMain.h */,
+				AE5EC03D15E0056D00C3455C /* Warrior.h */,
 				326A60862B5B702F2A352338 /* SDL */,
 				7AEC30580AFE2BF917346299 /* SDL_image */,
 				AEB2B5E115D174D200BD9B25 /* SDL_mixer */,
@@ -292,20 +316,26 @@
 		61B16361243454803C9112F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				AE449E6C15DD4105006B38EB /* HealthPickup.cpp */,
-				AE449E6D15DD4105006B38EB /* ManaPickup.cpp */,
+				AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */,
+				AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */,
 				AEB2B5E415D174E000BD9B25 /* Artifact.cpp */,
-				AEB2B5E515D174E000BD9B25 /* Consumable.cpp */,
-				AEB2B5E615D174E000BD9B25 /* HealthManaElement.cpp */,
-				AEB2B5E715D174E000BD9B25 /* Layer.cpp */,
-				AEB2B5E815D174E000BD9B25 /* Projectile.cpp */,
-				AEB2B5E915D174E000BD9B25 /* ProjectileFactory.cpp */,
+				AE5EC03F15E0058100C3455C /* Caster.cpp */,
 				743811C6017F777B61FB364C /* Character.cpp */,
+				AEB2B5E515D174E000BD9B25 /* Consumable.cpp */,
+				AE5EC04015E0058100C3455C /* Enemy.cpp */,
+				AEB2B5E615D174E000BD9B25 /* HealthManaElement.cpp */,
+				AE449E6C15DD4105006B38EB /* HealthPickup.cpp */,
+				AE5EC04115E0058100C3455C /* Hound.cpp */,
+				AEB2B5E715D174E000BD9B25 /* Layer.cpp */,
 				46C807CE050D4E8D46AF1009 /* Level.cpp */,
 				2AD51012433A1DC725B92CA2 /* Main.cpp */,
+				AE449E6D15DD4105006B38EB /* ManaPickup.cpp */,
 				575E684139E57D7B4DFB343F /* Platform.cpp */,
 				23E325DF049F72CE4BB5616E /* Player.cpp */,
+				AEB2B5E815D174E000BD9B25 /* Projectile.cpp */,
+				AEB2B5E915D174E000BD9B25 /* ProjectileFactory.cpp */,
 				236E38496C9D4BD120981138 /* SSMain.cpp */,
+				AE5EC04215E0058100C3455C /* Warrior.cpp */,
 			);
 			name = src;
 			path = ../src;
@@ -412,6 +442,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				40422F0B07B470B27620373F /* Character.cpp in Sources */,
+				AEB2DAD715E1CB6F0013F8B0 /* AttackManager.cpp in Sources */,
+				AEB2DAD615E1CB6F0013F8B0 /* Attack.cpp in Sources */,
 				749A392A0291291D5C9140B1 /* Level.cpp in Sources */,
 				48610324671669EF5EEB4CE9 /* Main.cpp in Sources */,
 				539A241B0EBB437B7FC30801 /* Platform.cpp in Sources */,
@@ -425,6 +457,10 @@
 				AEB2B5EF15D174E000BD9B25 /* ProjectileFactory.cpp in Sources */,
 				AE449E6E15DD4105006B38EB /* HealthPickup.cpp in Sources */,
 				AE449E6F15DD4105006B38EB /* ManaPickup.cpp in Sources */,
+				AE5EC04415E0058100C3455C /* Enemy.cpp in Sources */,
+				AE5EC04715E02F1900C3455C /* Caster.cpp in Sources */,
+				AE5EC04815E02F1900C3455C /* Hound.cpp in Sources */,
+				AE5EC04915E02F1900C3455C /* Warrior.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

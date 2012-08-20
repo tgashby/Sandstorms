@@ -8,7 +8,6 @@
 #pragma once
 
 #include <Collidable.h>
-#include <Collision.h>
 #include <Vector2D.h>
 #include <Animation.h>
 #include <Engine.h>
@@ -72,6 +71,8 @@ public:
   * @return bool - true if the character is alive
   */
   bool isAlive ();
+   
+   void takeDamage(int amount);
 
   /**
    * handleCollision

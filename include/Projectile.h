@@ -20,11 +20,11 @@
 class Projectile : public TGA::Collidable
 {
 public:
-   Projectile(std::string textureName, 
+   Projectile(int damage, std::string textureName,
       TGA::BoundingBox bounds, TGA::Vector2D pos, TGA::Vector2D vel);
    ~Projectile(void);
 
-   bool update();
+   void update();
    void draw();
 
    virtual void handleCollision( Collidable& collidedWith );
@@ -32,5 +32,6 @@ public:
 private:
    TGA::Vector2D position, velocity;
    TGA::Texture texture;
-   bool flipped, collided;
+   bool flipped;
+   int damage;
 };

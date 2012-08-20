@@ -7,14 +7,18 @@
  */
 #pragma once
 
-class Attack;
+#include <vector>
+
+#include "Attack.h"
 
 class AttackManager 
 {
 public:
    AttackManager ();
-   void RegisterAttack (Attack* attack);
+   void AddAttack (Attack* attack);
    void UpdateAttacks ();
+   void DeleteAttack(Attack* attack);
+   std::vector<Attack*> getAttacks();
 private:
    std::vector<Attack*> attacks;
 };

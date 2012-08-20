@@ -3,13 +3,19 @@
 #include "ProjectileFactory.h"
 #include "Platform.h"
 #include "Artifact.h"
+#include "Caster.h"
+#include "Warrior.h"
+#include "Hound.h"
+#include "Attack.h"
 
 const int PLAYER_MAX_HEALTH = 250;
 const double HORIZ_ACCEL = 1;
 const double MAX_VEL = 8;
 const double JUMP_VEL = -21;
-const int FIREBALL_COST = 20;
+const int FIREBALL_COST = 20, FIREBALL_DAMAGE = 45;
+const int PUNCH_DAMAGE = 20, KICK_DAMAGE = 20;
 int manaCycle = 0;
+int hurtCycle = 0;
 
 typedef std::pair<std::string, TGA::Animation*> animPair;
 
@@ -19,8 +25,9 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    maxHealth = PLAYER_MAX_HEALTH;
    mana = maxMana = 100;
    jumping = hasJumped = hasDoubleJumped = false;
-   falling = punching = kicking = casting = false;
+   falling = punching = kicking = kickPlaying = casting = hurting = false;
    facingLeft = false;
+   canBeHurt = true;
    artifactCount = 0;
 
    initAnimations();
@@ -56,8 +63,11 @@ void Player::update()
    {
       falling = false;
    }
-
-   if (manaCycle > 25)
+   
+   // Regenerating Mana
+   manaCycle++;
+   
+   if (manaCycle > 50)
    {
       mana += 1;
       manaCycle = 0;
@@ -67,8 +77,23 @@ void Player::update()
          mana = maxMana;
       }
    }
-
-   manaCycle++;
+   
+   // Pause between being able to be injured by colliding with enemies
+   if (!canBeHurt)
+   {
+      hurtCycle++;
+      
+      if (hurtCycle > 50)
+      {
+         canBeHurt = true;
+         hurtCycle = 0;
+      }
+   }
+   
+   if (currAnimationName.compare("hurt") == 0)
+   {
+      hurting = currAnimation->isDone();
+   }
 
    makeSubBounds();
    Character::update();
@@ -109,6 +134,25 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
    if (typeid(collidedWith) == typeid(Artifact))
    {
       artifactCount++;
+   }
+   
+   if (typeid(collidedWith) == typeid(Caster)
+       || typeid(collidedWith) == typeid(Warrior)
+       || typeid(collidedWith) == typeid(Hound))
+   {
+      if (!(punching || kicking || casting)
+          && currAnimationName.compare("hurt") != 0
+          && canBeHurt)
+      {
+         hurting = true;
+         currAnimation = animations["hurt"];
+         currAnimationName = "hurt";
+         
+         currAnimation->setRepetitions(1);
+         
+         health -= 10;
+         canBeHurt = false;
+      }
    }
 }
 
@@ -174,8 +218,11 @@ void Player::initAnimations()
 
 void Player::handleKeyboard()
 {
-   handleMovements();
-   handleAttacks();   
+   if (!hurting)
+   {
+      handleMovements();
+      handleAttacks();
+   }
 }
 
 double Player::getManaPercent()
@@ -233,6 +280,7 @@ Projectile* Player::generateFireball( bool facingLeft )
    TGA::Vector2D vel(10.0, 0);
    TGA::Vector2D position(getPosition());
    position.setY(position.getY() + 73);
+   bounds.setY(position.getY());
 
    if (facingLeft)
    {
@@ -243,8 +291,10 @@ Projectile* Player::generateFireball( bool facingLeft )
    {
       position.setX(position.getX() + 156);
    }
+   
+   bounds.setX(position.getX());
 
-   return new Projectile(fireballTex, bounds, position, vel);
+   return new Projectile(FIREBALL_DAMAGE, fireballTex, bounds, position, vel);
 }
 
 void Player::handleMovements()
@@ -352,6 +402,24 @@ void Player::handleAttacks()
             currAnimation->setRepetitions(2);
 
             engine->Sounds->playSound("player_punch", 0);
+            
+            if (facingLeft)
+            {
+               new Attack(PUNCH_DAMAGE,
+                          TGA::BoundingBox(position.getX(), position.getY(),
+                                           currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           100),
+                          2, this);
+            }
+            else
+            {
+               new Attack(PUNCH_DAMAGE,
+                          TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           position.getY(),
+                                           currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           100),
+                          2, this);
+            }
          }
 
          velocity.setX(0);
@@ -363,12 +431,31 @@ void Player::handleAttacks()
          if (currAnimationName.compare("kick") != 0)
          {
             kicking = true;
+            kickPlaying = false;
             currAnimation = animations["kick"];
             currAnimationName = "kick";
 
             currAnimation->setRepetitions(1);
 
             engine->Sounds->playSound("player_kick", 0);
+            
+            if (facingLeft)
+            {
+               new Attack(KICK_DAMAGE,
+                          TGA::BoundingBox(position.getX(), position.getY(),
+                                           currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           currAnimation->getCurrentFrameDimensions().getHeight()),
+                          2, this);
+            }
+            else
+            {
+               new Attack(KICK_DAMAGE,
+                          TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           position.getY(),
+                                           currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                           currAnimation->getCurrentFrameDimensions().getHeight()),
+                          2, this);
+            }
          }
 
          velocity.setX(0);
@@ -407,11 +494,12 @@ void Player::handleAttacks()
 
    if (currAnimationName.compare("kick") == 0)
    {
-      if (currAnimation->getFrameNum() == 1 && kicking)
+      if (currAnimation->getFrameNum() == 1 && kicking && !kickPlaying)
       {
          engine->Sounds->playSound("player_kick", 0);
-         kicking = false;
+         kickPlaying = true;
       }
+      kicking = !currAnimation->isDone();
    }
 
    if (currAnimationName.compare("punch") == 0)
