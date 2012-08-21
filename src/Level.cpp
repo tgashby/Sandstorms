@@ -133,7 +133,7 @@ void Level::draw()
    
    for(std::vector<Enemy*>::iterator i = enemies.begin(); i < enemies.end(); i++)
    {
-      (*i)->draw(0);
+      (*i)->draw();
    }
 }
 

@@ -13,7 +13,37 @@ Enemy::Enemy( int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA
    , leftBound(0,0)
    , rightBound(0,0)
 {
+   maxHealth = health;
+}
+
+void Enemy::draw()
+{
+   float redTint, greenTint, blueTint;
    
+   if (health / maxHealth == 1)
+   {
+      redTint = greenTint = blueTint = 1.0f;
+   }
+   else if (static_cast<float>(health) / maxHealth > 0.75)
+   {
+      redTint = 1.0f;
+      greenTint = 0.4f;
+      blueTint = 0.4f;
+   }
+   else if (static_cast<float>(health) / maxHealth > 0.5)
+   {
+      redTint = 1.0f;
+      greenTint = 0.2f;
+      blueTint = 0.2f;
+   }
+   else
+   {
+      redTint = 1.0f;
+      greenTint = 0.0f;
+      blueTint = 0.0f;
+   }
+   
+   Character::draw(0, 1, 1, 0, redTint, greenTint, blueTint);
 }
 
 void Enemy::update(TGA::Vector2D playerPosition)

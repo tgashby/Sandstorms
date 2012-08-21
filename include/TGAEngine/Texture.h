@@ -78,7 +78,7 @@ namespace TGA
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
 		*/
-		void draw(float xPos, float yPos, float scaleX = 1, float scaleY = 1, float rotation = 0);
+		void draw(float xPos, float yPos, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
 		/**
 		* drawSection
@@ -92,7 +92,7 @@ namespace TGA
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
 		*/
-      void drawSection(float xPos, float yPos, SDL_Rect section, float scaleX = 1, float scaleY = 1, float rotation = 0);
+      void drawSection(float xPos, float yPos, SDL_Rect section, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
 		/**
 		* drawSection
@@ -110,7 +110,7 @@ namespace TGA
       * @param rotation - a rotation, in degrees
 		*/
 		void drawSection(float xPos, float yPos, int sectX, int sectY,
-         int sectWidth, int sectHeight, float scaleX = 1, float scaleY = 1, float rotation = 0);
+         int sectWidth, int sectHeight, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
 		/**
 		* getWidth

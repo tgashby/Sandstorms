@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Enemy.cpp"
-         timestampString = "367184838.168884"
+         timestampString = "367197480.233549"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "27"
-         endingLineNumber = "27"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
          landmarkName = "Enemy::handleCollision(TGA::Collidable&amp; collidedWith)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Enemy.cpp"
-         timestampString = "367184838.168884"
+         timestampString = "367197480.233549"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
-         landmarkName = "Enemy::update(Player&amp; player)"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "Enemy::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -357,11 +357,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Caster.cpp"
-         timestampString = "367193139.245062"
+         timestampString = "367197480.233549"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "Caster::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -370,11 +370,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Caster.cpp"
-         timestampString = "367193158.584274"
+         timestampString = "367197480.233549"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "Caster::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>

@@ -33,7 +33,7 @@ void Character::update()
    }
 }
 
-void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/ )
+void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*= 1*/, float rotation /*= 0*/, float redTint /*= 1.0*/, float greenTint /*= 1.0*/, float blueTint /*= 1.0*/)
 {
    // TODO: Handle interpolation
    
@@ -44,7 +44,7 @@ void Character::draw( float interpolation, float scaleX /*= 1*/, float scaleY /*
    
    assert(currAnimation);
    currAnimation->draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
-                       scaleX, scaleY, rotation);
+                       scaleX, scaleY, rotation, redTint, greenTint, blueTint);
 }
 
 TGA::Vector2D Character::getPosition()

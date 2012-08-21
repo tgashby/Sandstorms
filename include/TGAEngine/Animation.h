@@ -187,7 +187,7 @@ namespace TGA
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
 		*/
-      void draw(GLfloat xPos, GLfloat yPos, float scaleX = 1, float scaleY = 1, float rotation = 0);
+      void draw(GLfloat xPos, GLfloat yPos, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
 		/**
 		* getFrameCount

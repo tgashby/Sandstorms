@@ -54,7 +54,7 @@ public:
     * @param scaleY - a scale factor in Y
     * @param rotation - a rotation, in degrees
     */
-   virtual void draw (float interpolation, float scaleX = 1, float scaleY = 1, float rotation = 0);
+   virtual void draw (float interpolation, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
    
    /**
     * getPosition
