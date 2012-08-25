@@ -490,7 +490,8 @@ void Player::punchAttack()
    if (facingLeft)
    {
       new Attack(PUNCH_DAMAGE,
-                 TGA::BoundingBox(position.getX(), position.getY(),
+                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                  position.getY(),
                                   currAnimation->getCurrentFrameDimensions().getWidth() / 2,
                                   100),
                  2, this);
@@ -498,8 +499,7 @@ void Player::punchAttack()
    else
    {
       new Attack(PUNCH_DAMAGE,
-                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  position.getY(),
+                 TGA::BoundingBox(position.getX(), position.getY(),
                                   currAnimation->getCurrentFrameDimensions().getWidth() / 2,
                                   100),
                  2, this);
@@ -511,7 +511,8 @@ void Player::kickAttack()
    if (facingLeft)
    {
       new Attack(KICK_DAMAGE,
-                 TGA::BoundingBox(position.getX(), position.getY(),
+                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                                  position.getY(),
                                   currAnimation->getCurrentFrameDimensions().getWidth() / 2,
                                   currAnimation->getCurrentFrameDimensions().getHeight()),
                  2, this);
@@ -519,8 +520,7 @@ void Player::kickAttack()
    else
    {
       new Attack(KICK_DAMAGE,
-                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  position.getY(),
+                 TGA::BoundingBox(position.getX(), position.getY(),
                                   currAnimation->getCurrentFrameDimensions().getWidth() / 2,
                                   currAnimation->getCurrentFrameDimensions().getHeight()),
                  2, this);

@@ -249,6 +249,7 @@ namespace Sandstorms
       // Oasis Layers
       layers.push_back(new Layer("resources/level/oasis.png", 0.94, false));
       layers.push_back(new Layer("resources/level/ground.png", 0.0, true));
+      layers.push_back(new Layer("resources/level/controls_overlay.png", 0.0, false));
       
       levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms)));
       
@@ -337,7 +338,6 @@ namespace Sandstorms
       
       int ndx, xVal, yVal;
       
-      // Place health pickups starting from the middle of the level with some
       for (int i = 0; i < numHounds; i++)
       {
          ndx = middle + (hStep * i) + (rand() % 4);
@@ -347,7 +347,6 @@ namespace Sandstorms
          lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-5, 0)));
       }
       
-      // Place mana pickups starting from the middle of the level
       for (int i = 0; i < numWarriors; i++)
       {
          ndx = middle + (wStep * i) + (rand() % 4);
@@ -357,7 +356,6 @@ namespace Sandstorms
          lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-3, 0)));
       }
       
-      // Place artifacts starting from the END
       for (int i = 0; i < numCasters; i++)
       {
          ndx = middle + (cStep * i) - (rand() % 4);

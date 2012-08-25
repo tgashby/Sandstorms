@@ -94,8 +94,7 @@ void Warrior::update(TGA::Vector2D playerPosition)
          currAnimation = animations["attack"];
          currAnimationName = "attack";
          
-         currAnimation->setRepetitions(2);
-         
+         currAnimation->setRepetitions(1);
          attack(playerOnLeft);
       }
       

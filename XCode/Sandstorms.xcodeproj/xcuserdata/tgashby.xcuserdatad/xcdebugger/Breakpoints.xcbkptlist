@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
+         timestampString = "367257961.909195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "348"
+         endingLineNumber = "348"
          landmarkName = "SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCasters)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
+         timestampString = "367257961.909195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "277"
-         endingLineNumber = "277"
+         startingLineNumber = "278"
+         endingLineNumber = "278"
          landmarkName = "SSMain::makeLevels()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -136,7 +136,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Attack.cpp"
-         timestampString = "367129916.828829"
+         timestampString = "367257272.016856"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "44"
@@ -318,11 +318,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Warrior.cpp"
-         timestampString = "367193095.335732"
+         timestampString = "367257961.909195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "99"
-         endingLineNumber = "99"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
          landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -331,11 +331,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Warrior.cpp"
-         timestampString = "367193095.335732"
+         timestampString = "367257961.909195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
          landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -344,11 +344,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Warrior.cpp"
-         timestampString = "367193095.335732"
+         timestampString = "367257961.909195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
+         startingLineNumber = "126"
+         endingLineNumber = "126"
          landmarkName = "Warrior::attack(bool playerOnLeft)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -376,6 +376,45 @@
          startingLineNumber = "79"
          endingLineNumber = "79"
          landmarkName = "Caster::update(TGA::Vector2D playerPosition)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/Warrior.cpp"
+         timestampString = "367257961.909195"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
+         landmarkName = "Warrior::attack(bool playerOnLeft)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/Warrior.cpp"
+         timestampString = "367256506.681958"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
+         landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/AttackManager.cpp"
+         timestampString = "367256608.493202"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "AttackManager::UpdateAttacks()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
