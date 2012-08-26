@@ -26,7 +26,7 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    mana = maxMana = 100;
    jumping = hasJumped = hasDoubleJumped = false;
    falling = punching = kicking = casting = hurting = false;
-   kickPlaying = castPlaying = false;
+   runPlaying = kickPlaying = castPlaying = false;
    facingLeft = true; // This is flipped because the original image is flipped
    canBeHurt = true;
    artifactCount = 0;
@@ -146,18 +146,31 @@ void Player::handleCollision( TGA::Collidable& collidedWith )
           && canBeHurt)
       {
          hurting = true;
-         currAnimation = animations["hurt"];
-         currAnimationName = "hurt";
-         
-         currAnimation->setRepetitions(1);
-         
-         health -= 10;
          canBeHurt = false;
+         takeDamage(10);
       }
-      
-      velocity.setX(0);
-      acceleration.setX(0);
    }
+}
+
+void Player::takeDamage(int howMuch)
+{
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   
+   if (!(punching || kicking || casting)
+       && currAnimationName.compare("hurt") != 0)
+   {
+      currAnimation = animations["hurt"];
+      currAnimationName = "hurt";
+      
+      currAnimation->setRepetitions(1);
+      
+      engine->Sounds->playSound("player_hurt", 0);
+   }
+   
+   velocity.setX(0);
+   acceleration.setX(0);
+   
+   Character::takeDamage(howMuch);
 }
 
 void Player::initAnimations()
@@ -275,6 +288,12 @@ void Player::addSounds()
    
    sound = new TGA::Sound("resources/sound/jump.wav");
    engine->Sounds->addSound(sound, "player_jump");
+   
+   sound = new TGA::Sound("resources/sound/hurt.wav");
+   engine->Sounds->addSound(sound, "player_hurt");
+   
+   sound = new TGA::Sound("resources/sound/run.wav");
+   engine->Sounds->addSound(sound, "player_run");
 }
 
 Projectile* Player::generateFireball(bool facingLeft)
@@ -325,6 +344,12 @@ void Player::handleMovements()
          currAnimation = animations["idle"];
          currAnimationName = "idle";
       }
+      
+      if (runPlaying)
+      {
+         engine->Sounds->pauseSound("player_run");
+         runPlaying = false;
+      }
    }
    else if (!(punching || kicking || casting))
    {
@@ -334,6 +359,20 @@ void Player::handleMovements()
          {
             currAnimation = animations["run"];
             currAnimationName = "run";
+            
+            if (!runPlaying)
+            {
+               engine->Sounds->playSound("player_run", -1);
+               runPlaying = true;
+            }
+         }
+         else if (jumping || falling || hasJumped)
+         {
+            if (runPlaying)
+            {
+               engine->Sounds->pauseSound("player_run");
+               runPlaying = false;
+            }
          }
          
          if (velocity.getX() < MAX_VEL)
@@ -349,6 +388,20 @@ void Player::handleMovements()
          {
             currAnimation = animations["run"];
             currAnimationName = "run";
+            
+            if (!runPlaying)
+            {
+               engine->Sounds->playSound("player_run", -1);
+               runPlaying = true;
+            }
+         }
+         else if (jumping || falling || hasJumped)
+         {
+            if (runPlaying)
+            {
+               engine->Sounds->pauseSound("player_run");
+               runPlaying = false;
+            }
          }
          
          if (velocity.getX() > -MAX_VEL)

@@ -255,7 +255,7 @@ namespace Sandstorms
       
       generatePlatforms(levels["oasis"], "resources/level/large_oasis.png", 125, 37);
       placeConsumables(levels["oasis"], 2, 2, 1, "resources/artifacts/key_artifact.png", 50);
-      placeEnemies(levels["oasis"], 1, 1, 1);
+      placeEnemies(levels["oasis"], 4, 2, 2);
       
       platforms.clear();
       layers.clear();
@@ -328,39 +328,27 @@ namespace Sandstorms
    void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCasters)
    {
       const int HOUND_HEIGHT = 75, CASTER_HEIGHT = 200, WARRIOR_HEIGHT = 266;
-      std::vector<Platform*> platforms = lvl->getPlatforms();
       
-      std::vector<Platform*>::size_type middle = platforms.size() / 2, end = platforms.size();
-      
-      int hStep = (end - middle) / numHounds,
-      wStep = (end - middle) / numWarriors,
-      cStep = (end - middle) / numCasters;
-      
-      int ndx, xVal, yVal;
+      int xVal, yVal,
+      rightBound = lvl->getRightBound();
       
       for (int i = 0; i < numHounds; i++)
       {
-         ndx = middle + (hStep * i) + (rand() % 4);
-         ndx = ndx > end - 1 ? end - 1 : ndx;
-         xVal = platforms[ndx]->getBounds().getX();
+         xVal = (rand() % rightBound);
          yVal = 750 - HOUND_HEIGHT;
          lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-5, 0)));
       }
       
       for (int i = 0; i < numWarriors; i++)
       {
-         ndx = middle + (wStep * i) + (rand() % 4);
-         ndx = ndx > end - 1 ? end - 1 : ndx;
-         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() / 2;
+         xVal = (rand() % rightBound);
          yVal = 750 - WARRIOR_HEIGHT;
          lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-3, 0)));
       }
       
       for (int i = 0; i < numCasters; i++)
       {
-         ndx = middle + (cStep * i) - (rand() % 4);
-         ndx = ndx > end - 1 ? end - 1 : ndx;
-         xVal = platforms[ndx]->getBounds().getX() + platforms[ndx]->getBounds().getWidth() - 10;
+         xVal = (rand() % rightBound);
          yVal = 750 - CASTER_HEIGHT;
          lvl->addEnemy(new Caster(60, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-7, 0)));
       }

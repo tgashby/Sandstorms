@@ -32,10 +32,18 @@ Caster::Caster(int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TG
    setRightBound(position.getX() + 300, 0);
    
    attacking = casted = false;
+   
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   TGA::Sound* sound;
+   
+   sound = new TGA::Sound("resources/sound/caster.wav");
+   engine->Sounds->addSound(sound, "caster_cast");
 }
 
 void Caster::update(TGA::Vector2D playerPosition)
 {
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+
    // AI!
    double distToPlayer = position.distanceFrom(playerPosition);
    bool playerOnLeft = playerPosition.getX() < position.getX();
@@ -65,6 +73,7 @@ void Caster::update(TGA::Vector2D playerPosition)
          currAnimationName = "attack";
          
          currAnimation->setRepetitions(1);
+         engine->Sounds->playSound("caster_cast", 0);
       }
       
       velocity.setX(0);

@@ -78,6 +78,8 @@ public:
     */
    virtual void handleCollision (TGA::Collidable& collidedWith);
    
+   void takeDamage(int howMuch);
+   
 private:
    void jump ();
    void initAnimations();
@@ -91,7 +93,7 @@ private:
    
    int maxHealth, mana, maxMana;
    bool jumping, falling, punching, kicking, casting, hurting;
-   bool hasJumped, hasDoubleJumped, kickPlaying, castPlaying, canBeHurt;
+   bool hasJumped, hasDoubleJumped, runPlaying, kickPlaying, castPlaying, canBeHurt;
    int artifactCount;
 };
 

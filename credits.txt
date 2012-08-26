@@ -3,3 +3,10 @@ Kick Sound - "Kick", by Mike Koenig
 Jump Sound - "Bounce", by Mike Koenig
 Punch Sound - "Swoosh 3", by man
 Fireball Sound - "Small Fireball", by Mike Koenig
+Run Sound - "Battlefield 3 Running Sound Effect"
+Hurt Sound - "Female Hurt Grunt Punched"
+Hound Sound - "dog"
+Warrior Punch Sound - "fight_punch"
+Caster Sound - "Flame Throw, Flaming Eerie Wind"
+Oasis Level - "Egyptian War Song", by fosterCHILD16
+City Level - "Pandemonium In The Bazaar", by m4x12

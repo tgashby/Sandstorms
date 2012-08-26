@@ -44,12 +44,17 @@ void Projectile::handleCollision( Collidable& collidedWith )
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
    }
    
-   if (typeid(collidedWith) == typeid(Player)
-       || typeid(collidedWith) == typeid(Caster)
+   if (typeid(collidedWith) == typeid(Caster)
        || typeid(collidedWith) == typeid(Warrior)
        || typeid(collidedWith) == typeid(Hound))
    {
       ((Character&)collidedWith).takeDamage(damage);
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
+   }
+   
+   if (typeid(collidedWith) == typeid(Player))
+   {
+      ((Player&)collidedWith).takeDamage(damage);
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
    }
 }

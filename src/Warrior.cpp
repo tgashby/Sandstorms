@@ -44,10 +44,18 @@ Warrior::Warrior(int health, TGA::Vector2D position, TGA::Vector2D velocity /*= 
    
    originalSpeed = abs(velocity.getX());
    attacking = secondPunch = false;
+   
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   TGA::Sound* sound;
+   
+   sound = new TGA::Sound("resources/sound/warrior.wav");
+   engine->Sounds->addSound(sound, "warrior_punch");
 }
 
 void Warrior::update(TGA::Vector2D playerPosition)
 {
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   
    // AI!
    double distToPlayer = position.distanceFrom(playerPosition);
    bool playerOnLeft = playerPosition.getX() < position.getX();
@@ -95,6 +103,7 @@ void Warrior::update(TGA::Vector2D playerPosition)
          currAnimationName = "attack";
          
          currAnimation->setRepetitions(1);
+         engine->Sounds->playSound("warrior_punch", 0);
          attack(playerOnLeft);
       }
       
@@ -109,6 +118,7 @@ void Warrior::update(TGA::Vector2D playerPosition)
       {
          attack(playerOnLeft);
          secondPunch = true;
+         engine->Sounds->playSound("warrior_punch", 0);
       }
       attacking = !currAnimation->isDone();
    }
