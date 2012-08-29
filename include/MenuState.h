@@ -7,13 +7,17 @@
  */
 #pragma once
 
-class MenuState 
+#include <Texture.h>
+#include <BoundingBox.h>
+#include <State.h>
+
+class MenuState : public TGA::State
 {
 public:
-  MenuState ();
-  bool update ();
-  void draw ();
+   MenuState ();
+   bool update ();
+   void draw ();
 private:
    TGA::Texture menuTexture;
+   TGA::BoundingBox startGameBox, exitGameBox;
 };
-

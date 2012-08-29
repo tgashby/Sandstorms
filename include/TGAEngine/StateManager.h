@@ -8,16 +8,25 @@
 #pragma once
 #include <vector>
 
-class State;
+#include "State.h"
 
-class StateManager 
+namespace TGA
 {
-public:
-  void PushState (State* state);
-  void UpdateCurrentState ();
-  void DrawCurrentState ();
-private:
-  void PopState ();
-  std::vector<State*> states;
-};
-
+   /**
+    * @class StateManager
+    *
+    * @brief Manages all the states of the game
+    *
+    * Simply calling UpdateCurrentState will handle moving between states.
+    */
+   class StateManager
+   {
+   public:
+      void PushState (State* state);
+      void UpdateCurrentState ();
+      void DrawCurrentState ();
+   private:
+      void PopState ();
+      std::vector<State*> states;
+   };
+}

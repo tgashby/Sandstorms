@@ -32,6 +32,9 @@
 		AEB2B61A15D1843300BD9B25 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB2B61915D1843300BD9B25 /* SDL2_mixer.framework */; };
 		AEB2DAD615E1CB6F0013F8B0 /* Attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */; };
 		AEB2DAD715E1CB6F0013F8B0 /* AttackManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */; };
+		AEB9E9B715EC2F760052471B /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB9E9B615EC2F760052471B /* MenuState.cpp */; };
+		AEB9E9C215EC3C4E0052471B /* libTGAEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB9E9C115EC3C4E0052471B /* libTGAEngine.a */; };
+		AEE79E7E15ED989B0080253A /* StoryState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEE79E7C15ED989B0080253A /* StoryState.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -169,6 +172,10 @@
 		AEB2DAD215E1CB4B0013F8B0 /* AttackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackManager.h; sourceTree = "<group>"; };
 		AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Attack.cpp; sourceTree = "<group>"; };
 		AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AttackManager.cpp; sourceTree = "<group>"; };
+		AEB9E9B615EC2F760052471B /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
+		AEB9E9B915EC2F7F0052471B /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
+		AEB9E9C115EC3C4E0052471B /* libTGAEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTGAEngine.a; path = ../lib/TGAEngine/libTGAEngine.a; sourceTree = "<group>"; };
+		AEE79E7C15ED989B0080253A /* StoryState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StoryState.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +187,7 @@
 				17FA44FB66352F646DD4145F /* SDL2_image.framework in Frameworks */,
 				0D85211D385E348E02851340 /* OpenGL.framework in Frameworks */,
 				AEB2B61A15D1843300BD9B25 /* SDL2_mixer.framework in Frameworks */,
+				AEB9E9C215EC3C4E0052471B /* libTGAEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +216,7 @@
 		29F5142C0C0E077F34F643BD /* Sandstorms */ = {
 			isa = PBXGroup;
 			children = (
+				AEB9E9C115EC3C4E0052471B /* libTGAEngine.a */,
 				43F60A4A27B573192C260E73 /* include */,
 				61B16361243454803C9112F2 /* src */,
 				18207F3B049E435F34514D69 /* Frameworks */,
@@ -284,6 +293,7 @@
 		43F60A4A27B573192C260E73 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				AEB9E9B915EC2F7F0052471B /* MenuState.h */,
 				AEB2DAD115E1CB4B0013F8B0 /* Attack.h */,
 				AEB2DAD215E1CB4B0013F8B0 /* AttackManager.h */,
 				AEB2B5DB15D174D200BD9B25 /* Artifact.h */,
@@ -316,6 +326,8 @@
 		61B16361243454803C9112F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				AEE79E7C15ED989B0080253A /* StoryState.cpp */,
+				AEB9E9B615EC2F760052471B /* MenuState.cpp */,
 				AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */,
 				AEB2DAD515E1CB6F0013F8B0 /* AttackManager.cpp */,
 				AEB2B5E415D174E000BD9B25 /* Artifact.cpp */,
@@ -387,7 +399,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AAE2222667C69BB1B7132EF /* Build configuration list for PBXNativeTarget "Sandstorms" */;
 			buildPhases = (
-				74AE0A3356EA2DC85BD1768A /* Resources */,
 				7D32150863D87EE42EBD1F01 /* Sources */,
 				13A2130E2FD218F519254D4E /* Frameworks */,
 				AE5C328515BEFB3000B6E1F5 /* CopyFiles */,
@@ -426,16 +437,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		74AE0A3356EA2DC85BD1768A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		7D32150863D87EE42EBD1F01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -461,6 +462,8 @@
 				AE5EC04715E02F1900C3455C /* Caster.cpp in Sources */,
 				AE5EC04815E02F1900C3455C /* Hound.cpp in Sources */,
 				AE5EC04915E02F1900C3455C /* Warrior.cpp in Sources */,
+				AEB9E9B715EC2F760052471B /* MenuState.cpp in Sources */,
+				AEE79E7E15ED989B0080253A /* StoryState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +511,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../lib/TGAEngine\"",
+				);
 				PRODUCT_NAME = Sandstorms;
 				SYMROOT = build;
 			};
@@ -554,6 +561,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../lib/TGAEngine\"",
+				);
 				PRODUCT_NAME = Sandstorms;
 				SYMROOT = build;
 			};

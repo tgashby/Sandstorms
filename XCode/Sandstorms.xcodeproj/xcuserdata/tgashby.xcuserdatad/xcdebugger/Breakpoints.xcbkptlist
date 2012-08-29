@@ -7,19 +7,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367605386.392328"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "339"
-         endingLineNumber = "339"
-         landmarkName = "SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCasters)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../src/Enemy.cpp"
          timestampString = "367197480.233549"
          startingColumnNumber = "9223372036854775807"
@@ -40,58 +27,6 @@
          startingLineNumber = "51"
          endingLineNumber = "51"
          landmarkName = "Enemy::update(TGA::Vector2D playerPosition)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367257961.909195"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "278"
-         endingLineNumber = "278"
-         landmarkName = "SSMain::makeLevels()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "122"
-         endingLineNumber = "122"
-         landmarkName = "SSMain::updateGame()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
-         landmarkName = "SSMain::updateGame()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
-         landmarkName = "SSMain::updateGame()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -207,19 +142,6 @@
          startingLineNumber = "11"
          endingLineNumber = "11"
          landmarkName = "Hound::Hound( int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA::Vector2D(0, 0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/ )"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../src/SSMain.cpp"
-         timestampString = "367191880.375799"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "192"
-         endingLineNumber = "192"
-         landmarkName = "SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight )"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,6 +351,56 @@
          endingLineNumber = "19"
          landmarkName = "class Hound"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/SSMain.cpp"
+         timestampString = "367894776.638857"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "35"
+         endingLineNumber = "35">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/MenuState.cpp"
+         timestampString = "367891468.30986"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
+         landmarkName = "MenuState::draw()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/SSMain.cpp"
+         timestampString = "367894843.414231"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
+         landmarkName = "SSMain::run()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../src/StoryState.cpp"
+         timestampString = "367895242.013279"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "StoryState::update()"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

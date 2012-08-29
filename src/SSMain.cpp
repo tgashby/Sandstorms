@@ -13,6 +13,8 @@
 #include "Warrior.h"
 #include "Caster.h"
 #include "AttackManager.h"
+#include "MenuState.h"
+#include "StoryState.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -34,6 +36,13 @@ namespace Sandstorms
 	SSMain::SSMain()
 	{
       srand((int)time(NULL));
+      TGA::Music* music;
+      
+      music = new TGA::Music("resources/sound/oasis_level.ogg");
+      Engine.Sounds->addMusic(music, "oasis_music");
+      
+      music = new TGA::Music("resources/sound/city_level.ogg");
+      Engine.Sounds->addMusic(music, "city_music");
 	}
 	
 	SSMain::~SSMain()
@@ -45,6 +54,10 @@ namespace Sandstorms
 		// Call the Graphics init method
 		Engine.Graphics->init(1280, 800, "Sandstorms");
       
+      MenuState menu;
+      StoryState backstory("resources/ui/backstory.png", 4),
+      oasisObjective("resources/ui/oasis_objective.png", 2);
+      
       player = new Player(TGA::Vector2D(0, 570));
       
       makeLevels();
@@ -52,6 +65,18 @@ namespace Sandstorms
 	   healthMana = new HealthManaElement();
       
       currLevel = "oasis";
+      
+      menu.draw();
+      
+      while (menu.update());
+      
+      backstory.draw();
+      
+      while (backstory.update());
+      
+      oasisObjective.draw();
+      
+      while (oasisObjective.update());
    }
    
 	void SSMain::run()
@@ -66,6 +91,8 @@ namespace Sandstorms
       Uint32 next_game_tick = TGA::Timer::getTicks();
       int loops;
       float interpolation;
+      
+      Engine.Sounds->playMusic("oasis_music", -1);
       
       while (running) {
          
@@ -335,6 +362,12 @@ namespace Sandstorms
       for (int i = 0; i < numHounds; i++)
       {
          xVal = (rand() % rightBound);
+         
+         while (xVal < 1280)
+         {
+            xVal = (rand() % rightBound);
+         }
+         
          yVal = 750 - HOUND_HEIGHT;
          lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-5, 0)));
       }
@@ -342,6 +375,12 @@ namespace Sandstorms
       for (int i = 0; i < numWarriors; i++)
       {
          xVal = (rand() % rightBound);
+         
+         while (xVal < 1280)
+         {
+            xVal = (rand() % rightBound);
+         }
+         
          yVal = 750 - WARRIOR_HEIGHT;
          lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-3, 0)));
       }
@@ -349,6 +388,12 @@ namespace Sandstorms
       for (int i = 0; i < numCasters; i++)
       {
          xVal = (rand() % rightBound);
+         
+         while (xVal < 1280)
+         {
+            xVal = (rand() % rightBound);
+         }
+         
          yVal = 750 - CASTER_HEIGHT;
          lvl->addEnemy(new Caster(60, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-7, 0)));
       }

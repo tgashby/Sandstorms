@@ -9,6 +9,7 @@
 #pragma once
 
 #include "Key.h"
+#include "Vector2D.h"
 
 namespace TGA
 {
@@ -50,10 +51,13 @@ namespace TGA
 		* Gets the current position of the mouse.
 		* @return SDL_Point - a point representation of the mouse coordinates
 		*/
-		SDL_Point getMouseCoords();
+      Vector2D getMouseCoords();
+      
+      bool mouseDown();
 
 	private:
 		std::map<int, bool> keystates;
+      bool mouseButtonDown;
 		int mouseX;
 		int mouseY;
 	};

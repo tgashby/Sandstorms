@@ -40,9 +40,14 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
 
 void Player::update()
 {
+   if (abs(velocity.getX()) > MAX_VEL)
+   {
+      acceleration.setX(0);
+   }
+   
    handleKeyboard();
    
-   assert(abs(velocity.getX()) < MAX_VEL + 1.5f);
+//   assert(abs(velocity.getX()) < MAX_VEL + 1.5f);
    
    // If the player is falling (like off a platform)
    if (velocity.getY() > MAX_VEL && !hurting)
@@ -323,11 +328,6 @@ Projectile* Player::generateFireball(bool facingLeft)
 void Player::handleMovements()
 {
    TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
-   
-   if (abs(velocity.getX()) > MAX_VEL)
-   {
-      acceleration.setX(0);
-   }
    
    if (!engine->Input->keyDown(TGA::key_A) &&
        !engine->Input->keyDown(TGA::key_D) &&
