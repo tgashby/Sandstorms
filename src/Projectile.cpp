@@ -25,8 +25,8 @@ void Projectile::update()
 {
    position += velocity;
    
-   bounds.setX(position.getX());
-   bounds.setY(position.getY());
+   bounds.setX(static_cast<int>(position.getX()));
+   bounds.setY(static_cast<int>(position.getY()));
 }
 
 void Projectile::draw()

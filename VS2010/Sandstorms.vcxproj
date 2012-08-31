@@ -38,7 +38,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Sandstorms</TargetName>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
@@ -77,9 +77,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PreBuildEvent>
-      <Command>robocopy /s $(OutDir)..\..\Libraries\TGAEngine\lib\ $(OutDir)..\lib\TGAEngine\ *
-robocopy $(OutDir)..\..\Libraries\TGAEngine\include\ $(OutDir)..\include\TGAEngine *.h 
-exit 0</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <CustomBuildStep>
       <Command>
@@ -122,14 +121,21 @@ exit 0</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Artifact.h" />
+    <ClInclude Include="..\include\Attack.h" />
+    <ClInclude Include="..\include\AttackManager.h" />
+    <ClInclude Include="..\include\Caster.h" />
     <ClInclude Include="..\include\Character.h" />
     <ClInclude Include="..\include\Consumable.h" />
+    <ClInclude Include="..\include\Enemy.h" />
+    <ClInclude Include="..\include\Hound.h" />
+    <ClInclude Include="..\include\LoseState.h" />
     <ClInclude Include="..\include\ManaPickup.h" />
     <ClInclude Include="..\include\HealthManaElement.h" />
     <ClInclude Include="..\include\HealthPickup.h" />
     <ClInclude Include="..\include\Layer.h" />
     <ClInclude Include="..\include\Level.h" />
     <ClInclude Include="..\include\Main.h" />
+    <ClInclude Include="..\include\MenuState.h" />
     <ClInclude Include="..\include\Platform.h" />
     <ClInclude Include="..\include\Player.h" />
     <ClInclude Include="..\include\Projectile.h" />
@@ -194,6 +200,7 @@ exit 0</Command>
     <ClInclude Include="..\include\SDL\SDL_version.h" />
     <ClInclude Include="..\include\SDL\SDL_video.h" />
     <ClInclude Include="..\include\SDL_image\SDL_image.h" />
+    <ClInclude Include="..\include\StoryState.h" />
     <ClInclude Include="..\include\TGAEngine\Animation.h" />
     <ClInclude Include="..\include\TGAEngine\AnimationManager.h" />
     <ClInclude Include="..\include\TGAEngine\BoundingBox.h" />
@@ -210,12 +217,20 @@ exit 0</Command>
     <ClInclude Include="..\include\TGAEngine\TextureManager.h" />
     <ClInclude Include="..\include\TGAEngine\Timer.h" />
     <ClInclude Include="..\include\TGAEngine\Vector2D.h" />
+    <ClInclude Include="..\include\Warrior.h" />
+    <ClInclude Include="..\include\WinState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Artifact.cpp" />
+    <ClCompile Include="..\src\Attack.cpp" />
+    <ClCompile Include="..\src\AttackManager.cpp" />
+    <ClCompile Include="..\src\Caster.cpp" />
     <ClCompile Include="..\src\Character.cpp">
     </ClCompile>
     <ClCompile Include="..\src\Consumable.cpp" />
+    <ClCompile Include="..\src\Enemy.cpp" />
+    <ClCompile Include="..\src\Hound.cpp" />
+    <ClCompile Include="..\src\LoseState.cpp" />
     <ClCompile Include="..\src\ManaPickup.cpp" />
     <ClCompile Include="..\src\HealthManaElement.cpp" />
     <ClCompile Include="..\src\HealthPickup.cpp" />
@@ -223,6 +238,7 @@ exit 0</Command>
     <ClCompile Include="..\src\Level.cpp" />
     <ClCompile Include="..\src\Main.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\MenuState.cpp" />
     <ClCompile Include="..\src\Platform.cpp" />
     <ClCompile Include="..\src\Player.cpp">
     </ClCompile>
@@ -230,6 +246,9 @@ exit 0</Command>
     <ClCompile Include="..\src\ProjectileFactory.cpp" />
     <ClCompile Include="..\src\SSMain.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\StoryState.cpp" />
+    <ClCompile Include="..\src\Warrior.cpp" />
+    <ClCompile Include="..\src\WinState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

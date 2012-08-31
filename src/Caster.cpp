@@ -113,5 +113,5 @@ void Caster::attack(bool playerOnLeft)
       boltPos.setX(boltPos.getX() + 179);
    }
    
-   TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->addProjectile(new Projectile(30, "resources/enemies/casterProj.png", TGA::BoundingBox(boltPos.getX(), boltPos.getY(), 61, 34), boltPos, boltVel));
+   TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->addProjectile(new Projectile(30, "resources/enemies/casterProj.png", TGA::BoundingBox(static_cast<int>(boltPos.getX()), static_cast<int>(boltPos.getY()), 61, 34), boltPos, boltVel));
 }

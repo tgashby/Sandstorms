@@ -15,6 +15,8 @@
 #include "AttackManager.h"
 #include "MenuState.h"
 #include "StoryState.h"
+#include "WinState.h"
+#include "LoseState.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 800;
@@ -37,12 +39,14 @@ namespace Sandstorms
 	{
       srand((int)time(NULL));
       TGA::Music* music;
+
+      Engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
       
       music = new TGA::Music("resources/sound/oasis_level.ogg");
-      Engine.Sounds->addMusic(music, "oasis_music");
+      Engine->Sounds->addMusic(music, "oasis_music");
       
       music = new TGA::Music("resources/sound/city_level.ogg");
-      Engine.Sounds->addMusic(music, "city_music");
+      Engine->Sounds->addMusic(music, "city_music");
 	}
 	
 	SSMain::~SSMain()
@@ -52,19 +56,16 @@ namespace Sandstorms
 	void SSMain::init()
 	{
 		// Call the Graphics init method
-		Engine.Graphics->init(1280, 800, "Sandstorms");
+		Engine->Graphics->init(1280, 800, "Sandstorms");
       
       MenuState menu;
-      StoryState backstory("resources/ui/backstory.png", 6),
-      oasisObjective("resources/ui/oasis_objective.png", 2);
+      StoryState backstory("resources/ui/backstory.png", 6);
       
       player = new Player(TGA::Vector2D(0, 570));
       
       makeLevels();
       
 	   healthMana = new HealthManaElement();
-      
-      currLevel = "oasis";
       
       menu.draw();
       
@@ -74,9 +75,7 @@ namespace Sandstorms
       
       while (backstory.update());
       
-      oasisObjective.draw();
-      
-      while (oasisObjective.update());
+      startGame();
    }
    
 	void SSMain::run()
@@ -92,7 +91,7 @@ namespace Sandstorms
       int loops;
       float interpolation;
       
-      Engine.Sounds->playMusic("oasis_music", -1);
+      Engine->Sounds->playMusic("oasis_music", -1);
       
       while (running) {
          
@@ -120,17 +119,34 @@ namespace Sandstorms
 	void SSMain::shutDown()
 	{
 		// Call Graphics shutDown method
-		Engine.Graphics->shutDown();
+		Engine->Graphics->shutDown();
 	}
+
+   void SSMain::startGame()
+   {
+      Engine->Sounds->pauseMusic("oasis_music");
+
+      StoryState oasisObjective("resources/ui/oasis_objective.png", 2);
+
+      player->reset();
+
+      currLevel = "oasis";
+
+      oasisObjective.draw();
+
+      while (oasisObjective.update());
+
+      Engine->Sounds->playMusic("oasis_music", -1);
+   }
    
 	bool SSMain::handleEvents()
 	{
 		// Update the Input
-		bool stillGoing = Engine.Input->update();
+		bool stillGoing = Engine->Input->update();
       
       if (stillGoing)
       {
-         stillGoing = !Engine.Input->keyDown(TGA::key_ESC);
+         stillGoing = !Engine->Input->keyDown(TGA::key_ESC);
       }
       
 		return stillGoing;
@@ -157,21 +173,21 @@ namespace Sandstorms
          TGA::Collision::handleCollisions((*player), *(*i));
       }
       
-		Engine.Animations->updateAll();
+		Engine->Animations->updateAll();
       
       player->update();
       
       // Scroll with player
-      Engine.GameCamera->setPosition(static_cast<float>(player->getPosition().getX()) - SCREEN_WIDTH / 2, 0);
+      Engine->GameCamera->setPosition(static_cast<float>(player->getPosition().getX()) - SCREEN_WIDTH / 2, 0);
       
-      if (Engine.GameCamera->getX() < 0)
+      if (Engine->GameCamera->getX() < 0)
       {
-         Engine.GameCamera->setPosition(0, Engine.GameCamera->getY());
+         Engine->GameCamera->setPosition(0, Engine->GameCamera->getY());
       }
       
-      if (Engine.GameCamera->getX() > levels[currLevel]->getRightBound() - SCREEN_WIDTH)
+      if (Engine->GameCamera->getX() > levels[currLevel]->getRightBound() - SCREEN_WIDTH)
       {
-         Engine.GameCamera->setPosition(static_cast<float>(levels[currLevel]->getRightBound() - SCREEN_WIDTH), Engine.GameCamera->getY());
+         Engine->GameCamera->setPosition(static_cast<float>(levels[currLevel]->getRightBound() - SCREEN_WIDTH), Engine->GameCamera->getY());
       }
       
       healthMana->update(player->getHealthPercent(), player->getManaPercent());
@@ -181,28 +197,78 @@ namespace Sandstorms
       
       if (player->getArtifactCount() == 1 && currLevel.compare("city") != 0)
       {
-         StoryState cityObjective("resources/ui/city_objective.png", 2);
+         Engine->Sounds->pauseMusic("oasis_music");
+
+         StoryState cityObjective("resources/ui/city_objective.png", 3);
+
+         Engine->GameCamera->setPosition(0, 0);
          
          cityObjective.draw();
-         Engine.Graphics->swapBuffers();
          
-         while (cityObjective.update())
-         {
-            cityObjective.draw();
-         }
+         while (cityObjective.update());
          
          currLevel = "city";
-         
+
+         Engine->Sounds->playMusic("city_music", -1);
+
          player->reset();
-         
-         Engine.GameCamera->setPosition(0, 0);
       }
       
       if (player->getArtifactCount() == 1 && currLevel.compare("city") == 0)
       {
-         // YOU WIN!
-         exit(EXIT_SUCCESS);
+         bool playingAgain;
+
+         Engine->Sounds->pauseMusic("city_music");
+
+         WinState win(playingAgain);
+
+         Engine->GameCamera->setPosition(0, 0);
+
+         win.draw();
+
+         while (win.update());
+
+         if (playingAgain)
+         {
+            levels.clear();
+            makeLevels();
+            startGame();
+            run();
+         }
+         else
+         {
+            exit(EXIT_SUCCESS);
+         }
       }
+
+      if (player->getHealthPercent() <= 0)
+      {
+         bool playingAgain;
+
+         Engine->Sounds->pauseMusic("oasis_music");
+         Engine->Sounds->pauseMusic("city_music");
+
+         LoseState lose(playingAgain);
+
+         Engine->GameCamera->setPosition(0, 0);
+
+         lose.draw();
+
+         while (lose.update());
+
+         if (playingAgain)
+         {
+            levels.clear();
+            makeLevels();
+            startGame();
+            run();
+         }
+         else
+         {
+            exit(EXIT_SUCCESS);
+         }
+      }
+      
 	}
    
 	void SSMain::render(float interpolation)
@@ -218,7 +284,7 @@ namespace Sandstorms
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->draw();
       
 		// Call Graphics Swap Buffers
-		Engine.Graphics->swapBuffers();
+		Engine->Graphics->swapBuffers();
 	}
    
    void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight )
@@ -344,7 +410,8 @@ namespace Sandstorms
       mStep = (end - middle) / numMPickups,
       aStep = (end - middle) / numArtifacts;
       
-      int ndx, xVal, yVal;
+      unsigned int ndx;
+      int xVal, yVal;
       
       // Place health pickups starting from the middle of the level with some
       for (int i = 0; i < numHPickups; i++)

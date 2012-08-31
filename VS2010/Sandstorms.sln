@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandstorms", "Sandstorms.vcxproj", "{083F3295-0B43-0745-9D77-F2FC30A816F0}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SanstormsSetup", "..\SanstormsSetup\SanstormsSetup.vdproj", "{7FBE0E26-0641-433F-B8E1-F493189870F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,8 @@ Global
 		{083F3295-0B43-0745-9D77-F2FC30A816F0}.Debug|Win32.Build.0 = Debug|Win32
 		{083F3295-0B43-0745-9D77-F2FC30A816F0}.Release|Win32.ActiveCfg = Release|Win32
 		{083F3295-0B43-0745-9D77-F2FC30A816F0}.Release|Win32.Build.0 = Release|Win32
+		{7FBE0E26-0641-433F-B8E1-F493189870F7}.Debug|Win32.ActiveCfg = Debug
+		{7FBE0E26-0641-433F-B8E1-F493189870F7}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

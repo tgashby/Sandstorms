@@ -1,49 +1,58 @@
 /**
- * @file MenuState.cpp
+ * @file LoseState.cpp
  *
  * @author Tag Ashby
  * @date 8/2012
  * 
  */
-#include "MenuState.h"
+
+#include "LoseState.h"
 #include <Vector2D.h>
 #include <Singleton.h>
 #include <InputManager.h>
 #include <Collision.h>
 #include <Engine.h>
 
-MenuState::MenuState()
-: startGameBox(280, 250, 520, 85)
-, exitGameBox(280, 345, 470, 85)
+LoseState::LoseState(bool& playAgain)
+: startGameBox(360, 660, 205, 82)
+, exitGameBox(720, 660, 158, 82)
+, playAgain(playAgain)
 {
-   menuTexture.loadTexture("resources/ui/menu.png");
+   loseTexture.loadTexture("resources/ui/lose.png");
 }
 
-bool MenuState::update()
+
+LoseState::~LoseState()
+{
+}
+
+bool LoseState::update()
 {
    TGA::Singleton<TGA::InputManager>::GetSingletonPtr()->update();
    if (TGA::Singleton<TGA::InputManager>::GetSingletonPtr()->mouseDown())
    {
       TGA::Vector2D mousePos = TGA::Singleton<TGA::InputManager>::GetSingletonPtr()->getMouseCoords();
-      
+
       if (TGA::Collision::checkCollision(startGameBox, TGA::BoundingBox(static_cast<int>(mousePos.getX()), 
          static_cast<int>(mousePos.getY()), 1, 1)))
       {
+         playAgain = true;
          return false;
       }
-      
+
       if (TGA::Collision::checkCollision(exitGameBox, TGA::BoundingBox(static_cast<int>(mousePos.getX()), 
          static_cast<int>(mousePos.getY()), 1, 1)))
       {
-         exit(EXIT_SUCCESS);
+         playAgain = false;
+         return false;
       }
    }
-      
+
    return true;
 }
 
-void MenuState::draw()
+void LoseState::draw()
 {
-   menuTexture.draw(0, 0);
+   loseTexture.draw(0, 0);
    TGA::Singleton<TGA::Engine>::GetSingletonPtr()->Graphics->swapBuffers();
 }

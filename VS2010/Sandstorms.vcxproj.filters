@@ -285,6 +285,36 @@
     <ClInclude Include="..\include\ManaPickup.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Attack.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\AttackManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Caster.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Enemy.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hound.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\MenuState.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StoryState.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Warrior.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\WinState.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LoseState.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Character.cpp">
@@ -327,6 +357,36 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ManaPickup.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Attack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AttackManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Caster.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Enemy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Hound.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MenuState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StoryState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Warrior.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WinState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LoseState.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

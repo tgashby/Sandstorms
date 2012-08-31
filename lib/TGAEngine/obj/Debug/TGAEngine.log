@@ -1,12 +1,19 @@
-﻿Build started 8/10/2012 3:31:25 PM.
+﻿Build started 8/31/2012 10:40:15 AM.
      1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "obj\Debug\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include\SDL_mixer /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Engine.cpp ..\src\GraphicsManager.cpp ..\src\InputManager.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include\SDL_mixer /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Camera.cpp ..\src\Engine.cpp ..\src\GraphicsManager.cpp ..\src\InputManager.cpp ..\src\Sound.cpp ..\src\Texture.cpp ..\src\TextureManager.cpp ..\src\Timer.cpp
+         Animation.cpp
+         AnimationManager.cpp
+         Camera.cpp
          Engine.cpp
          GraphicsManager.cpp
          InputManager.cpp
+         Sound.cpp
+         Texture.cpp
+         TextureManager.cpp
+         Timer.cpp
          Generating Code...
        Lib:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Debug\Animation.obj
@@ -21,6 +28,7 @@
          obj\Debug\Music.obj
          obj\Debug\Sound.obj
          obj\Debug\SoundManager.obj
+         obj\Debug\StateManager.obj
          obj\Debug\Texture.obj
          obj\Debug\TextureManager.obj
          obj\Debug\Timer.obj
@@ -33,3 +41,78 @@
          exit 0
          :VCEnd
                  1 file(s) copied.
+         
+         -------------------------------------------------------------------------------
+            ROBOCOPY     ::     Robust File Copy for Windows                              
+         -------------------------------------------------------------------------------
+         
+           Started : Fri Aug 31 10:40:20 2012
+         
+            Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
+              Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\lib\obj\
+         
+             Files : *.*
+         	    
+           Options : *.* /S /COPY:DAT /R:1000000 /W:30 
+         
+         ------------------------------------------------------------------------------
+         
+         	                   0	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
+         	                  30	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\Debug\
+         	    Newer     		  305548	Animation.obj
+           0%  
+          42%  
+          85%  
+         100%  
+         	    Newer     		  198201	AnimationManager.obj
+           0%  
+          66%  
+         100%  
+         	    Newer     		   48338	Camera.obj
+           0%  
+         100%  
+         	    Newer     		   13876	cl.command.1.tlog
+           0%  
+         100%  
+         	    Newer     		  328700	CL.read.1.tlog
+           0%  
+          39%  
+          79%  
+         100%  
+         	    Newer     		   34760	CL.write.1.tlog
+           0%  
+         100%  
+         	    Newer     		  375514	Engine.obj
+           0%  
+          34%  
+          69%  
+         100%  
+         	    Newer     		  103485	GraphicsManager.obj
+           0%  
+         100%  
+         	    Newer     		  259765	InputManager.obj
+           0%  
+          50%  
+         100%  
+         	    Newer     		    3538	lib.command.1.tlog
+           0%  
+         100%  
+         	    Newer     		    5406	Lib-link.read.1.tlog
+           0%  
+         100%  
+         	    Newer     		    2742	Lib-link.write.1.tlog
+           0%  
+         100%  
+         	    Newer     		   59927	Sound.obj
+           0%  
+         100%  
+         	    Newer     		  141411	Texture.obj
+           0%  
+          92%  
+         100%  
+         	    Newer     		  192962	TextureManager.obj
+           0%  
+          67%  
+         100%  
+         	    Newer     		      85	TGAEngine.lastbuildstate
+           0%  

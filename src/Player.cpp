@@ -325,7 +325,7 @@ Projectile* Player::generateFireball(bool facingLeft)
    TGA::Vector2D vel(10.0, 0);
    TGA::Vector2D position(getPosition());
    position.setY(position.getY() + 73);
-   bounds.setY(position.getY());
+   bounds.setY(static_cast<int>(position.getY()));
    
    if (!facingLeft)
    {
@@ -337,7 +337,7 @@ Projectile* Player::generateFireball(bool facingLeft)
       position.setX(position.getX() + 156);
    }
    
-   bounds.setX(position.getX());
+   bounds.setX(static_cast<int>(position.getX()));
    
    return new Projectile(FIREBALL_DAMAGE, fireballTex, bounds, position, vel);
 }
@@ -560,17 +560,17 @@ void Player::punchAttack()
    if (facingLeft)
    {
       new Attack(PUNCH_DAMAGE,
-                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                 TGA::BoundingBox(static_cast<int>(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+                                  static_cast<int>(position.getY()),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
                                   100),
                  2, this);
    }
    else
    {
       new Attack(PUNCH_DAMAGE,
-                 TGA::BoundingBox(position.getX(), position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                 TGA::BoundingBox(static_cast<int>(position.getX()), static_cast<int>(position.getY()),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
                                   100),
                  2, this);
    }
@@ -581,18 +581,18 @@ void Player::kickAttack()
    if (facingLeft)
    {
       new Attack(KICK_DAMAGE,
-                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  currAnimation->getCurrentFrameDimensions().getHeight()),
+                 TGA::BoundingBox(static_cast<int>(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+                                  static_cast<int>(position.getY()),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getHeight())),
                  2, this);
    }
    else
    {
       new Attack(KICK_DAMAGE,
-                 TGA::BoundingBox(position.getX(), position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  currAnimation->getCurrentFrameDimensions().getHeight()),
+                 TGA::BoundingBox(static_cast<int>(position.getX()), static_cast<int>(position.getY()),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getHeight())),
                  2, this);
    }
 }

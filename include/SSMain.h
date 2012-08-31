@@ -21,6 +21,7 @@ namespace Sandstorms
 		void shutDown();
       
 	private:
+      void startGame();
 		bool handleEvents();
 		void updateGame();
 		void render(float interpolation);
@@ -30,7 +31,7 @@ namespace Sandstorms
                             int numArtifacts, std::string artifactTex,
                             int artifactHeight);
       void placeEnemies(Level* lvl, int numHounds, int numWarriors, int numCasters);
-      TGA::Engine Engine;
+      TGA::Engine* Engine;
       std::map<std::string, Level*> levels;
       std::string currLevel;
 		Player* player;

@@ -135,17 +135,18 @@ void Warrior::attack(bool playerOnLeft)
    if (playerOnLeft)
    {
       new Attack(ATTACK_DAMAGE,
-                 TGA::BoundingBox(position.getX(), position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  100),
-                 2, this);
+       TGA::BoundingBox(static_cast<int>(position.getX()), 
+        static_cast<int>(position.getY()),
+        static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+        100),
+      2, this);
    }
    else
    {
       new Attack(ATTACK_DAMAGE,
-                 TGA::BoundingBox(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2,
-                                  position.getY(),
-                                  currAnimation->getCurrentFrameDimensions().getWidth() / 2,
+                 TGA::BoundingBox(static_cast<int>(position.getX() + currAnimation->getCurrentFrameDimensions().getWidth() / 2),
+                                  static_cast<int>(position.getY()),
+                                  static_cast<int>(currAnimation->getCurrentFrameDimensions().getWidth() / 2),
                                   100),
                  2, this);
    }
