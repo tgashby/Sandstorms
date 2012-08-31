@@ -9,6 +9,7 @@
 #include "Attack.h"
 
 const int PLAYER_MAX_HEALTH = 250;
+const int PLAYER_MAX_MANA = 100;
 const double HORIZ_ACCEL = 1;
 const double MAX_VEL = 8;
 const double JUMP_VEL = -21;
@@ -23,13 +24,9 @@ Player::Player( TGA::Vector2D position /*= TGA::Vector2D(0,0)*/ )
    : Character(PLAYER_MAX_HEALTH, position)
 {
    maxHealth = PLAYER_MAX_HEALTH;
-   mana = maxMana = 100;
-   jumping = hasJumped = hasDoubleJumped = false;
-   falling = punching = kicking = casting = hurting = false;
-   runPlaying = kickPlaying = castPlaying = false;
-   facingLeft = true; // This is flipped because the original image is flipped
-   canBeHurt = true;
-   artifactCount = 0;
+   maxMana = PLAYER_MAX_MANA;
+   
+   cleanSlate();
    
    initAnimations();
    addSounds();
@@ -176,6 +173,26 @@ void Player::takeDamage(int howMuch)
    acceleration.setX(0);
    
    Character::takeDamage(howMuch);
+}
+
+void Player::reset()
+{
+   position.setX(0);
+   position.setY(400);
+   
+   cleanSlate();
+}
+
+void Player::cleanSlate()
+{
+   health = PLAYER_MAX_HEALTH;
+   mana = PLAYER_MAX_MANA;
+   jumping = hasJumped = hasDoubleJumped = false;
+   falling = punching = kicking = casting = hurting = false;
+   runPlaying = kickPlaying = castPlaying = false;
+   facingLeft = true; // This is flipped because the original image is flipped
+   canBeHurt = true;
+   artifactCount = 0;
 }
 
 void Player::initAnimations()

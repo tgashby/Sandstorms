@@ -55,7 +55,7 @@ namespace Sandstorms
 		Engine.Graphics->init(1280, 800, "Sandstorms");
       
       MenuState menu;
-      StoryState backstory("resources/ui/backstory.png", 4),
+      StoryState backstory("resources/ui/backstory.png", 6),
       oasisObjective("resources/ui/oasis_objective.png", 2);
       
       player = new Player(TGA::Vector2D(0, 570));
@@ -178,6 +178,31 @@ namespace Sandstorms
       
       TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->update();
       TGA::Singleton<AttackManager>::GetSingletonPtr()->UpdateAttacks();
+      
+      if (player->getArtifactCount() == 1 && currLevel.compare("city") != 0)
+      {
+         StoryState cityObjective("resources/ui/city_objective.png", 2);
+         
+         cityObjective.draw();
+         Engine.Graphics->swapBuffers();
+         
+         while (cityObjective.update())
+         {
+            cityObjective.draw();
+         }
+         
+         currLevel = "city";
+         
+         player->reset();
+         
+         Engine.GameCamera->setPosition(0, 0);
+      }
+      
+      if (player->getArtifactCount() == 1 && currLevel.compare("city") == 0)
+      {
+         // YOU WIN!
+         exit(EXIT_SUCCESS);
+      }
 	}
    
 	void SSMain::render(float interpolation)

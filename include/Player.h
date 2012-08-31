@@ -80,7 +80,10 @@ public:
    
    void takeDamage(int howMuch);
    
+   void reset();
+   
 private:
+   void cleanSlate();
    void jump ();
    void initAnimations();
    void handleKeyboard();
