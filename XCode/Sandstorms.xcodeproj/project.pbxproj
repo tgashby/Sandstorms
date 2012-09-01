@@ -23,6 +23,8 @@
 		AE5EC04715E02F1900C3455C /* Caster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC03F15E0058100C3455C /* Caster.cpp */; };
 		AE5EC04815E02F1900C3455C /* Hound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC04115E0058100C3455C /* Hound.cpp */; };
 		AE5EC04915E02F1900C3455C /* Warrior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE5EC04215E0058100C3455C /* Warrior.cpp */; };
+		AEA7327C15F1684F0087893D /* LoseState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEA7327A15F1684F0087893D /* LoseState.cpp */; };
+		AEA7327D15F1684F0087893D /* WinState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEA7327B15F1684F0087893D /* WinState.cpp */; };
 		AEB2B5EA15D174E000BD9B25 /* Artifact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E415D174E000BD9B25 /* Artifact.cpp */; };
 		AEB2B5EB15D174E000BD9B25 /* Consumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E515D174E000BD9B25 /* Consumable.cpp */; };
 		AEB2B5EC15D174E000BD9B25 /* HealthManaElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEB2B5E615D174E000BD9B25 /* HealthManaElement.cpp */; };
@@ -154,6 +156,11 @@
 		AE5EC04015E0058100C3455C /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 		AE5EC04115E0058100C3455C /* Hound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hound.cpp; sourceTree = "<group>"; };
 		AE5EC04215E0058100C3455C /* Warrior.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Warrior.cpp; sourceTree = "<group>"; };
+		AEA7327615F168390087893D /* LoseState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoseState.h; sourceTree = "<group>"; };
+		AEA7327715F168390087893D /* StoryState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryState.h; sourceTree = "<group>"; };
+		AEA7327815F168390087893D /* WinState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinState.h; sourceTree = "<group>"; };
+		AEA7327A15F1684F0087893D /* LoseState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoseState.cpp; sourceTree = "<group>"; };
+		AEA7327B15F1684F0087893D /* WinState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WinState.cpp; sourceTree = "<group>"; };
 		AEB2B5DB15D174D200BD9B25 /* Artifact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artifact.h; sourceTree = "<group>"; };
 		AEB2B5DC15D174D200BD9B25 /* Consumable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consumable.h; sourceTree = "<group>"; };
 		AEB2B5DD15D174D200BD9B25 /* HealthManaElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthManaElement.h; sourceTree = "<group>"; };
@@ -293,6 +300,9 @@
 		43F60A4A27B573192C260E73 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7327615F168390087893D /* LoseState.h */,
+				AEA7327715F168390087893D /* StoryState.h */,
+				AEA7327815F168390087893D /* WinState.h */,
 				AEB9E9B915EC2F7F0052471B /* MenuState.h */,
 				AEB2DAD115E1CB4B0013F8B0 /* Attack.h */,
 				AEB2DAD215E1CB4B0013F8B0 /* AttackManager.h */,
@@ -326,6 +336,8 @@
 		61B16361243454803C9112F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				AEA7327A15F1684F0087893D /* LoseState.cpp */,
+				AEA7327B15F1684F0087893D /* WinState.cpp */,
 				AEE79E7C15ED989B0080253A /* StoryState.cpp */,
 				AEB9E9B615EC2F760052471B /* MenuState.cpp */,
 				AEB2DAD415E1CB6F0013F8B0 /* Attack.cpp */,
@@ -464,6 +476,8 @@
 				AE5EC04915E02F1900C3455C /* Warrior.cpp in Sources */,
 				AEB9E9B715EC2F760052471B /* MenuState.cpp in Sources */,
 				AEE79E7E15ED989B0080253A /* StoryState.cpp in Sources */,
+				AEA7327C15F1684F0087893D /* LoseState.cpp in Sources */,
+				AEA7327D15F1684F0087893D /* WinState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

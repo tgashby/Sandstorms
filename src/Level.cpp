@@ -88,6 +88,7 @@ void Level::update(Player *player)
    
    for (std::vector<int>::iterator i = removeNdxs.begin(); i < removeNdxs.end(); i++)
    {
+      delete enemies.at(*i);
       enemies.erase(enemies.begin() + *i);
    }
 }

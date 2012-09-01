@@ -18,17 +18,19 @@ Attack::Attack(int damage, TGA::BoundingBox area, Uint32 duration, TGA::Collidab
 : TGA::Collidable(area), originator(originator)
 {
    this->damage = damage;
+   this->duration = duration;
    TGA::Singleton<AttackManager>::GetSingletonPtr()->AddAttack(this);
 }
 
-void Attack::update()
+bool Attack::update()
 {
    if (duration == 0)
    {
-      TGA::Singleton<AttackManager>::GetSingletonPtr()->DeleteAttack(this);
+      return true;
    }
    
    duration--;
+   return false;
 }
 
 void Attack::handleCollision(TGA::Collidable& collidedWith)

@@ -20,9 +20,19 @@ void AttackManager::AddAttack( Attack* attack )
 
 void AttackManager::UpdateAttacks()
 {
-   for (std::vector<Attack*>::iterator i = attacks.begin(); i < attacks.end(); i++)
+   std::vector<std::vector<Attack*>::size_type> removeNdxs;
+
+   for (std::vector<Attack*>::size_type i = 0; i < attacks.size(); i++)
    {
-      (*i)->update();
+      if (attacks.at(i)->update())
+      {
+         removeNdxs.push_back(i);
+      }
+   }
+
+   for (std::vector<std::vector<Attack*>::size_type>::size_type i = 0; i < removeNdxs.size(); i++)
+   {
+      attacks.erase(attacks.begin() + removeNdxs.at(i));
    }
 }
 

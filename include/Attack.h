@@ -14,7 +14,7 @@ class Attack : public TGA::Collidable
 {
 public:
    Attack (int damage, TGA::BoundingBox area, Uint32 duration, TGA::Collidable* originator);
-   void update ();
+   bool update ();
    virtual void handleCollision(TGA::Collidable& collidedWith);
    
 protected:

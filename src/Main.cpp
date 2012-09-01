@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-	Sandstorms::SSMain app;
+	SSMain app;
 
 	app.init();
 	app.run();

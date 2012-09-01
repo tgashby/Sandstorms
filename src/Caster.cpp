@@ -50,7 +50,7 @@ void Caster::update(TGA::Vector2D playerPosition)
    
    facingLeft = velocity.getX() < 0;
    
-   if (distToPlayer > 1000)
+   if (distToPlayer > 800)
    {
       if (currAnimationName.compare("idle") != 0)
       {
