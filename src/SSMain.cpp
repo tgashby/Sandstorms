@@ -130,9 +130,7 @@ void SSMain::startGame()
 
    player->reset();
 
-   // DEBUG: LEVEL SWITCH
-   //currLevel = "oasis";
-   currLevel = "city";
+   currLevel = "oasis";
 
    oasisObjective.draw();
 
