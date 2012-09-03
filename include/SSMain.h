@@ -23,7 +23,7 @@ private:
 	bool handleEvents();
 	void updateGame();
 	void render(float interpolation);
-   void generatePlatforms( Level* lvl, std::string platformTex, int platWidth, int platHeight );
+   void generatePlatforms(Level* lvl, std::string platformTex, int platWidth, int platHeight);
    void makeLevels();
    void placeConsumables(Level* lvl, int numHPickups, int numMPickups,
                            int numArtifacts, std::string artifactTex,

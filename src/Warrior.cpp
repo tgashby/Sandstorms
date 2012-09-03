@@ -50,6 +50,11 @@ Warrior::Warrior(int health, TGA::Vector2D position, TGA::Vector2D velocity /*= 
    
    sound = new TGA::Sound("resources/sound/warrior.wav");
    engine->Sounds->addSound(sound, "warrior_punch");
+
+   sound = new TGA::Sound("resources/sound/warrior_walk.wav");
+   engine->Sounds->addSound(sound, "warrior_walk");
+
+   walkPlaying = false;
 }
 
 void Warrior::update(TGA::Vector2D playerPosition)
@@ -61,6 +66,17 @@ void Warrior::update(TGA::Vector2D playerPosition)
    bool playerOnLeft = playerPosition.getX() < position.getX();
    
    facingLeft = velocity.getX() < 0;
+
+   if (distToPlayer < 800 && !walkPlaying)
+   {
+      engine->Sounds->playSound("warrior_walk", -1);
+      walkPlaying = true;
+   }
+   else if (distToPlayer > 800 && walkPlaying)
+   {
+      engine->Sounds->pauseSound("warrior_walk");
+      walkPlaying = false;
+   }
    
    if (distToPlayer > 500)
    {
@@ -95,6 +111,12 @@ void Warrior::update(TGA::Vector2D playerPosition)
    }
    else
    {
+      if (walkPlaying)
+      {
+         engine->Sounds->pauseSound("warrior_walk");
+         walkPlaying = false;
+      }
+
       if (currAnimationName.compare("attack") != 0 || !attacking)
       {
          attacking = true;
@@ -127,6 +149,11 @@ void Warrior::update(TGA::Vector2D playerPosition)
       attacking = false;
    }
    
+   if (health <= 0)
+   {
+      engine->Sounds->pauseSound("warrior_walk");
+   }
+
    Enemy::update(playerPosition);
 }
 

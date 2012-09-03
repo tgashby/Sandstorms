@@ -130,7 +130,9 @@ void SSMain::startGame()
 
    player->reset();
 
-   currLevel = "oasis";
+   // DEBUG: LEVEL SWITCH
+   //currLevel = "oasis";
+   currLevel = "city";
 
    oasisObjective.draw();
 
@@ -308,7 +310,7 @@ void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWid
       while (!platformCreated && attempts < 300)
       {
          xPos = randFloat(1280, static_cast<float>(rightBound - platWidth));
-         yPos = randFloat(200, 485);
+         yPos = randFloat(260, 450);
 
          assert(xPos > 100 && xPos < rightBound - platWidth);
 
@@ -372,7 +374,7 @@ void SSMain::makeLevels()
    levels.insert(levels.begin(), lvlPair("oasis", new Level(oasis_width, layers, platforms)));
 
    generatePlatforms(levels["oasis"], "resources/level/large_oasis.png", 125, 37);
-   placeConsumables(levels["oasis"], 2, 2, 1, "resources/artifacts/key_artifact.png", 50);
+   placeConsumables(levels["oasis"], 3, 3, 1, "resources/artifacts/key_artifact.png", 50);
    placeEnemies(levels["oasis"], 4, 2, 2, 2);
 
    platforms.clear();
@@ -394,8 +396,8 @@ void SSMain::makeLevels()
    levels.insert(levels.begin(), lvlPair("city", new Level(city_width, layers, platforms)));
 
    generatePlatforms(levels["city"], "resources/level/large_city.png", 123, 37);
-   placeConsumables(levels["city"], 3, 3, 1, "resources/artifacts/crown_artifact.png", 50);
-   placeEnemies(levels["city"], 4, 2, 3, 4);
+   placeConsumables(levels["city"], 6, 5, 1, "resources/artifacts/crown_artifact.png", 50);
+   placeEnemies(levels["city"], 6, 3, 3, 4);
 }
 
 void SSMain::placeConsumables(Level *lvl, int numHPickups, int numMPickups, int numArtifacts, std::string artifactTex, int artifactHeight)

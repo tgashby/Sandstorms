@@ -46,7 +46,6 @@ void Caster::update(TGA::Vector2D playerPosition)
 
    // AI!
    double distToPlayer = position.distanceFrom(playerPosition);
-   bool playerOnLeft = playerPosition.getX() < position.getX();
    
    facingLeft = velocity.getX() < 0;
    
@@ -78,14 +77,14 @@ void Caster::update(TGA::Vector2D playerPosition)
       
       velocity.setX(0);
       
-      facingLeft = playerOnLeft;
+      facingLeft = playerPosition.getX() < position.getX();
    }
    
    if (currAnimationName.compare("attack") == 0)
    {
       if (currAnimation->getFrameNum() == 1 && !casted)
       {
-         attack(playerOnLeft);
+         attack(playerPosition);
          casted = true;
       }
       attacking = !currAnimation->isDone();
@@ -98,20 +97,54 @@ void Caster::update(TGA::Vector2D playerPosition)
    Enemy::update(playerPosition);
 }
 
-void Caster::attack(bool playerOnLeft)
+void Caster::attack(TGA::Vector2D playerPosition)
 {
-   TGA::Vector2D boltPos(getPosition()), boltVel(10.0, 0);
-   boltPos.setY(boltPos.getY() + 59);
+
+   bool playerOnLeft = playerPosition.getX() < position.getX();
+   int boundWidth, boundHeight;
+   std::string projStr;
    
-   if (playerOnLeft)
+   TGA::Vector2D boltPos(position), boltVel(0, 0);
+
+   if (abs(playerPosition.getY() - position.getY()) > 210)
    {
-      boltVel.setX(-10.0);
-      boltPos.setX(boltPos.getX() - 62);
+      boltPos.setX(boltPos.getX() + 50);
+      boundWidth = 34;
+      boundHeight = 61;
+
+      // Player below
+      if (playerPosition.getY() > position.getY())
+      {
+         boltVel.setY(10.0);
+         boltPos.setY(boltPos.getY() + 200);
+         projStr = "resources/enemies/casterProjDown.png";
+      }
+      else
+      {
+         boltVel.setY(-10.0);
+         boltPos.setY(boltPos.getY() - 62);
+         projStr = "resources/enemies/casterProjUp.png";
+      }
    }
    else
    {
-      boltPos.setX(boltPos.getX() + 179);
+      boltPos.setY(boltPos.getY() + 59);
+      projStr = "resources/enemies/casterProj.png";
+      boundWidth = 61;
+      boundHeight = 34;
+
+      if (playerOnLeft)
+      {
+         boltVel.setX(-10.0);
+         boltPos.setX(boltPos.getX() - 62);
+      }
+      else
+      {
+         boltVel.setX(10.0);
+         boltPos.setX(boltPos.getX() + 179);
+      }
    }
    
-   TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->addProjectile(new Projectile(30, "resources/enemies/casterProj.png", TGA::BoundingBox(static_cast<int>(boltPos.getX()), static_cast<int>(boltPos.getY()), 61, 34), boltPos, boltVel));
+   
+   TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->addProjectile(new Projectile(30, projStr, TGA::BoundingBox(static_cast<int>(boltPos.getX()), static_cast<int>(boltPos.getY()), boundWidth, boundHeight), boltPos, boltVel));
 }

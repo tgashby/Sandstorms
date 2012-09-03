@@ -14,6 +14,7 @@ Projectile::Projectile(int damage, std::string textureName,
    , damage(damage)
 {
    texture.loadTexture(textureName);
+   updateCount = 0;
 }
 
 
@@ -27,22 +28,30 @@ void Projectile::update()
    
    bounds.setX(static_cast<int>(position.getX()));
    bounds.setY(static_cast<int>(position.getY()));
+
+   updateCount++;
+
+   if (updateCount > 125)
+   {
+      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
+   }
+   
 }
 
 void Projectile::draw()
 {
    float scaleX = velocity.getX() < 0 ? -1.0f : 1.0f;
-   
+
    texture.draw(static_cast<float>(position.getX()), static_cast<float>(position.getY()),
                 scaleX);
 }
 
 void Projectile::handleCollision( Collidable& collidedWith )
 {
-   if (typeid(collidedWith) == typeid(Platform))
-   {
-      TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
-   }
+   //if (typeid(collidedWith) == typeid(Platform))
+   //{
+   //   TGA::Singleton<ProjectileFactory>::GetSingletonPtr()->removeProjectile(this);
+   //}
    
    if (typeid(collidedWith) == typeid(Caster)
        || typeid(collidedWith) == typeid(Warrior)

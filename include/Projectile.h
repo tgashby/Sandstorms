@@ -33,5 +33,5 @@ private:
    TGA::Vector2D position, velocity;
    TGA::Texture texture;
    bool flipped;
-   int damage;
+   int damage, updateCount;
 };

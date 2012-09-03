@@ -46,18 +46,23 @@ void Hound::update(TGA::Vector2D playerPosition)
       acceleration.setX(-acceleration.getX());
    }
    
-   if (distToPlayer < 400 && !barking)
+   if (distToPlayer < 800 && !barking)
    {
-      engine->Sounds->playSound("hound_bark", 2);
+      engine->Sounds->playSound("hound_bark", -1);
       barking = true;
    }
-   else if (distToPlayer > 400 && barking)
+   else if (distToPlayer > 800 && barking)
    {
       engine->Sounds->pauseSound("hound_bark");
       barking = false;
    }
    
    facingLeft = velocity.getX() < 0;
+
+   if (health <= 0)
+   {
+      engine->Sounds->pauseSound("hound_bark");
+   }
    
    Enemy::update(playerPosition);
 }

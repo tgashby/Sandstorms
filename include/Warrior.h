@@ -17,5 +17,5 @@ private:
    void attack(bool playerOnLeft);
    
    double originalSpeed;
-   bool attacking, secondPunch;
+   bool attacking, secondPunch, walkPlaying;
 };

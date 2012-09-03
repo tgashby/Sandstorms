@@ -243,7 +243,7 @@ void Player::initAnimations()
    
    TGA::Texture* hurtTex = new TGA::Texture("resources/player/hurt.png");
    TGA::Animation* hurtAnim = new TGA::Animation(hurtTex);
-   hurtAnim->addFrame(TGA::BoundingBox(0, 0, 129, 200), 1000);
+   hurtAnim->addFrame(TGA::BoundingBox(0, 0, 129, 200), 500);
    hurtAnim->setRepetitions(-1);
    
    animations.insert(animations.begin(), animPair("idle", idleAnim));
@@ -316,6 +316,9 @@ void Player::addSounds()
    
    sound = new TGA::Sound("resources/sound/run.wav");
    engine->Sounds->addSound(sound, "player_run");
+
+   sound = new TGA::Sound("resources/sound/attack.wav");
+   engine->Sounds->addSound(sound, "player_attack");
 }
 
 Projectile* Player::generateFireball(bool facingLeft)
