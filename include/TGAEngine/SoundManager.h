@@ -109,6 +109,13 @@ namespace TGA
       */
       void removeAllMusic ();
 
+      /**
+      * pauseAllSounds
+      *
+      * Pauses all sounds.
+      */
+      void pauseAllSounds();
+
    private:
       std::map<std::string, Sound*> sounds;
       std::map<std::string, Music*> music;

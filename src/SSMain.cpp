@@ -198,6 +198,7 @@ void SSMain::updateGame()
    if (player->getArtifactCount() == 1 && currLevel.compare("city") != 0)
    {
       Engine->Sounds->pauseMusic("oasis_music");
+      Engine->Sounds->pauseAllSounds();
 
       StoryState cityObjective("resources/ui/city_objective.png", 3);
 
@@ -219,6 +220,7 @@ void SSMain::updateGame()
       bool playingAgain;
 
       Engine->Sounds->pauseMusic("city_music");
+      Engine->Sounds->pauseAllSounds();
 
       WinState win(playingAgain);
 
@@ -247,6 +249,7 @@ void SSMain::updateGame()
 
       Engine->Sounds->pauseMusic("oasis_music");
       Engine->Sounds->pauseMusic("city_music");
+      Engine->Sounds->pauseAllSounds();
 
       LoseState lose(playingAgain);
 

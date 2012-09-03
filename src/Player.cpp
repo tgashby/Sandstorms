@@ -459,6 +459,12 @@ void Player::handleMovements()
    {
       jumping = false;
    }
+
+   if (punching || kicking || casting)
+   {
+      velocity.setX(0);
+      acceleration.setX(0);
+   }
 }
 
 void Player::handleAttacks()

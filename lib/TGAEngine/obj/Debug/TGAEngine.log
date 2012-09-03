@@ -1,19 +1,11 @@
-﻿Build started 8/31/2012 10:40:15 AM.
+﻿Build started 9/3/2012 1:06:05 PM.
      1>Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "obj\Debug\TGAEngine.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include\SDL_mixer /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Animation.cpp ..\src\AnimationManager.cpp ..\src\Camera.cpp ..\src\Engine.cpp ..\src\GraphicsManager.cpp ..\src\InputManager.cpp ..\src\Sound.cpp ..\src\Texture.cpp ..\src\TextureManager.cpp ..\src\Timer.cpp
-         Animation.cpp
-         AnimationManager.cpp
-         Camera.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include\SDL_mixer /I..\include /I..\include\SDL /I..\include\SDL_image /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"obj\Debug\\" /Fd"obj\Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Engine.cpp ..\src\SoundManager.cpp
          Engine.cpp
-         GraphicsManager.cpp
-         InputManager.cpp
-         Sound.cpp
-         Texture.cpp
-         TextureManager.cpp
-         Timer.cpp
+         SoundManager.cpp
          Generating Code...
        Lib:
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:".\TGAEngine.lib" /NOLOGO obj\Debug\Animation.obj
@@ -46,7 +38,7 @@
             ROBOCOPY     ::     Robust File Copy for Windows                              
          -------------------------------------------------------------------------------
          
-           Started : Fri Aug 31 10:40:20 2012
+           Started : Mon Sep 03 13:06:08 2012
          
             Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
               Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\lib\obj\
@@ -59,40 +51,21 @@
          
          	                   0	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\
          	                  30	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\Debug\
-         	    Newer     		  305548	Animation.obj
-           0%  
-          42%  
-          85%  
-         100%  
-         	    Newer     		  198201	AnimationManager.obj
-           0%  
-          66%  
-         100%  
-         	    Newer     		   48338	Camera.obj
-           0%  
-         100%  
          	    Newer     		   13876	cl.command.1.tlog
            0%  
          100%  
-         	    Newer     		  328700	CL.read.1.tlog
+         	    Newer     		  328856	CL.read.1.tlog
            0%  
           39%  
           79%  
          100%  
-         	    Newer     		   34760	CL.write.1.tlog
+         	    Newer     		   35314	CL.write.1.tlog
            0%  
          100%  
          	    Newer     		  375514	Engine.obj
            0%  
           34%  
           69%  
-         100%  
-         	    Newer     		  103485	GraphicsManager.obj
-           0%  
-         100%  
-         	    Newer     		  259765	InputManager.obj
-           0%  
-          50%  
          100%  
          	    Newer     		    3538	lib.command.1.tlog
            0%  
@@ -103,16 +76,79 @@
          	    Newer     		    2742	Lib-link.write.1.tlog
            0%  
          100%  
-         	    Newer     		   59927	Sound.obj
+         	    Newer     		 1001483	SoundManager.obj
            0%  
-         100%  
-         	    Newer     		  141411	Texture.obj
-           0%  
-          92%  
-         100%  
-         	    Newer     		  192962	TextureManager.obj
-           0%  
-          67%  
+          26%  
+          52%  
+          78%  
          100%  
          	    Newer     		      85	TGAEngine.lastbuildstate
            0%  
+         100%  
+         	    Newer     		     699	TGAEngine.log
+           0%  
+         100%  
+         	    Newer     		       0	TGAEngine.unsuccessfulbuild
+         100%  
+         	    Newer     		  569344	vc100.pdb
+           0%  
+          46%  
+          92%  
+         100%  
+         	                  18	C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\obj\Release\
+         
+         ------------------------------------------------------------------------------
+         
+                        Total    Copied   Skipped  Mismatch    FAILED    Extras
+             Dirs :         3         0         3         0         0         0
+            Files :        48        12        36         0         0         0
+            Bytes :    4.35 m    2.22 m    2.13 m         0         0         0
+            Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+         
+         
+            Speed :            77895233 Bytes/sec.
+            Speed :            4457.201 MegaBytes/min.
+         
+            Ended : Mon Sep 03 13:06:08 2012
+         
+         -------------------------------------------------------------------------------
+            ROBOCOPY     ::     Robust File Copy for Windows                              
+         -------------------------------------------------------------------------------
+         
+           Started : Mon Sep 03 13:06:08 2012
+         
+            Source : C:\Users\Tag\Google Drive\Projects\TGAEngine\include\
+              Dest : C:\Users\Tag\Google Drive\Projects\Libraries\TGAEngine\include\
+         
+             Files : *.h
+         	    
+           Options : /COPY:DAT /R:1000000 /W:30 
+         
+         ------------------------------------------------------------------------------
+         
+         	                  21	C:\Users\Tag\Google Drive\Projects\TGAEngine\include\
+         	    Newer     		    2915	SoundManager.h
+           0%  
+         100%  
+         
+         ------------------------------------------------------------------------------
+         
+                        Total    Copied   Skipped  Mismatch    FAILED    Extras
+             Dirs :         1         0         1         0         0         0
+            Files :        21         1        20         0         0         0
+            Bytes :    34.6 k     2.8 k    31.8 k         0         0         0
+            Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+         
+         
+            Speed :              242916 Bytes/sec.
+            Speed :              13.899 MegaBytes/min.
+         
+            Ended : Mon Sep 03 13:06:08 2012
+       FinalizeBuildStatus:
+         Deleting file "obj\Debug\TGAEngine.unsuccessfulbuild".
+         Touching "obj\Debug\TGAEngine.lastbuildstate".
+     1>Done Building Project "C:\Users\Tag\Google Drive\Projects\TGAEngine\VS2010\TGAEngine.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.65
