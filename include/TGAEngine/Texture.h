@@ -77,6 +77,9 @@ namespace TGA
       * @param scaleX - a scale factor in X
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
+      * @param redTint - the amount of red to overlay
+      * @param greenTint - the amount of green to overlay
+      * @param blueTint - the amount of blue to overlay
 		*/
 		void draw(float xPos, float yPos, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
@@ -91,6 +94,9 @@ namespace TGA
       * @param scaleX - a scale factor in X
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
+      * @param redTint - the amount of red to overlay
+      * @param greenTint - the amount of green to overlay
+      * @param blueTint - the amount of blue to overlay
 		*/
       void drawSection(float xPos, float yPos, SDL_Rect section, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 
@@ -108,6 +114,9 @@ namespace TGA
       * @param scaleX - a scale factor in X
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
+      * @param redTint - the amount of red to overlay
+      * @param greenTint - the amount of green to overlay
+      * @param blueTint - the amount of blue to overlay
 		*/
 		void drawSection(float xPos, float yPos, int sectX, int sectY,
          int sectWidth, int sectHeight, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);

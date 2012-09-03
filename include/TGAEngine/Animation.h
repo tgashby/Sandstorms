@@ -181,11 +181,14 @@ namespace TGA
 		* draw
 		*
 		* Draws the current frame at the specified position.
-		* @param xPos - the x position of the point at which to draw.
       * @param yPos - the y position of the point at which to draw.
+      * @param xPos - the x position of the point at which to draw.
       * @param scaleX - a scale factor in X
       * @param scaleY - a scale factor in Y
       * @param rotation - a rotation, in degrees
+      * @param redTint - the amount of red to overlay
+      * @param greenTint - the amount of green to overlay
+      * @param blueTint - the amount of blue to overlay
 		*/
       void draw(GLfloat xPos, GLfloat yPos, float scaleX = 1, float scaleY = 1, float rotation = 0, float redTint = 1.0, float greenTint = 1.0, float blueTint = 1.0);
 

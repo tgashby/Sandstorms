@@ -361,7 +361,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "35"
-         endingLineNumber = "35">
+         endingLineNumber = "35"
+         landmarkName = "sortPlatforms(Platform* p1, Platform* p2)"
+         landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -372,9 +374,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "MenuState::draw()"
-         landmarkType = "5">
+         endingLineNumber = "45">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

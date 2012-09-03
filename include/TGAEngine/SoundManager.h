@@ -71,7 +71,7 @@ namespace TGA
       * addMusic
       *
       * Add a music track to the collection.
-      * @param music - the pointer to the Music
+      * @param musicTrack - the pointer to the Music
       * @param musicName - the name to give to the music track
       */
       void addMusic (Music* musicTrack, std::string musicName);
@@ -98,7 +98,7 @@ namespace TGA
       * pauseMusic
       *
       * Pauses the given music.
-      * @param soundName - the name given to the sound
+      * @param musicName - the name given to the sound
       */
       void pauseMusic (std::string musicName);
 
