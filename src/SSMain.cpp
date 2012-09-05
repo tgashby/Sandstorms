@@ -91,8 +91,6 @@ void SSMain::run()
    int loops;
    float interpolation;
 
-   Engine->Sounds->playMusic("oasis_music", -1);
-
    while (running) {
 
       loops = 0;

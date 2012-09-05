@@ -67,7 +67,7 @@ void Warrior::update(TGA::Vector2D playerPosition)
    
    facingLeft = velocity.getX() < 0;
 
-   if (distToPlayer < 800 && !walkPlaying)
+   if (distToPlayer < 800 && !walkPlaying && !attacking)
    {
       engine->Sounds->playSound("warrior_walk", -1);
       walkPlaying = true;
