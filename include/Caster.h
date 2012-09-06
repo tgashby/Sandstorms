@@ -16,5 +16,6 @@ public:
 private:
    void attack(TGA::Vector2D playerPosition);
    bool attacking, casted;
+   TGA::Vector2D originalVel;
 };
 

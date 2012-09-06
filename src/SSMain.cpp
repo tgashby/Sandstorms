@@ -457,9 +457,9 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
    // Stuff for stationary casters
    std::vector<Platform*> platforms = lvl->getPlatforms();
 
-   std::vector<Platform*>::size_type middle = platforms.size() / 2, end = platforms.size();
+   std::vector<Platform*>::size_type quarter = platforms.size() / 4, end = platforms.size();
 
-   int casterStep = (end - middle) / stationaryCasters;
+   int casterStep = (end - quarter) / stationaryCasters;
 
    unsigned int ndx;
    // End stuff for stationary casters
@@ -468,7 +468,7 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
    {
       xVal = (rand() % rightBound);
 
-      while (xVal < 1280 || invalidXVal(allXVals, xVal))
+      while (invalidXVal(allXVals, xVal))
       {
          xVal = (rand() % rightBound);
       }
@@ -476,14 +476,15 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
       allXVals.push_back(xVal);
 
       yVal = 750 - HOUND_HEIGHT;
-      lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-5, 0)));
+      lvl->addEnemy(new Hound(40, TGA::Vector2D(xVal, yVal),
+                              TGA::Vector2D(randFloat(-7, -4), 0)));
    }
 
    for (int i = 0; i < numWarriors; i++)
    {
       xVal = (rand() % rightBound);
 
-      while (xVal < 1280 || invalidXVal(allXVals, xVal))
+      while (invalidXVal(allXVals, xVal))
       {
          xVal = (rand() % rightBound);
       }
@@ -491,14 +492,15 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
       allXVals.push_back(xVal);
 
       yVal = 750 - WARRIOR_HEIGHT;
-      lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-3, 0)));
+      lvl->addEnemy(new Warrior(100, TGA::Vector2D(xVal, yVal),
+                                TGA::Vector2D(randFloat(-5, -2), 0)));
    }
 
    for (int i = 0; i < numCasters; i++)
    {
       xVal = (rand() % rightBound);
 
-      while (xVal < 1280 || invalidXVal(allXVals, xVal))
+      while (invalidXVal(allXVals, xVal))
       {
          xVal = (rand() % rightBound);
       }
@@ -506,12 +508,23 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
       allXVals.push_back(xVal);
 
       yVal = 750 - CASTER_HEIGHT;
-      lvl->addEnemy(new Caster(60, TGA::Vector2D(xVal, yVal), TGA::Vector2D(-7, 0)));
+      lvl->addEnemy(new Caster(60, TGA::Vector2D(xVal, yVal),
+                               TGA::Vector2D(randFloat(-9, -6), 0)));
    }
+   
+   allXVals.clear();
 
    for (int i = 0; i < stationaryCasters; i++)
    {
-      ndx = middle + (casterStep * i) + (rand() % 4);
+      ndx = quarter + (casterStep * i) + (rand() % 4);
+      
+      while (find(allXVals.begin(), allXVals.end(), ndx) != allXVals.end())
+      {
+         ndx = quarter + (casterStep * i) + (rand() % 4);
+      }
+      
+      allXVals.push_back(ndx);
+      
       ndx = ndx > end - 1 ? end - 1 : ndx;
       xVal = platforms[ndx]->getBounds().getX();
       yVal = platforms[ndx]->getBounds().getY() - CASTER_HEIGHT;
@@ -521,6 +534,11 @@ void SSMain::placeEnemies(Level *lvl, int numHounds, int numWarriors, int numCas
 
 bool SSMain::invalidXVal( std::vector<int> allXVals, int xVal )
 {
+   if (xVal < 1280)
+   {
+      return true;
+   }
+   
    for (std::vector<int>::iterator i = allXVals.begin(); i < allXVals.end(); i++)
    {
       if (abs(*i - xVal) < 300)

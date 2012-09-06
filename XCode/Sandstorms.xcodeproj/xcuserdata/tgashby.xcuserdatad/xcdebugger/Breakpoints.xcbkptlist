@@ -192,9 +192,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "60"
-         endingLineNumber = "60"
-         landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
-         landmarkType = "5">
+         endingLineNumber = "60">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -271,7 +269,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "136"
          endingLineNumber = "136"
-         landmarkName = "Warrior::attack(bool playerOnLeft)"
+         landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -279,11 +277,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Caster.cpp"
-         timestampString = "367627678.329076"
+         timestampString = "368640601.5381"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
          landmarkName = "Caster::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -292,11 +290,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/Caster.cpp"
-         timestampString = "367627678.329076"
+         timestampString = "368640601.5381"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "88"
-         endingLineNumber = "88"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "Caster::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -310,7 +308,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "137"
          endingLineNumber = "137"
-         landmarkName = "Warrior::attack(bool playerOnLeft)"
+         landmarkName = "Warrior::update(TGA::Vector2D playerPosition)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -357,7 +355,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367894776.638857"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "35"
@@ -381,7 +379,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367894843.414231"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "114"
@@ -407,7 +405,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367945796.30572"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "186"
@@ -420,7 +418,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367945796.30572"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "190"
@@ -433,7 +431,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367945796.30572"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "204"
@@ -446,7 +444,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../src/SSMain.cpp"
-         timestampString = "367945452.01137"
+         timestampString = "368640363.965396"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "162"

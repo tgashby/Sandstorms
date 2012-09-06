@@ -10,6 +10,7 @@
 
 Caster::Caster(int health, TGA::Vector2D position, TGA::Vector2D velocity /*= TGA::Vector2D(0, 0)*/, TGA::Vector2D acceleration /*= TGA::Vector2D(0, 1)*/)
    : Enemy(health, position, velocity, acceleration)
+   , originalVel(velocity)
 {
    TGA::Texture* attackTex = new TGA::Texture("resources/enemies/caster_attack.png");
    TGA::Animation* attackAnim = new TGA::Animation(attackTex);
@@ -49,8 +50,13 @@ void Caster::update(TGA::Vector2D playerPosition)
    
    facingLeft = velocity.getX() < 0;
    
-   if (distToPlayer > 800)
+   if (distToPlayer > 700)
    {
+      if (velocity.getX() == 0)
+      {
+         velocity.setX(originalVel.getX());
+      }
+      
       if (currAnimationName.compare("idle") != 0)
       {
          currAnimation = animations["idle"];
