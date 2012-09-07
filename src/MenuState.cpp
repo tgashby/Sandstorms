@@ -16,11 +16,21 @@ MenuState::MenuState()
 : startGameBox(280, 250, 520, 85)
 , exitGameBox(280, 345, 470, 85)
 {
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+   TGA::Music* music;
+   
    menuTexture.loadTexture("resources/ui/menu.png");
+   
+   music = new TGA::Music("resources/sound/menu.ogg");
+   engine->Sounds->addMusic(music, "menu_music");
+   
+   engine->Sounds->playMusic("menu_music", -1);
 }
 
 bool MenuState::update()
 {
+   TGA::Engine* engine = TGA::Singleton<TGA::Engine>::GetSingletonPtr();
+
    TGA::Singleton<TGA::InputManager>::GetSingletonPtr()->update();
    if (TGA::Singleton<TGA::InputManager>::GetSingletonPtr()->mouseDown())
    {
@@ -29,12 +39,14 @@ bool MenuState::update()
       if (TGA::Collision::checkCollision(startGameBox, TGA::BoundingBox(static_cast<int>(mousePos.getX()), 
          static_cast<int>(mousePos.getY()), 1, 1)))
       {
+         engine->Sounds->pauseMusic("menu_music");
          return false;
       }
       
       if (TGA::Collision::checkCollision(exitGameBox, TGA::BoundingBox(static_cast<int>(mousePos.getX()), 
          static_cast<int>(mousePos.getY()), 1, 1)))
       {
+         engine->Sounds->pauseMusic("menu_music");
          exit(EXIT_SUCCESS);
       }
    }

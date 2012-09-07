@@ -10,3 +10,4 @@ Warrior Punch Sound - "fight_punch"
 Caster Sound - "Flame Throw, Flaming Eerie Wind"
 Oasis Level - "Egyptian War Song", by fosterCHILD16
 City Level - "Pandemonium In The Bazaar", by m4x12
+Menu - "Pyramid Promenade", by JakesFable
