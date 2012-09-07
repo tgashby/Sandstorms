@@ -212,8 +212,7 @@ void SSMain::updateGame()
 
       player->reset();
    }
-
-   if (player->getArtifactCount() == 1 && currLevel.compare("city") == 0)
+   else if (player->getArtifactCount() == 1 && currLevel.compare("city") == 0)
    {
       bool playingAgain;
 
@@ -311,7 +310,7 @@ void SSMain::generatePlatforms( Level* lvl, std::string platformTex, int platWid
          xPos = randFloat(1280, static_cast<float>(rightBound - platWidth));
          yPos = randFloat(260, 450);
 
-         assert(xPos > 100 && xPos < rightBound - platWidth);
+         assert(xPos > 100 && xPos < rightBound - platWidth + 1);
 
          currPlatform = platforms.begin();
          for (; currPlatform < platforms.end(); currPlatform++)
